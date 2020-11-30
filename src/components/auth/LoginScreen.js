@@ -3,9 +3,12 @@ import { useDispatch } from 'react-redux';
 import { startLogin } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
 
-import './login.css';
 
 export const LoginScreen = () => {
+
+
+    document.body.style.backgroundColor = "#32323A";
+
 
     const dispatch = useDispatch();
 

@@ -31,7 +31,7 @@ export const AppRouter = () => {
 
     return (
         <Router>
-            <div>
+            <div >
                 <Switch>
                         <PublicRoute 
                             exact 
@@ -39,6 +39,7 @@ export const AppRouter = () => {
                             component={ LoginScreen } 
                             isAuthenticated={ !!uid }
                         />
+            
                         <Layout>
                             <PrivateRoute 
                                 exact 

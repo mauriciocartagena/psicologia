@@ -7,7 +7,7 @@ import { AppRouter } from './router/AppRouter';
 export const PsicologiaApp = () => {
   return (
     <Provider store={ store }> 
-      <AppRouter />
+      <AppRouter  />
     </Provider>
   )
 }

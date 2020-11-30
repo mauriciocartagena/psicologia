@@ -1,12 +1,15 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 export const Aside = () => {
+
+    const { uiSidebar } = useSelector(state => state.ui);
+
     return (
         <aside>
             <div
                 id="sidebar"
-                className="nav-collapse"
-            // className="nav-collapse hide-left-bar" 
+                className={ uiSidebar }
             >
             <div className="leftside-navigation">
                 <ul className="sidebar-menu" id="nav-accordion">

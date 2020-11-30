@@ -6,11 +6,13 @@ import {
     Redirect,
 } from "react-router-dom";
 import { startChecking } from '../actions/auth';
+import { AccountScreen } from '../components/Accounts/AccountScreen';
 import { LoginScreen } from '../components/auth/LoginScreen';
 import { Layout } from '../components/main/Layout';
 
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRouter';
+
 
 export const AppRouter = () => {
 
@@ -37,13 +39,14 @@ export const AppRouter = () => {
                             component={ LoginScreen } 
                             isAuthenticated={ !!uid }
                         />
-
-                        <PrivateRoute 
-                            exact 
-                            path="/"      
-                            component={ Layout }
-                            isAuthenticated={ !!uid }
-                        />
+                        <Layout>
+                            <PrivateRoute 
+                                exact 
+                                path="/"      
+                                component={ AccountScreen }
+                                isAuthenticated={ !!uid }
+                                />
+                        </Layout>
                         <Redirect to="/login" /> 
                 </Switch>
             </div>

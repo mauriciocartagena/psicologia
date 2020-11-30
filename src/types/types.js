@@ -1,5 +1,16 @@
 export const types = {
 
+    uiOpenSidebar:'[ui] Open Sidebar',
+    uiCloseSidebar:'[ui] Close Sidebar',
+    
+    uiOpenSection:'[ui] Open Section',
+    uiCloseSection:'[ui] Close Section',
+
+
+    uiOpenDrowp:'[ui] Open rowp',
+    uiCloseDrowp:'[ui] Close drowp',
+
+
     authChecking:'[auth] Checking login state ',
     authCheckingFinish:'[auth] Finish cheking login state ',
     authStartLogin:'[auth] Start Login',

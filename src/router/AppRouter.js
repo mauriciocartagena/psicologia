@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { startChecking } from '../actions/auth';
 import { LoginScreen } from '../components/auth/LoginScreen';
-import { UserScreen } from '../components/users/UserScreen';
+import { Layout } from '../components/main/Layout';
 
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRouter';
@@ -41,7 +41,7 @@ export const AppRouter = () => {
                         <PrivateRoute 
                             exact 
                             path="/"      
-                            component={ UserScreen }
+                            component={ Layout }
                             isAuthenticated={ !!uid }
                         />
                         <Redirect to="/login" /> 

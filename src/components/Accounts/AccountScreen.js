@@ -1,6 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 export const AccountScreen = () => {
+
+    const { persona } = useSelector( state => state.auth );
+
+    const { nombre } = persona;
+
     return (
             <div className="row">
                 <div className="col-md-12">
@@ -13,7 +19,7 @@ export const AccountScreen = () => {
                         </div>
                         <div className="col-md-6">
                             <div className="profile-desk">
-                                <h1>David Rojormillan</h1>
+                                <h1>{ nombre }</h1>
                                 <span className="text-muted">Product Manager</span>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porttitor vestibulum imperdiet. Ut auctor accumsan erat, a vulputate metus tristique non. Aliquam aliquam vel orci quis sagittis.

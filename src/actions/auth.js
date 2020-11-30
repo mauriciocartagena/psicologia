@@ -11,6 +11,12 @@ export const startLogin = ( username, password ) => {
        const resp = await fetchSinToken( 'auth',{ username, password }, 'POST' );
        const body = await resp.json();
 
+       const persona_id = body.uid;
+       const respPersona = await fetchConToken( 'users/usuario',{ persona_id } , 'POST' , body.token );
+       
+       const { persona } = await respPersona.json();
+
+
        console.log( body );
        if ( body.ok ) {
            localStorage.setItem('token', body.token);
@@ -18,7 +24,8 @@ export const startLogin = ( username, password ) => {
             
             dispatch( login({
                 uid: body.uid,
-                name: body.username
+                username: body.username,
+                persona:persona
             }));
        }else{
            Swal.fire('Error', body.msg, 'error');
@@ -54,6 +61,11 @@ export const startChecking = () => {
 
         const resp = await fetchConToken( 'auth/renew' );
         const body = await resp.json();
+
+        const persona_id = body.uid;
+        const respPersona = await fetchConToken( 'users/usuario',{ persona_id } , 'POST' , body.token );
+        
+        const { persona } = await respPersona.json();
         
  
         if ( body.ok ) {
@@ -62,7 +74,8 @@ export const startChecking = () => {
              
              dispatch( login({
                  uid: body.uid,
-                 name: body.username
+                 username: body.username,
+                 persona:persona
              }));
         }else{
             dispatch( checkingFinish() );

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { startLogout } from '../../actions/auth';
 import { uiCloseDrowp, uiCloseSection, uiCloseSidebar, uiOpenDrowp, uiOpenSection, uiOpenSidebar } from '../../actions/ui';
+import '../../styles/styles.css';
 
 export const Header = () => {
     const { uiDrowp, uiSidebar  } = useSelector(state => state.ui);
@@ -83,7 +84,7 @@ export const Header = () => {
                                     Configuración
                                 </Link>    
                             </li>
-                            <li style={{ cursor:"pointer" }} onClick = { handleLogout } >
+                            <li className='hyper' onClick = { handleLogout } >
                                 <a>
                                     <i className="fa fa-key"></i>Cerrar Sesión
                                 </a>

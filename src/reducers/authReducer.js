@@ -22,6 +22,11 @@ export const authReducer = ( state = initalState, action ) => {
                 ...state,
                 checking:false
             }
+        case types.accountUpdate:
+            return {
+                ...state,
+                persona: action.payload
+            }
         case types.authLogout:
             return {
                 checking: false

@@ -1,6 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { startLogout } from '../../actions/auth';
+import '../../styles/styles.css';
+
 
 export const Aside = () => {
 
@@ -20,20 +23,20 @@ export const Aside = () => {
             >
             <div className="leftside-navigation">
                 <ul className="sidebar-menu" id="nav-accordion">
-                    <li>
-                        <a className="active" href="index.html">
+                    {/* <li>
+                        <a  href="index.html">
                             <i className="fa fa-dashboard"></i>
                             <span>Dashboard</span>
                         </a>
-                    </li>
+                    </li> */}
                     <li className="sub-menu">
-                        <a href="javascript:;">
+                        <Link to='/' >
                             <i _ngcontent-tkb-c31="" className="fa fa-user"></i>
                             <span>Perfil</span>
-                        </a>
+                        </Link>
                     </li>
                     <li onClick={ handleLogout } >
-                        <a style={{ cursor:"pointer" }} >
+                        <a className='hyper' >
                             <i className="fa fa-sign-out"></i>
                             <span>Cerrar Sesión</span>
                         </a>

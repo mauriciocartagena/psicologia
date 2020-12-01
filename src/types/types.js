@@ -11,6 +11,8 @@ export const types = {
     uiCloseDrowp:'[ui] Close drowp',
     uieventLogout:'[ui] Logout',
 
+    accountUpdate:'[ui] Account update',
+
 
     authChecking:'[auth] Checking login state ',
     authCheckingFinish:'[auth] Finish cheking login state ',

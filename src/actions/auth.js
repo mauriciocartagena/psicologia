@@ -85,6 +85,43 @@ export const startChecking = () => {
     }
 
 }
+
+export const startUpdateAccount = ( persona_id, nombre, primer_apellido, segundo_apellido, celular, imei, edad, dni, direccion, email ) => {
+
+    return async ( dispatch ) => {
+
+        try {
+
+            const resp = await fetchConToken( 'users/update', { persona_id ,nombre, primer_apellido, segundo_apellido, celular, imei, edad, dni, direccion, email }, 'PUT' );
+            const body = await resp.json();
+     
+            const respPersona = await fetchConToken( 'users/usuario',{ persona_id } , 'POST' , body.token );
+            
+            const { persona } = await respPersona.json();
+
+            if ( body.ok ) {
+                dispatch( accountUpdated( persona ) );
+    
+            }else{
+                Swal.fire('Error', body.msg, 'error');
+            }
+
+            
+        } catch (error) {
+            console.log( error );
+        }
+
+    }
+}
+
+const accountUpdated = ( persona ) => ({
+
+    type: types.accountUpdate,
+    payload: persona
+
+});
+
+
 const checkingFinish = () => ({ type: types.authCheckingFinish })
 
 const login = ( user ) => ({ 

@@ -1,19 +1,23 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { startUpdateAccount } from '../../actions/auth';
+import { useForm } from '../../hooks/useForm';
 
 export const AccountScreen = () => {
 
+    const dispatch = useDispatch();
+
     const { persona } = useSelector(state => state.auth);
 
-    const { nombre,
-        primer_apellido,
-        segundo_apellido,
-        celular,
-        imei,
-        edad,
-        dni,
-        direccion,
-        email } = persona;
+    const [ formAccountValues, handleAccountInputChange ] = useForm( persona );
+    
+    const { persona_id, nombre, primer_apellido, segundo_apellido, celular, imei, edad, dni, direccion, email } = formAccountValues;
+
+    const handleUpdate = ( e ) => {
+        e.preventDefault();
+        dispatch( startUpdateAccount( persona_id, nombre, primer_apellido, segundo_apellido, celular, imei, edad, dni, direccion, email ) );
+
+    }
 
     return (
         <div className="row">
@@ -26,7 +30,7 @@ export const AccountScreen = () => {
                                     <div className="prf-contacts sttng">
                                         <h2>  INFORMACIÓN PERSONAL</h2>
                                     </div>
-                                    <form role="form" className="form-horizontal">
+                                    <form role="form" className="form-horizontal" onSubmit={ handleUpdate } >
                                         <div className="form-group">
                                             <label className="col-lg-2 control-label">
                                                 Foto principal
@@ -47,6 +51,7 @@ export const AccountScreen = () => {
                                                     type="text"
                                                     placeholder="nombre"
                                                     value={ nombre }
+                                                    onChange= { handleAccountInputChange }
                                                     id="nombre"
                                                     name="nombre"
                                                     className="form-control" />
@@ -61,6 +66,7 @@ export const AccountScreen = () => {
                                                     id="primer_apellido"
                                                     name="primer_apellido"
                                                     value={ primer_apellido }
+                                                    onChange= { handleAccountInputChange }
                                                     className="form-control" />
                                             </div>
                                         </div>
@@ -73,6 +79,7 @@ export const AccountScreen = () => {
                                                     name="segundo_apellido"
                                                     className="form-control"
                                                     value={ segundo_apellido }
+                                                    onChange= { handleAccountInputChange }
                                                 />
                                             </div>
                                         </div>
@@ -85,6 +92,7 @@ export const AccountScreen = () => {
                                                     name="celular"
                                                     className="form-control"
                                                     value={ celular }
+                                                    onChange= { handleAccountInputChange }
                                                 />
                                             </div>
                                         </div>
@@ -97,6 +105,7 @@ export const AccountScreen = () => {
                                                     name="imei"
                                                     className="form-control"
                                                     value={ imei }
+                                                    onChange= { handleAccountInputChange }
                                                 />
                                             </div>
                                         </div>
@@ -109,6 +118,7 @@ export const AccountScreen = () => {
                                                     name="dni"
                                                     className="form-control"
                                                     value={ dni }
+                                                    onChange= { handleAccountInputChange }
                                                 />
                                             </div>
                                         </div>
@@ -121,6 +131,7 @@ export const AccountScreen = () => {
                                                     name="edad"
                                                     className="form-control"
                                                     value={ edad }
+                                                    onChange= { handleAccountInputChange }
                                                 />
                                             </div>
                                         </div>
@@ -133,6 +144,7 @@ export const AccountScreen = () => {
                                                     name="email"
                                                     className="form-control"
                                                     value={ email }
+                                                    onChange= { handleAccountInputChange }
                                                 />
                                             </div>
                                         </div>
@@ -145,6 +157,7 @@ export const AccountScreen = () => {
                                                     name="direccion"
                                                     className="form-control"
                                                     value={ direccion }
+                                                    onChange= { handleAccountInputChange }
                                                 />
                                             </div>
                                         </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Aside } from './Aside'
-import { Header } from './Header'
+import { Aside } from './Aside';
+import { Header } from './Header';
 
 export const Layout = ({ children }) => {
     document.body.style.backgroundColor = "";

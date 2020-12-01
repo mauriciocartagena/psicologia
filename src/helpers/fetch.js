@@ -32,7 +32,6 @@ const fetchConToken = ( endpoint, data, method = 'GET', tokenStart = '' ) => {
         } );
     }
     else if( tokenStart !== '' ){
-        console.log("tokestart")
         return fetch( url, { 
             method,
             headers:{
@@ -43,7 +42,6 @@ const fetchConToken = ( endpoint, data, method = 'GET', tokenStart = '' ) => {
         } );
     }
     else {
-        console.log("token")
         return fetch( url, {            
             method,
             headers:{

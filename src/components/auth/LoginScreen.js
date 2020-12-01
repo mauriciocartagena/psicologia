@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 import { startLogin } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
 
@@ -11,31 +12,38 @@ export const LoginScreen = () => {
 
     const dispatch = useDispatch();
 
-    const [buttonLogin, setButtonLogin] = useState('btn btn-lg btn-login btn-block');
+    const [ buttonLogin, setButtonLogin ] = useState( false );
+    
+    const [ loading, setLoading ] = useState("fa fa-lock");
+    // fa fa-spin fa-refresh
 
     const [ formLoginValues, handleLoginInputChange ] = useForm({
         lUsername:'ad2min',
         lPassword:'administrador'
     });
-
     
     const { lUsername, lPassword } = formLoginValues;
     
     const handleLogin = ( e ) => {
         e.preventDefault();
+        setLoading("fa fa-spin fa-refresh" );
 
         if ( lUsername.trim() === '' || lPassword.trim() === '') {
-            return ;
+            return (
+                Swal.fire(':(', 'Username o contraseña incorrectos'  , 'error'),
+                setLoading( "fa fa-lock" )
+            );
         }
-        dispatch( startLogin( lUsername, lPassword ) );
-
+        setLoading( "fa fa-lock" );
+        dispatch( startLogin( lUsername, lPassword ) );     
         
     }
     useEffect(() => {
+
       if ( lUsername.trim() === '' ||  lPassword.trim() === '' ) {
-        return setButtonLogin( 'btn btn-lg btn-login btn-block disabled' );
+        return setButtonLogin( true );
       }
-      setButtonLogin( 'btn btn-lg btn-login btn-block' );
+      setButtonLogin( false );
 
     }, [ lUsername, lPassword ])
 
@@ -71,7 +79,9 @@ export const LoginScreen = () => {
 
                         </span>
                     </label>
-                    <button className={ buttonLogin } type="submit"><i _ngcontent-kod-c28="" className="fa fa-lock"></i> Iniciar Sesión</button>
+                    <button className='btn btn-lg btn-login btn-block'  disabled={ buttonLogin } type="submit">
+                        <i _ngcontent-kod-c28="" className={ loading }></i> Iniciar Sesión
+                    </button>
 
                     <div className="registration">
                     ¿No tienes una cuenta?                   

@@ -30,7 +30,7 @@ export const Aside = () => {
                         </a>
                     </li> */}
                     <li className="sub-menu">
-                        <Link to='/' >
+                        <Link to='/user' >
                             <i _ngcontent-tkb-c31="" className="fa fa-user"></i>
                             <span>Perfil</span>
                         </Link>

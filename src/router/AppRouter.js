@@ -6,10 +6,8 @@ import {
     Redirect,
 } from "react-router-dom";
 import { startChecking } from '../actions/auth';
-import { AccountScreen } from '../components/Accounts/AccountScreen';
-import { User } from '../components/Accounts/User';
-import { LoginScreen } from '../components/auth/LoginScreen';
-import { Layout } from '../components/main/Layout';
+import { AccountRouter } from './AccountRouter';
+import { AuthRouter } from './AuthRouter';
 
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRouter';
@@ -38,28 +36,18 @@ export const AppRouter = () => {
         <Router>
             <div >
                 <Switch>
-                        <PublicRoute 
-                            exact 
-                            path="/login" 
-                            component={ LoginScreen } 
-                            isAuthenticated={ !!uid }
-                        />
-            
-                        <Layout>
-                            <PrivateRoute 
-                                exact 
-                                path="/"      
-                                component={ AccountScreen }
-                                isAuthenticated={ !!uid }
-                                />
-                            <PrivateRoute 
-                                exact 
-                                path="/user"      
-                                component={ User }
-                                isAuthenticated={ !!uid }
-                            />
-                        </Layout>
-                        <Redirect to="/login" /> 
+                    <PublicRoute  
+                        path="/auth" 
+                        component={ AuthRouter } 
+                        isAuthenticated={ !!uid }
+                    />
+        
+                    <PrivateRoute 
+                        path="/"      
+                        component={ AccountRouter }
+                        isAuthenticated={ !!uid }
+                    />
+                    <Redirect to="/auth/login" /> 
                 </Switch>
             </div>
         </Router>

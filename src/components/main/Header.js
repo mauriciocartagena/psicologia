@@ -73,13 +73,13 @@ export const Header = () => {
                         </a>
                         <ul className="dropdown-menu extended logout">
                             <li>
-                                <Link to='/' >
+                                <Link to='/user' >
                                     <i className=" fa fa-suitcase"></i>
                                     Perfil
                                 </Link>                                        
                             </li>
                             <li>
-                               <Link to='/user' >
+                               <Link to='/user/setting' >
                                     <i className="fa fa-cog"></i>
                                     Configuración
                                 </Link>    

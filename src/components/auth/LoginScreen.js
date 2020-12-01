@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { startLogin } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
@@ -85,7 +86,11 @@ export const LoginScreen = () => {
 
                     <div className="registration">
                     ¿No tienes una cuenta?                   
-                        <a className="" href="registration.html"> Crear cuenta </a>
+                        <Link 
+                            to="/register"
+                        > 
+                            Crear cuenta 
+                        </Link>
                     </div>
 
                 </div>

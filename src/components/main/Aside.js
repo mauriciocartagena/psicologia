@@ -1,9 +1,16 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { startLogout } from '../../actions/auth';
 
 export const Aside = () => {
 
+    const dispatch = useDispatch();
+
     const { uiSidebar } = useSelector(state => state.ui);
+
+    const handleLogout = () => {
+        dispatch( startLogout() );
+    }
 
     return (
         <aside>
@@ -25,8 +32,8 @@ export const Aside = () => {
                             <span>Perfil</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="login.html">
+                    <li onClick={ handleLogout } >
+                        <a style={{ cursor:"pointer" }} >
                             <i className="fa fa-sign-out"></i>
                             <span>Cerrar Sesión</span>
                         </a>

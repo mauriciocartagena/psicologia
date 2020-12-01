@@ -1,15 +1,18 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { startLogout } from '../../actions/auth';
 import { uiCloseDrowp, uiCloseSection, uiCloseSidebar, uiOpenDrowp, uiOpenSection, uiOpenSidebar } from '../../actions/ui';
 
 export const Header = () => {
     const { uiDrowp, uiSidebar  } = useSelector(state => state.ui);
+   
     const dispatch = useDispatch();
 
     const handleSidebar = ( e ) => {
         e.preventDefault();
 
-        if( uiSidebar == 'nav-collapse' ){
+        if( uiSidebar === 'nav-collapse' ){
             return (
                 dispatch( uiCloseSidebar()),
                 dispatch( uiCloseSection())     
@@ -22,13 +25,16 @@ export const Header = () => {
     const dropDownOpen = ( e ) => {
         e.preventDefault();
         
-        dispatch( uiOpenDrowp() );
-    }
-
-    const handleDownClose = ( e ) => {
-        e.preventDefault();
+        if ( uiDrowp === 'dropdown' ) {
+            
+           return dispatch( uiOpenDrowp() );
+            
+        }
 
         dispatch( uiCloseDrowp() );
+    }
+    const handleLogout = () => {
+        dispatch( startLogout() );
     }
 
 
@@ -49,27 +55,39 @@ export const Header = () => {
                     <div className="fa fa-bars"></div>
                 </div>
             </div>
-
         
             <div className="top-nav clearfix">
                 <ul className="nav pull-right top-menu">
                     <li 
                         className={ uiDrowp }
                         >
-                        <a data-toggle="dropdown" 
+                        <a data-toggle="dropdown"
                             className="dropdown-toggle" 
-                            href="#" 
                             onClick={ dropDownOpen } 
-                            onBlur={ handleDownClose }
+                            style={{cursor:"pointer" }}
                             >
                             <img alt="" src="https://mauriciocartagena.github.io/my-perfil/static/media/photo.517c8325.png" />  
                             <span className="username" > &nbsp; Mauricio Cartagena </span>
                             <b className="caret"></b>
                         </a>
                         <ul className="dropdown-menu extended logout">
-                            <li><a href="#"><i className=" fa fa-suitcase"></i>Perfil</a></li>
-                            <li><a href="#"><i className="fa fa-cog"></i>Configuración</a></li>
-                            <li><a href="login.html"><i className="fa fa-key"></i>Cerrar Sesión</a></li>
+                            <li>
+                                <Link to='/' >
+                                    <i className=" fa fa-suitcase"></i>
+                                    Perfil
+                                </Link>                                        
+                            </li>
+                            <li>
+                               <Link to='/user' >
+                                    <i className="fa fa-cog"></i>
+                                    Configuración
+                                </Link>    
+                            </li>
+                            <li style={{ cursor:"pointer" }} onClick = { handleLogout } >
+                                <a>
+                                    <i className="fa fa-key"></i>Cerrar Sesión
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

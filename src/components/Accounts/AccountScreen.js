@@ -153,7 +153,7 @@ export const AccountScreen = () => {
                                             <label className="col-lg-2 control-label">&nbsp;</label>
                                             <div className="col-sm-6">
                                                 <button type="submit" className="btn btn-primary btn-round btn-block">
-                                                    <i class="fa fa-save"></i>  Guardar
+                                                    <i className="fa fa-save"></i>  Guardar
                                             </button>
                                             </div>
                                         </div>

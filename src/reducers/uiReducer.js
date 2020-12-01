@@ -38,6 +38,10 @@ export const uiReducer = ( state = initialState, action) => {
                 ...state,
                 uiDrowp:'dropdown'
             }
+        case types.uieventLogout:
+            return {
+                ...initialState
+            }
     
         default:
             return state;

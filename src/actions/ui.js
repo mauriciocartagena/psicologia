@@ -10,3 +10,5 @@ export const uiCloseSection = () => ({ type: types.uiCloseSection });
 
 export const uiOpenDrowp  = () => ({ type: types.uiOpenDrowp });
 export const uiCloseDrowp = () => ({ type: types.uiCloseDrowp });
+
+export const uieventLogout = () => ({ type: types.uieventLogout } )

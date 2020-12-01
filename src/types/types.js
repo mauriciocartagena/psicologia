@@ -9,6 +9,7 @@ export const types = {
 
     uiOpenDrowp:'[ui] Open rowp',
     uiCloseDrowp:'[ui] Close drowp',
+    uieventLogout:'[ui] Logout',
 
 
     authChecking:'[auth] Checking login state ',
@@ -17,6 +18,7 @@ export const types = {
     authLogin:'[auth] Login',
     authStartRegister:'[auth] Login Register',
     authStartStartTokenRenew:'[auth] start token renew',
+
     authLogout:'[auth] Logout',
 
 }

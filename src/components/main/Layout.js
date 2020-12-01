@@ -4,7 +4,6 @@ import { Aside } from './Aside';
 import { Header } from './Header';
 
 export const Layout = ({ children }) => {
-    document.body.style.backgroundColor = "";
     
     const { uiSection } = useSelector(state => state.ui)   
 

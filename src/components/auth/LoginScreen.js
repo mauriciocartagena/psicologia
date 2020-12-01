@@ -8,8 +8,6 @@ import { useForm } from '../../hooks/useForm';
 
 
 export const LoginScreen = () => {
-    
-    document.body.style.backgroundColor = "#32323A";
 
     const { uiLoadingButton } = useSelector(state => state.ui);
 
@@ -90,9 +88,8 @@ export const LoginScreen = () => {
                     <div className="registration">
                     ¿No tienes una cuenta?                   
                         <Link 
-                            to="/register"
-                        > 
-                            Crear cuenta 
+                            to="/auth/register"
+                        > Crear cuenta 
                         </Link>
                     </div>
 

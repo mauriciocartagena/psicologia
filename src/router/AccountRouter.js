@@ -7,6 +7,9 @@ import { Layout } from '../components/main/Layout';
 
 
 export const AccountRouter = () => {
+
+    document.body.style.backgroundColor = "";
+
     return (
         <Layout>
             <Switch>

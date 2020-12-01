@@ -5,6 +5,9 @@ import { RegisterScreen } from '../components/auth/RegisterScreen';
 
 
 export const AuthRouter = () => {
+
+    document.body.style.backgroundColor = "#32323A";
+
     return (
         <div>
             <Switch>

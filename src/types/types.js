@@ -6,8 +6,14 @@ export const types = {
     uiOpenSection:'[ui] Open Section',
     uiCloseSection:'[ui] Close Section',
 
+    uiOpenLoadingButton:'[ui] Open Loading Button',
+    uiCloseLoadingButton:'[ui] CloseLoading Button',
 
-    uiOpenDrowp:'[ui] Open rowp',
+    uiOpenLoadingSaveButton:'[ui] Open Loading Save Button',
+    uiCloseLoadingSaveButton:'[ui] CloseLoading Save Button',
+
+
+    uiOpenDrowp:'[ui] Open drowp',
     uiCloseDrowp:'[ui] Close drowp',
     uieventLogout:'[ui] Logout',
 

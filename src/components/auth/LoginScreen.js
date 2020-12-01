@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { startLogin } from '../../actions/auth';
+import { uiCloseLoadingButton, uiOpenLoadingButton } from '../../actions/ui';
 import { useForm } from '../../hooks/useForm';
 
 
 export const LoginScreen = () => {
-
-
+    
     document.body.style.backgroundColor = "#32323A";
+
+    const { uiLoadingButton } = useSelector(state => state.ui);
 
     const dispatch = useDispatch();
 
     const [ buttonLogin, setButtonLogin ] = useState( false );
-    
-    const [ loading, setLoading ] = useState("fa fa-lock");
-    // fa fa-spin fa-refresh
 
     const [ formLoginValues, handleLoginInputChange ] = useForm({
         lUsername:'ad2min',
@@ -27,16 +26,20 @@ export const LoginScreen = () => {
     
     const handleLogin = ( e ) => {
         e.preventDefault();
-        setLoading("fa fa-spin fa-refresh" );
 
+        dispatch( uiCloseLoadingButton() );
+        
+            
         if ( lUsername.trim() === '' || lPassword.trim() === '') {
             return (
                 Swal.fire(':(', 'Username o contraseña incorrectos'  , 'error'),
-                setLoading( "fa fa-lock" )
+                dispatch( uiOpenLoadingButton() )
             );
         }
-        setLoading( "fa fa-lock" );
-        dispatch( startLogin( lUsername, lPassword ) );     
+        dispatch( startLogin( lUsername, lPassword ) );   
+        dispatch( uiOpenLoadingButton() );
+
+
         
     }
     useEffect(() => {
@@ -81,7 +84,7 @@ export const LoginScreen = () => {
                         </span>
                     </label>
                     <button className='btn btn-lg btn-login btn-block'  disabled={ buttonLogin } type="submit">
-                        <i _ngcontent-kod-c28="" className={ loading }></i> Iniciar Sesión
+                        <i _ngcontent-kod-c28="" className={ uiLoadingButton }></i> Iniciar Sesión
                     </button>
 
                     <div className="registration">

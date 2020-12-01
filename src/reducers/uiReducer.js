@@ -3,7 +3,9 @@ import { types } from "../types/types";
 const initialState = {
     uiDrowp:'dropdown',
     uiSidebar:'nav-collapse',
-    uiSection:''
+    uiSection:'',
+    uiLoadingButton:'fa fa-lock',
+    uiLoadingSaveButton:'fa fa-save'
 }
 
 export const uiReducer = ( state = initialState, action) => {
@@ -38,6 +40,29 @@ export const uiReducer = ( state = initialState, action) => {
                 ...state,
                 uiDrowp:'dropdown'
             }
+
+        case types.uiOpenLoadingButton:
+            return {
+                ...state,
+                uiLoadingButton:'fa fa-lock'
+            }
+        case types.uiCloseLoadingButton:
+            return {
+                ...state,
+                uiLoadingButton:'fa fa-spin fa-refresh'
+            }
+            
+        case types.uiOpenLoadingSaveButton:
+            return{
+                ...state,
+                uiLoadingSaveButton:'fa fa-save'
+            }
+        case types.uiCloseLoadingSaveButton:
+            return{
+                ...state,
+                uiLoadingSaveButton:'fa fa-spin fa-refresh'
+            }
+        
         case types.uieventLogout:
             return {
                 ...initialState

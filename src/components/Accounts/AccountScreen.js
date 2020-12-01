@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startUpdateAccount } from '../../actions/auth';
+import { uiCloseLoadingSaveButton, uiOpenLoadingSaveButton } from '../../actions/ui';
 import { useForm } from '../../hooks/useForm';
 
 export const AccountScreen = () => {
@@ -8,6 +9,7 @@ export const AccountScreen = () => {
     const dispatch = useDispatch();
 
     const { persona } = useSelector(state => state.auth);
+    const { uiLoadingSaveButton } = useSelector(state => state.ui)
 
     const [ formAccountValues, handleAccountInputChange ] = useForm( persona );
     
@@ -15,8 +17,12 @@ export const AccountScreen = () => {
 
     const handleUpdate = ( e ) => {
         e.preventDefault();
-        dispatch( startUpdateAccount( persona_id, nombre, primer_apellido, segundo_apellido, celular, imei, edad, dni, direccion, email ) );
+        
+        dispatch( uiCloseLoadingSaveButton() );
 
+        dispatch( startUpdateAccount( persona_id, nombre, primer_apellido, segundo_apellido, celular, imei, edad, dni, direccion, email ) );
+        
+        dispatch( uiOpenLoadingSaveButton() );
     }
 
     return (
@@ -166,7 +172,7 @@ export const AccountScreen = () => {
                                             <label className="col-lg-2 control-label">&nbsp;</label>
                                             <div className="col-sm-6">
                                                 <button type="submit" className="btn btn-primary btn-round btn-block">
-                                                    <i className="fa fa-save"></i>  Guardar
+                                                    <i className={ uiLoadingSaveButton } ></i>  Guardar
                                             </button>
                                             </div>
                                         </div>

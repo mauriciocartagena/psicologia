@@ -11,4 +11,12 @@ export const uiCloseSection = () => ({ type: types.uiCloseSection });
 export const uiOpenDrowp  = () => ({ type: types.uiOpenDrowp });
 export const uiCloseDrowp = () => ({ type: types.uiCloseDrowp });
 
-export const uieventLogout = () => ({ type: types.uieventLogout } )
+export const uiOpenLoadingButton = () => ({ type: types.uiOpenLoadingButton } );
+export const uiCloseLoadingButton = () => ({ type: types.uiCloseLoadingButton } );
+
+export const uiOpenLoadingSaveButton = () => ({ type: types.uiOpenLoadingSaveButton } );
+export const uiCloseLoadingSaveButton = () => ({ type: types.uiCloseLoadingSaveButton } );
+
+
+export const uieventLogout = () => ({ type: types.uieventLogout } );
+

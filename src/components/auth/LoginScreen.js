@@ -27,19 +27,19 @@ export const LoginScreen = () => {
     const handleLogin = ( e ) => {
         e.preventDefault();
 
+        setButtonLogin( true );
         dispatch( uiCloseLoadingButton() );
-        
-            
+
         if ( lUsername.trim() === '' || lPassword.trim() === '') {
             return (
                 Swal.fire(':(', 'Username o contraseña incorrectos'  , 'error'),
-                dispatch( uiOpenLoadingButton() )
+                dispatch( uiOpenLoadingButton() ),
+                setButtonLogin( false )
             );
         }
-        dispatch( startLogin( lUsername, lPassword ) );   
         dispatch( uiOpenLoadingButton() );
-
-
+        setButtonLogin( false );
+        dispatch( startLogin( lUsername, lPassword ) );   
         
     }
     useEffect(() => {

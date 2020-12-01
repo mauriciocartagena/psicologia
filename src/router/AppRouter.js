@@ -27,7 +27,11 @@ export const AppRouter = () => {
     }, [dispatch]);
 
     if ( checking ) {
-        return ( <h5>Espere ...</h5> );
+        return ( 
+            <div className="loader-wrapper" style={{ display:"block" }} >
+                <div  className="loader"/>
+            </div>
+        );
     }
 
     return (

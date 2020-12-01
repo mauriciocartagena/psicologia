@@ -29,7 +29,9 @@ export const startLogin = ( username, password ) => {
                 persona:persona
             }));
        }else{
-           Swal.fire('Error', body.msg, 'error');
+
+           Swal.fire('Error', body.msg  , 'error');
+
        }
 
     }

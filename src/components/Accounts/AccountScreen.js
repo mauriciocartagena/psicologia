@@ -35,7 +35,7 @@ export const AccountScreen = () => {
                                             <label className="col-lg-2 control-label">
                                                 Foto principal
                                             </label>
-                                            <div className="col-sm-7">
+                                            <div className="col-sm-6">
                                                 <img
                                                     className="w150 img-thumbnail"
                                                     src="https://mauriciocartagena.github.io/my-perfil/static/media/photo.517c8325.png" />

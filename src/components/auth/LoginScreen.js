@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { startLogin } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
@@ -9,21 +9,35 @@ export const LoginScreen = () => {
 
     document.body.style.backgroundColor = "#32323A";
 
-
     const dispatch = useDispatch();
+
+    const [buttonLogin, setButtonLogin] = useState('btn btn-lg btn-login btn-block');
 
     const [ formLoginValues, handleLoginInputChange ] = useForm({
         lUsername:'ad2min',
         lPassword:'administrador'
     });
 
+    
     const { lUsername, lPassword } = formLoginValues;
-
+    
     const handleLogin = ( e ) => {
         e.preventDefault();
+
+        if ( lUsername.trim() === '' || lPassword.trim() === '') {
+            return ;
+        }
         dispatch( startLogin( lUsername, lPassword ) );
 
+        
     }
+    useEffect(() => {
+      if ( lUsername.trim() === '' ||  lPassword.trim() === '' ) {
+        return setButtonLogin( 'btn btn-lg btn-login btn-block disabled' );
+      }
+      setButtonLogin( 'btn btn-lg btn-login btn-block' );
+
+    }, [ lUsername, lPassword ])
 
 
     return (
@@ -57,7 +71,7 @@ export const LoginScreen = () => {
 
                         </span>
                     </label>
-                    <button className="btn btn-lg btn-login btn-block" type="submit"><i _ngcontent-kod-c28="" className="fa fa-lock"></i> Iniciar Sesión</button>
+                    <button className={ buttonLogin } type="submit"><i _ngcontent-kod-c28="" className="fa fa-lock"></i> Iniciar Sesión</button>
 
                     <div className="registration">
                     ¿No tienes una cuenta?                   

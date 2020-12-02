@@ -17,8 +17,6 @@ export const startLogin = ( username, password ) => {
        
        const { persona } = await respPersona.json();
 
-
-       console.log( body );
        if ( body.ok ) {
            localStorage.setItem('token', body.token);
            localStorage.setItem('token-init-date', new Date().getTime() );
@@ -37,20 +35,16 @@ export const startLogin = ( username, password ) => {
     }
 }
 
-export const startRegister = ( email, password, name ) => {
+export const startRegister = ( nombre, primer_apellido, segundo_apellido, celular, imei, genero, edad, direccion, padres_responsables, dni, email, username, password, id_institucion ) => {
     return async ( dispatch ) => {
 
-        const resp = await fetchSinToken( 'auth/new',{ email, password, name }, 'POST' );
+        const resp = await fetchSinToken( 'auth/new',{ nombre, primer_apellido, segundo_apellido, celular, imei, genero, edad, direccion, padres_responsables, dni, email, username, password, id_institucion }, 'POST' );
         const body = await resp.json();
  
         if ( body.ok ) {
-            localStorage.setItem('token', body.token);
-            localStorage.setItem('token-init-date', new Date().getTime() );
-             
-             dispatch( login({
-                 uid: body.uid,
-                 name: body.name
-             }));
+            console.log( body );
+            dispatch( startLogin( username, password ));
+
         }else{
             Swal.fire('Error', body.msg, 'error');
         }

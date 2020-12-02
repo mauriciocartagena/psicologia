@@ -47,7 +47,7 @@ export const LoginScreen = () => {
       }
       setButtonLogin( false );
 
-    }, [ lUsername, lPassword ])
+    }, [ lUsername, lPassword ]);
 
 
     return (

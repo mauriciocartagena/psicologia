@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import cryptoRandomString from 'crypto-random-string';
 
 
 import { useForm } from '../../hooks/useForm';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { startRegister } from '../../actions/auth';
+import { uiCloseLoadingButton, uiOpenLoadingButton } from '../../actions/ui';
 
 
 export const RegisterScreen = () => {
 
     const dispatch = useDispatch();
+
+    const { uiLoadingButton } = useSelector(state => state.ui);
+    const [ buttonLogin, setButtonLogin ] = useState( false );
+
 
     const [formRegisterValues, handleRegisterInputChange] = useForm({
 
@@ -37,14 +42,36 @@ export const RegisterScreen = () => {
 
     const handleRegisterUser = ( e ) => {
         e.preventDefault();
+        setButtonLogin( true );
+        dispatch( uiCloseLoadingButton() );
+
         if ( password !== password2 ) {
-            return Swal.fire( ':(','Las contraseñas no coinciden', 'error' );
+            return (
+                Swal.fire( ':(','Las contraseñas no coinciden', 'error' ) ,
+                setButtonLogin( false )
+            ) ;
+
         }
         if( password.trim().length < 6 || '' || username === '' ){
-            return Swal.fire( ':(','El username o password no son validos', 'error' );
+            return (
+                Swal.fire( ':(','El username o password no son validos', 'error' ),
+                setButtonLogin( false )
+            );
         }
+        dispatch( uiOpenLoadingButton() );
+        setButtonLogin( false );
         dispatch( startRegister( nombre, primer_apellido, segundo_apellido, celular, imei, genero, edad, direccion, padres_responsables, dni, email, username, password, id_institucion ) );
     }
+
+    useEffect(() => {
+
+        if ( password.trim() === '' ||  password2.trim() === ''|| username.trim() === '' ) {
+          return setButtonLogin( true );
+        }
+        setButtonLogin( false );
+  
+      }, [ password, password2, username  ]);
+  
 
 
     return (
@@ -80,8 +107,8 @@ export const RegisterScreen = () => {
                         onChange={ handleRegisterInputChange }
                     />
 
-                    <button className="btn btn-lg btn-login btn-block" type="submit">
-                        Registrar
+                    <button className="btn btn-lg btn-login btn-block" type="submit" disabled={ buttonLogin } >
+                        <i _ngcontent-kod-c28="" className={ uiLoadingButton }></i> Crear Cuenta
                     </button>
 
                     <div className="registration">

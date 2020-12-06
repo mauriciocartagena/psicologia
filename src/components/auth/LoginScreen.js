@@ -38,6 +38,9 @@ export const LoginScreen = () => {
       if ( lUsername.trim() === '' ||  lPassword.trim() === '' ) {
        return dispatch( uiTrueDisabledButton() );
       }
+      else if( lPassword.trim().length <= 5  ) {
+        return dispatch( uiTrueDisabledButton() );
+       }
       dispatch( uiFalseDisabledButton() );
 
     }, [ lUsername, lPassword ]);

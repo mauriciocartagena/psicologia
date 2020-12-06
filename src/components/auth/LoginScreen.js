@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -33,18 +33,18 @@ export const LoginScreen = () => {
         dispatch( startLogin( lUsername, lPassword ) );  
         
     }
+
     useEffect(() => {
 
-      if ( lUsername.trim() === '' ||  lPassword.trim() === '' ) {
-       return dispatch( uiTrueDisabledButton() );
-      }
-      else if( lPassword.trim().length <= 5  ) {
-        return dispatch( uiTrueDisabledButton() );
-       }
-      dispatch( uiFalseDisabledButton() );
-
-    }, [ lUsername, lPassword ]);
-
+        if ( lUsername.trim() === '' ||  lPassword.trim() === '' ) {
+            return dispatch( uiTrueDisabledButton() );
+        }
+        else if( lPassword.trim().length <= 5  ) {
+            return dispatch( uiTrueDisabledButton() );
+        }
+        dispatch( uiFalseDisabledButton() );
+    
+    }, [ lUsername, lPassword, dispatch ]);
 
     return (
         <div className="container">
@@ -58,6 +58,7 @@ export const LoginScreen = () => {
                             className="form-control"  
                             placeholder="Username" 
                             autoFocus
+                            autoComplete="off"
                             value={ lUsername }
                             onChange={ handleLoginInputChange }
                             />
@@ -66,6 +67,7 @@ export const LoginScreen = () => {
                             name="lPassword" 
                             className="form-control" 
                             placeholder="Password" 
+                            autoComplete="off"
                             value={ lPassword }
                             onChange={ handleLoginInputChange }
                             />
@@ -89,7 +91,7 @@ export const LoginScreen = () => {
                     </div>
                 </div>
                 {/* Modal */}
-                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" className="modal fade in" style={{ display:"none" }} >
+                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabIndex="-1" id="myModal" className="modal fade in" style={{ display:"none" }} >
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -98,7 +100,7 @@ export const LoginScreen = () => {
                             </div>
                             <div className="modal-body">
                                 <p>Ingrese tu email para restablecer tu contraseña</p>
-                                <input type="text" name="email" placeholder="Email" autocomplete="off" className="form-control placeholder-no-fix" />
+                                <input type="text" name="email" placeholder="Email" autoComplete="off" className="form-control placeholder-no-fix" />
 
                             </div>
                             <div className="modal-footer">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import cryptoRandomString from 'crypto-random-string';
 
 
@@ -7,16 +7,13 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { startRegister } from '../../actions/auth';
-import { uiCloseLoadingButton, uiOpenLoadingButton } from '../../actions/ui';
-
+import { uiFalseDisabledButton, uiTrueDisabledButton } from '../../actions/ui';
 
 export const RegisterScreen = () => {
 
     const dispatch = useDispatch();
 
-    const { uiLoadingButton } = useSelector(state => state.ui);
-    const [ buttonLogin, setButtonLogin ] = useState( false );
-
+    const { uiLoadingButton, uiDisabled } = useSelector(state => state.ui);
 
     const [formRegisterValues, handleRegisterInputChange] = useForm({
 
@@ -42,35 +39,19 @@ export const RegisterScreen = () => {
 
     const handleRegisterUser = ( e ) => {
         e.preventDefault();
-        setButtonLogin( true );
-        dispatch( uiCloseLoadingButton() );
 
-        if ( password !== password2 ) {
-            return (
-                Swal.fire( ':(','Las contraseñas no coinciden', 'error' ) ,
-                setButtonLogin( false ),
-                dispatch( uiOpenLoadingButton() )
-            ) ;
-
-        }
-        if( password.trim().length < 6 || '' || username === '' ){
-            return (
-                Swal.fire( ':(','El username o password no son validos', 'error' ),
-                setButtonLogin( false ),
-                dispatch( uiOpenLoadingButton() )
-            );
-        }
-        dispatch( uiOpenLoadingButton() );
-        setButtonLogin( false );
-        dispatch( startRegister( nombre, primer_apellido, segundo_apellido, celular, imei, genero, edad, direccion, padres_responsables, dni, email, username, password, id_institucion ) );
+        dispatch( startRegister( nombre, primer_apellido, segundo_apellido, celular, imei, genero, edad, direccion, padres_responsables, dni, email, username, password, password2, id_institucion ) );
     }
 
     useEffect(() => {
 
         if ( password.trim() === '' ||  password2.trim() === ''|| username.trim() === '' ) {
-          return setButtonLogin( true );
+          return dispatch( uiTrueDisabledButton() );
         }
-        setButtonLogin( false );
+        else if( password.trim().length <= 5 || password2.trim().length <= 5 ) {
+            return dispatch( uiTrueDisabledButton() );
+        }
+        dispatch( uiFalseDisabledButton() );
   
       }, [ password, password2, username  ]);
   
@@ -109,7 +90,7 @@ export const RegisterScreen = () => {
                         onChange={ handleRegisterInputChange }
                     />
 
-                    <button className="btn btn-lg btn-login btn-block" type="submit" disabled={ buttonLogin } >
+                    <button className="btn btn-lg btn-login btn-block" type="submit" disabled={ uiDisabled } >
                         <i _ngcontent-kod-c28="" className={ uiLoadingButton }></i> Crear Cuenta
                     </button>
 

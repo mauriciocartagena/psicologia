@@ -40,18 +40,40 @@ export const startLogin = ( username, password ) => {
     }
 }
 
-export const startRegister = ( nombre, primer_apellido, segundo_apellido, celular, imei, genero, edad, direccion, padres_responsables, dni, email, username, password, id_institucion ) => {
+export const startRegister = ( nombre, primer_apellido, segundo_apellido, celular, imei, genero, edad, direccion, padres_responsables, dni, email, username, password, password2, id_institucion ) => {
     return async ( dispatch ) => {
+
+        dispatch( uiCloseLoadingButton() );
+        dispatch( uiTrueDisabledButton() );
+
+        if( password !== password2 ) {
+            return (
+                Swal.fire( ':(','Las contraseñas no coinciden', 'error' ),
+                dispatch( uiOpenLoadingButton() ),
+                dispatch( uiFalseDisabledButton() )
+            );
+
+        }
+        else if( password.trim().length <= 5 || '' || password2.trim().length <= 5 || '' || username === '' ){
+            return (
+                Swal.fire( ':(','El username o password no son validos', 'error' ),
+                dispatch( uiOpenLoadingButton() ),
+                dispatch( uiFalseDisabledButton() )
+            );
+        }
 
         const resp = await fetchSinToken( 'auth/new',{ nombre, primer_apellido, segundo_apellido, celular, imei, genero, edad, direccion, padres_responsables, dni, email, username, password, id_institucion }, 'POST' );
         const body = await resp.json();
  
         if ( body.ok ) {
-            console.log( body );
             dispatch( startLogin( username, password ));
+            dispatch( uiOpenLoadingButton() );
+            dispatch( uiFalseDisabledButton() );
 
         }else{
             Swal.fire('Error', body.msg, 'error');
+            dispatch( uiOpenLoadingButton() );
+            dispatch( uiFalseDisabledButton() );
         }
 
     }

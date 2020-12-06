@@ -23,21 +23,21 @@ export const LoginScreen = () => {
     const { lUsername, lPassword } = formLoginValues;
     
     const handleLogin = ( e ) => {
-        e.preventDefault();
-
-        setButtonLogin( true );
-        dispatch( uiCloseLoadingButton() );
+        e.preventDefault(); 
 
         if ( lUsername.trim() === '' || lPassword.trim() === '') {
-            return (
-                Swal.fire(':(', 'Username o contraseña incorrectos'  , 'error'),
-                dispatch( uiOpenLoadingButton() ),
-                setButtonLogin( false )
-            );
+            setButtonLogin( true );
+            Swal.fire(':(', 'Username o contraseña incorrectos'  , 'error');
+            dispatch( uiOpenLoadingButton() );
         }
-        dispatch( uiOpenLoadingButton() );
-        setButtonLogin( false );
-        dispatch( startLogin( lUsername, lPassword ) );   
+        else{
+
+            setButtonLogin( true );
+            dispatch( uiCloseLoadingButton() );        
+            dispatch( uiOpenLoadingButton() );
+            dispatch( startLogin( lUsername, lPassword ) );  
+
+        }
         
     }
     useEffect(() => {
@@ -93,21 +93,21 @@ export const LoginScreen = () => {
                     </div>
                 </div>
                 {/* Modal */}
-                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade in" style={{ display:"none" }} >
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">¿Olvidaste tu Contraseña?</h4>
+                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" className="modal fade in" style={{ display:"none" }} >
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 className="modal-title">¿Olvidaste tu Contraseña?</h4>
                             </div>
-                            <div class="modal-body">
+                            <div className="modal-body">
                                 <p>Ingrese tu email para restablecer tu contraseña</p>
-                                <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix" />
+                                <input type="text" name="email" placeholder="Email" autocomplete="off" className="form-control placeholder-no-fix" />
 
                             </div>
-                            <div class="modal-footer">
-                                <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                                <button class="btn btn-success" type="button">Submit</button>
+                            <div className="modal-footer">
+                                <button data-dismiss="modal" className="btn btn-default" type="button">Cancel</button>
+                                <button className="btn btn-success" type="button">Submit</button>
                             </div>
                         </div>
                     </div>

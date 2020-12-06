@@ -48,14 +48,16 @@ export const RegisterScreen = () => {
         if ( password !== password2 ) {
             return (
                 Swal.fire( ':(','Las contraseñas no coinciden', 'error' ) ,
-                setButtonLogin( false )
+                setButtonLogin( false ),
+                dispatch( uiOpenLoadingButton() )
             ) ;
 
         }
         if( password.trim().length < 6 || '' || username === '' ){
             return (
                 Swal.fire( ':(','El username o password no son validos', 'error' ),
-                setButtonLogin( false )
+                setButtonLogin( false ),
+                dispatch( uiOpenLoadingButton() )
             );
         }
         dispatch( uiOpenLoadingButton() );

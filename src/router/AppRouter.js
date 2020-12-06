@@ -34,7 +34,7 @@ export const AppRouter = () => {
 
     return (
         <Router>
-            <div >
+            <div>
                 <Switch>
                     <PublicRoute  
                         path="/auth" 

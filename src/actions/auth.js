@@ -1,13 +1,14 @@
 import Swal from "sweetalert2";
 import { fetchConToken, fetchSinToken } from "../helpers/fetch"
 import { types } from "../types/types";
-import { uieventLogout } from "./ui";
+import { uiCloseLoadingButton, uieventLogout, uiFalseDisabledButton, uiOpenLoadingButton, uiTrueDisabledButton } from "./ui";
 // import { eventLogout } from "./events";
-
-
 
 export const startLogin = ( username, password ) => { 
     return async ( dispatch ) => {
+
+        dispatch( uiCloseLoadingButton() );
+        dispatch( uiTrueDisabledButton() );
 
        const resp = await fetchSinToken( 'auth',{ username, password }, 'POST' );
        const body = await resp.json();
@@ -26,9 +27,13 @@ export const startLogin = ( username, password ) => {
                 username: body.username,
                 persona:persona
             }));
+            dispatch( uiOpenLoadingButton() );
+            dispatch( uiFalseDisabledButton() );
        }else{
 
            Swal.fire('Error', body.msg  , 'error');
+           dispatch( uiOpenLoadingButton() );
+           dispatch( uiFalseDisabledButton() );
 
        }
 

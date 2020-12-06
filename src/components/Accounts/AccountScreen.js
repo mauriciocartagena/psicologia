@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startUpdateAccount } from '../../actions/auth';
-import { uiCloseLoadingSaveButton, uiOpenLoadingSaveButton } from '../../actions/ui';
+import { uiCloseLoadingSaveButton, uiOpenLoadingButton, uiOpenLoadingSaveButton } from '../../actions/ui';
 import { useForm } from '../../hooks/useForm';
 
 export const AccountScreen = () => {
@@ -29,8 +29,6 @@ export const AccountScreen = () => {
         
         dispatch( uiOpenLoadingSaveButton() );
 
-
-        
     }
 
 

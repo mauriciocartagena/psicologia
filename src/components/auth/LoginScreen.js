@@ -3,17 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { startLogin } from '../../actions/auth';
-import { uiCloseLoadingButton, uiOpenLoadingButton } from '../../actions/ui';
+import { uiFalseDisabledButton, uiTrueDisabledButton } from '../../actions/ui';
 import { useForm } from '../../hooks/useForm';
 
 
 export const LoginScreen = () => {
 
-    const { uiLoadingButton } = useSelector(state => state.ui);
+    const { uiLoadingButton, uiDisabled } = useSelector(state => state.ui);
 
     const dispatch = useDispatch();
-
-    const [ buttonLogin, setButtonLogin ] = useState( false );
 
     const [ formLoginValues, handleLoginInputChange ] = useForm({
         lUsername:'ad2min',
@@ -26,26 +24,21 @@ export const LoginScreen = () => {
         e.preventDefault(); 
 
         if ( lUsername.trim() === '' || lPassword.trim() === '') {
-            setButtonLogin( true );
-            Swal.fire(':(', 'Username o contraseña incorrectos'  , 'error');
-            dispatch( uiOpenLoadingButton() );
+            return Swal.fire(':(', 'Username o contraseña esta vacia'  , 'error');
         }
-        else{
-
-            setButtonLogin( true );
-            dispatch( uiCloseLoadingButton() );        
-            dispatch( uiOpenLoadingButton() );
-            dispatch( startLogin( lUsername, lPassword ) );  
-
+        else if( lPassword.trim().length <= 5 ) {
+           return Swal.fire(':(', `La contraseña debe tener 6 a mas digitos y tiene ${ lPassword.trim().length }`  , 'error');
         }
+        
+        dispatch( startLogin( lUsername, lPassword ) );  
         
     }
     useEffect(() => {
 
       if ( lUsername.trim() === '' ||  lPassword.trim() === '' ) {
-        return setButtonLogin( true );
+       return dispatch( uiTrueDisabledButton() );
       }
-      setButtonLogin( false );
+      dispatch( uiFalseDisabledButton() );
 
     }, [ lUsername, lPassword ]);
 
@@ -80,7 +73,7 @@ export const LoginScreen = () => {
                         </span>
                         <br/>
                     </label>
-                    <button className='btn btn-lg btn-login btn-block'  disabled={ buttonLogin } type="submit">
+                    <button className='btn btn-lg btn-login btn-block'  disabled={ uiDisabled } type="submit">
                         <i _ngcontent-kod-c28="" className={ uiLoadingButton }></i> Iniciar Sesión
                     </button>
 

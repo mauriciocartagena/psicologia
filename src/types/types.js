@@ -2,6 +2,9 @@ export const types = {
 
     uiOpenSidebar:'[ui] Open Sidebar',
     uiCloseSidebar:'[ui] Close Sidebar',
+
+    uiTrueDisabledButton:'[ui] Disabled true',
+    uiFalseDisabledButton:'[ui] Disabled false',
     
     uiOpenSection:'[ui] Open Section',
     uiCloseSection:'[ui] Close Section',

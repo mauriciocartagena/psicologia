@@ -5,7 +5,8 @@ const initialState = {
     uiSidebar:'nav-collapse',
     uiSection:'',
     uiLoadingButton:'fa fa-lock',
-    uiLoadingSaveButton:'fa fa-save'
+    uiLoadingSaveButton:'fa fa-save',
+    uiDisabled:false
 }
 
 export const uiReducer = ( state = initialState, action) => {
@@ -19,6 +20,16 @@ export const uiReducer = ( state = initialState, action) => {
             return {
                 ...state,
                 uiSidebar:'nav-collapse hide-left-bar'
+            }
+        case types.uiTrueDisabledButton:
+            return {
+                ...state,
+                uiDisabled:true
+            }
+        case types.uiFalseDisabledButton:
+            return {
+                ...state,
+                uiDisabled:false
             }
         case types.uiOpenSection:
             return {

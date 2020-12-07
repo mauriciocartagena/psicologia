@@ -1,6 +1,12 @@
 import React from 'react'
+import moment from 'moment';
 import { useSelector } from 'react-redux';
-import { useForm } from '../../hooks/useForm'
+import { useForm } from '../../hooks/useForm';
+import 'moment/locale/es';
+
+// change Spanish
+
+moment.locale('es');
 
 export const UserScreen = () => {
 
@@ -18,9 +24,9 @@ export const UserScreen = () => {
                         <div id="settings" className="tab-pane active">
                             <div className="position-center">
                                 <div className="prf-contacts sttng">
-                                    <h2>  INFORMACIÓN CUENTA</h2>
+                                    <h2>INFORMACIÓN CUENTA</h2>
                                 </div>
-                                <form role="form" className="form-horizontal" 
+                                <form alt="form" className="form-horizontal" 
                                 // onSubmit={ handleUpdate } 
                                 >
                                     <div className="form-group">
@@ -44,7 +50,7 @@ export const UserScreen = () => {
                                                 disabled
                                                 name="create"
                                                 className="form-control"
-                                                value={ createdAt }
+                                                value={ moment(createdAt).format('LL, h:mm:ss a') }
                                             />
                                         </div>
                                     </div>
@@ -56,7 +62,7 @@ export const UserScreen = () => {
                                                 disabled
                                                 name="update"
                                                 className="form-control"
-                                                value={ updatedAt }
+                                                value={ moment(updatedAt).format('LL, h:mm:ss a') }
                                             />
                                         </div>
                                     </div>

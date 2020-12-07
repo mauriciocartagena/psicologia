@@ -47,7 +47,7 @@ export const LoginScreen = () => {
     }, [ lUsername, lPassword, dispatch ]);
 
     return (
-        <div className="container">
+        <div className="container animate__animated animate__fadeIn">
             <form className="form-signin" onSubmit={ handleLogin } >
                 <h2 className="form-signin-heading">Sistema de Psicologia</h2>
                 <div className="login-wrap">

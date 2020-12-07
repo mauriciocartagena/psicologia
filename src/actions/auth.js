@@ -39,6 +39,38 @@ export const startLogin = ( username, password ) => {
 
     }
 }
+export const startLoginAddAccount = ( username, password ) => { 
+    return async ( dispatch ) => {
+
+       const resp = await fetchSinToken( 'auth',{ username, password }, 'POST' );
+       const body = await resp.json();
+
+       const persona_id = body.uid;
+       const respPersona = await fetchConToken( 'users/usuario',{ persona_id } , 'POST' , body.token );
+       
+       const { persona } = await respPersona.json();
+
+       if ( body.ok ) {
+           localStorage.setItem('token', body.token);
+           localStorage.setItem('token-init-date', new Date().getTime() );
+            
+            dispatch( login({
+                uid: body.uid,
+                username: body.username,
+                persona:persona
+            }));
+            dispatch( uiOpenLoadingButton() );
+            dispatch( uiFalseDisabledButton() );
+       }else{
+
+           Swal.fire('Error', body.msg  , 'error');
+           dispatch( uiOpenLoadingButton() );
+           dispatch( uiFalseDisabledButton() );
+
+       }
+
+    }
+}
 
 export const startRegister = ( nombre, primer_apellido, segundo_apellido, celular, imei, genero, edad, direccion, padres_responsables, dni, email, username, password, password2, id_institucion ) => {
     return async ( dispatch ) => {
@@ -66,10 +98,7 @@ export const startRegister = ( nombre, primer_apellido, segundo_apellido, celula
         const body = await resp.json();
  
         if ( body.ok ) {
-            dispatch( startLogin( username, password ));
-            dispatch( uiOpenLoadingButton() );
-            dispatch( uiFalseDisabledButton() );
-
+            dispatch( startLoginAddAccount( username, password ));
         }else{
             Swal.fire('Error', body.msg, 'error');
             dispatch( uiOpenLoadingButton() );

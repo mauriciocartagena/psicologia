@@ -24,7 +24,6 @@ export const AccountScreen = () => {
 
 
     return (
-        <div className="row">
             <div className="col-md-12">
                 <section className="panel">
                     <div className="panel-body">
@@ -184,6 +183,5 @@ export const AccountScreen = () => {
                     </div>
                 </section>
             </div>
-        </div>
     )
 }

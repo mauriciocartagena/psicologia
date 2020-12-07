@@ -4,7 +4,6 @@ import cryptoRandomString from 'crypto-random-string';
 
 import { useForm } from '../../hooks/useForm';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { startRegister } from '../../actions/auth';
 import { uiFalseDisabledButton, uiTrueDisabledButton } from '../../actions/ui';
@@ -53,7 +52,7 @@ export const RegisterScreen = () => {
         }
         dispatch( uiFalseDisabledButton() );
   
-      }, [ password, password2, username  ]);
+    }, [ password, password2, username, dispatch ]);
   
 
 

@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startUpdateAccount } from '../../actions/auth';
-import { uiCloseLoadingSaveButton, uiOpenLoadingButton, uiOpenLoadingSaveButton } from '../../actions/ui';
 import { useForm } from '../../hooks/useForm';
 
 export const AccountScreen = () => {
 
     const dispatch = useDispatch();
 
-    const [ buttonLogin, setButtonLogin ] = useState( false );
-
     const { persona } = useSelector(state => state.auth);
     
-    const { uiLoadingSaveButton } = useSelector(state => state.ui)
+    const { uiLoadingSaveButton, uiDisabled } = useSelector(state => state.ui)
 
     const [ formAccountValues, handleAccountInputChange ] = useForm( persona );
     
@@ -20,14 +17,8 @@ export const AccountScreen = () => {
 
     const handleUpdate = ( e ) => {
         e.preventDefault();
-        
-        setButtonLogin( true );
-        
-        dispatch( uiCloseLoadingSaveButton() );
-            
+
         dispatch( startUpdateAccount( persona_id, nombre, primer_apellido, segundo_apellido, celular, imei, edad, dni, direccion, email ) );
-        
-        dispatch( uiOpenLoadingSaveButton() );
 
     }
 
@@ -43,7 +34,7 @@ export const AccountScreen = () => {
                                     <div className="prf-contacts sttng">
                                         <h2>  INFORMACIÓN PERSONAL</h2>
                                     </div>
-                                    <form role="form" className="form-horizontal" onSubmit={ handleUpdate } >
+                                    <form alt="formulario" className="form-horizontal" onSubmit={ handleUpdate } >
                                         <div className="form-group">
                                             <label className="col-lg-2 control-label">
                                                 Foto principal
@@ -51,7 +42,9 @@ export const AccountScreen = () => {
                                             <div className="col-sm-6">
                                                 <img
                                                     className="w150 img-thumbnail"
-                                                    src="https://mauriciocartagena.github.io/my-perfil/static/media/photo.517c8325.png" />
+                                                    src="https://mauriciocartagena.github.io/my-perfil/static/media/photo.517c8325.png" 
+                                                    alt="perfil"
+                                                />
                                                 <br />
                                                 <br />
                                                 <input type="file" className="form-control"></input>
@@ -178,7 +171,7 @@ export const AccountScreen = () => {
                                         <div className="form-group">
                                             <label className="col-lg-2 control-label">&nbsp;</label>
                                             <div className="col-sm-6">
-                                                <button type="submit" className="btn btn-primary btn-round btn-block" disabled={ buttonLogin } >
+                                                <button type="submit" className="btn btn-primary btn-round btn-block" disabled={ uiDisabled } >
                                                     <i className={ uiLoadingSaveButton } ></i>  Guardar
                                             </button>
                                             </div>

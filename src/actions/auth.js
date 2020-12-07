@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { fetchConToken, fetchSinToken } from "../helpers/fetch"
 import { types } from "../types/types";
-import { uiCloseLoadingButton, uieventLogout, uiFalseDisabledButton, uiOpenLoadingButton, uiTrueDisabledButton } from "./ui";
+import { uiCloseLoadingButton, uiCloseLoadingSaveButton, uieventLogout, uiFalseDisabledButton, uiOpenLoadingButton, uiOpenLoadingSaveButton, uiTrueDisabledButton } from "./ui";
 // import { eventLogout } from "./events";
 
 export const startLogin = ( username, password ) => { 
@@ -113,6 +113,9 @@ export const startUpdateAccount = ( persona_id, nombre, primer_apellido, segundo
 
     return async ( dispatch ) => {
 
+        dispatch( uiCloseLoadingSaveButton() );
+        dispatch( uiTrueDisabledButton() );
+
         try {
 
             const resp = await fetchConToken( 'users/update', { persona_id ,nombre, primer_apellido, segundo_apellido, celular, imei, edad, dni, direccion, email }, 'PUT' );
@@ -124,14 +127,20 @@ export const startUpdateAccount = ( persona_id, nombre, primer_apellido, segundo
 
             if ( body.ok ) {
                 dispatch( accountUpdated( persona ) );
+                dispatch( uiOpenLoadingSaveButton() );
+                dispatch( uiFalseDisabledButton() );
     
             }else{
                 Swal.fire('Error', body.msg, 'error');
+                dispatch( uiOpenLoadingSaveButton() );
+                dispatch( uiFalseDisabledButton() );
             }
 
             
         } catch (error) {
             console.log( error );
+            dispatch( uiOpenLoadingSaveButton() );
+            dispatch( uiFalseDisabledButton() );
         }
 
     }

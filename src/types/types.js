@@ -3,6 +3,8 @@ export const types = {
     uiOpenSidebar:'[ui] Open Sidebar',
     uiCloseSidebar:'[ui] Close Sidebar',
 
+    
+
     uiTrueDisabledButton:'[ui] Disabled true',
     uiFalseDisabledButton:'[ui] Disabled false',
     
@@ -21,8 +23,8 @@ export const types = {
     uieventLogout:'[ui] Logout',
 
     accountUpdate:'[ui] Account update',
-
-
+    
+    authUserUpdate:'[auth] User update',
     authChecking:'[auth] Checking login state ',
     authCheckingFinish:'[auth] Finish cheking login state ',
     authStartLogin:'[auth] Start Login',

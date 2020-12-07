@@ -1,8 +1,9 @@
 import React from 'react'
 import moment from 'moment';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
 import 'moment/locale/es';
+import { startUpdateUser } from '../../actions/auth';
 
 // change Spanish
 
@@ -10,11 +11,20 @@ moment.locale('es');
 
 export const UserScreen = () => {
 
-    const { usuarios } = useSelector(state => state.auth.persona)
+    const dispatch = useDispatch();
+
+    const { usuarios, persona_id } = useSelector(state => state.auth.persona);
+    const { uiLoadingSaveButton, uiDisabled } = useSelector(state => state.ui);
 
     const [ formUserValues, handleUserInputChange ] = useForm( usuarios[0] );
 
     const { username, createdAt, updatedAt  } = formUserValues;
+
+    const handleUpdateUser = ( e ) => {
+        e.preventDefault();
+        console.log( persona_id, username );
+        dispatch( startUpdateUser( persona_id, username ) );
+    }
 
     return (
         <div className="col-md-12">
@@ -68,16 +78,20 @@ export const UserScreen = () => {
                                     </div>
                                     <hr></hr>
                                     <div className="form-group">
-                                        <label className="col-lg-2 control-label">&nbsp;</label>
-                                        <div className="col-sm-6">
-                                            <button type="submit" className="btn btn-primary btn-round btn-block" 
-                                            // disabled={ buttonLogin } 
+                                        <div className="col-lg-offset-2 col-lg-7">
                                             
-                                            >
-                                                <i 
-                                                // className={ uiLoadingSaveButton } 
-                                                ></i>  Guardar
-                                        </button>
+                                            <button 
+                                                className="btn btn-primary col-lg-5" 
+                                                onClick={ handleUpdateUser }
+                                                style={{ marginRight:5 }}
+                                                type="submit"
+                                                disabled={ uiDisabled }
+                                            ><i className={ uiLoadingSaveButton } ></i>  Actualizar</button>
+                                            <button
+                                                className="btn btn-success col-lg-5"  
+                                                style={{ marginRight:5 }} 
+                                                type="button"
+                                            >Cambiar Contraseña</button>
                                         </div>
                                     </div>
                                 </form>

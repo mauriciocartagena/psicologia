@@ -174,6 +174,40 @@ export const startUpdateAccount = ( persona_id, nombre, primer_apellido, segundo
 
     }
 }
+export const startUpdateUser = ( persona_id ,username ) => {
+
+    return async ( dispatch ) => {
+
+        dispatch( uiCloseLoadingSaveButton() );
+        dispatch( uiTrueDisabledButton() );
+
+        try {
+
+            const resp = await fetchConToken( 'users/update-user', { persona_id, username }, 'PUT' );
+            const body = await resp.json();
+     
+            console.log( body );
+            const respPersona = await fetchConToken( 'users/usuario',{ persona_id } , 'POST' , body.token );
+            
+            const { persona } = await respPersona.json();
+
+            if ( body.ok ) {
+                dispatch( accountUpdated( persona ) );
+                dispatch( uiOpenLoadingSaveButton() );
+                dispatch( uiFalseDisabledButton() );
+    
+            }else{
+                Swal.fire('Error', body.msg, 'error');
+                dispatch( uiOpenLoadingSaveButton() );
+                dispatch( uiFalseDisabledButton() );
+            }
+            
+        } catch (error) {
+            console.log( error );
+        }
+    }
+
+}
 
 const accountUpdated = ( persona ) => ({
 

@@ -27,7 +27,7 @@ export const AppRouter = () => {
     if ( checking ) {
         return ( 
             <div className="loader-wrapper" style={{ display:"block" }} >
-                <div  className="loader animate__animated animate__fadeOut"/>
+                <div  className="loader"/>
             </div>
         );
     }

@@ -22,6 +22,11 @@ export const authReducer = ( state = initalState, action ) => {
                 ...state,
                 persona: action.payload
             }
+        case types.authUserUpdatePassword:
+            return {
+                ...state,
+                persona: action.payload
+            }
         case types.authCheckingFinish:
             return{
                 ...state,

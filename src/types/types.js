@@ -25,6 +25,7 @@ export const types = {
     accountUpdate:'[ui] Account update',
     
     authUserUpdate:'[auth] User update',
+    authUserUpdatePassword:"[auth] User update password",
     authChecking:'[auth] Checking login state ',
     authCheckingFinish:'[auth] Finish cheking login state ',
     authStartLogin:'[auth] Start Login',

@@ -183,10 +183,17 @@ export const startUpdateUser = ( persona_id ,username ) => {
 
         try {
 
+            if ( username.trim() === '' ) {
+                return (
+                    Swal.fire('Error', "El username esta vacio", 'error'),
+                    dispatch( uiOpenLoadingSaveButton() ),
+                    dispatch( uiFalseDisabledButton() )
+                );
+            }
+
             const resp = await fetchConToken( 'users/update-user', { persona_id, username }, 'PUT' );
             const body = await resp.json();
      
-            console.log( body );
             const respPersona = await fetchConToken( 'users/usuario',{ persona_id } , 'POST' , body.token );
             
             const { persona } = await respPersona.json();
@@ -194,7 +201,9 @@ export const startUpdateUser = ( persona_id ,username ) => {
             if ( body.ok ) {
 
                 dispatch( login({ 
-                    persona:persona 
+                    uid: body.uid,
+                    username: body.username,
+                    persona:persona
                 }));
                 dispatch( uiOpenLoadingSaveButton() );
                 dispatch( uiFalseDisabledButton() );
@@ -210,6 +219,57 @@ export const startUpdateUser = ( persona_id ,username ) => {
         }
     }
 
+}
+
+export const startUpdateUserPassword = ( persona_id, passwordCurrent, passwordNew, passwordAgain ) => {
+    return async ( dispatch ) => {
+        dispatch( uiCloseLoadingSaveButton() );
+        dispatch( uiTrueDisabledButton() );
+
+        try {
+
+            if ( passwordNew.trim() === '' || passwordNew.trim().length <= 5 ) {
+                return (
+                    Swal.fire('Error', "La contraseña es menor a 6", 'error'),
+                    dispatch( uiOpenLoadingSaveButton() ),
+                    dispatch( uiFalseDisabledButton() )
+                );
+            }
+            else if ( passwordNew !==  passwordAgain ){
+                return(
+                    Swal.fire('Error', "Las contraseñas no coinciden", 'error'),
+                    dispatch( uiOpenLoadingSaveButton() ),
+                    dispatch( uiFalseDisabledButton() )
+                );
+            }
+
+            const resp = await fetchConToken( 'users/update-userp', { persona_id, passwordCurrent,passwordNew }, 'PUT' );
+            const body = await resp.json();
+        
+            const respPersona = await fetchConToken( 'users/usuario',{ persona_id } , 'POST' , body.token );
+            
+            const { persona } = await respPersona.json();
+            
+            console.log( body );
+
+            if ( body.ok ) {
+
+                dispatch( login({ 
+                    persona:persona 
+                }));
+                dispatch( uiOpenLoadingSaveButton() );
+                dispatch( uiFalseDisabledButton() );
+
+            }else{
+                Swal.fire('Error', body.msg, 'error');
+                dispatch( uiOpenLoadingSaveButton() );
+                dispatch( uiFalseDisabledButton() );
+            }
+            
+        } catch (error) {
+            console.log( error );
+        }
+    }
 }
 
 const accountUpdated = ( persona ) => ({

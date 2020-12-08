@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../hooks/useForm';
 import 'moment/locale/es';
 import { startUpdateUser } from '../../actions/auth';
-
+import { Link } from 'react-router-dom';
+import { uiFalseDisabledButton, uiTrueDisabledButton } from '../../actions/ui';
 // change Spanish
 
 moment.locale('es');
@@ -25,9 +26,16 @@ export const UserScreen = () => {
         console.log( persona_id, username );
         dispatch( startUpdateUser( persona_id, username ) );
     }
+    useEffect(() => {
+        if( username.trim() === '' ){
+            return dispatch( uiTrueDisabledButton() );
+        }
+        dispatch( uiFalseDisabledButton() );
+        
+    }, [ username, dispatch ]);
 
     return (
-        <div className="col-md-12">
+        <div className="col-md-12 animated fadeIn">
             <section className="panel">
                 <div className="panel-body">
                     <div className="tab-content tasi-tab">
@@ -37,7 +45,7 @@ export const UserScreen = () => {
                                     <h2>INFORMACIÓN CUENTA</h2>
                                 </div>
                                 <form alt="form" className="form-horizontal" 
-                                // onSubmit={ handleUpdate } 
+                                onSubmit={ handleUpdateUser } 
                                 >
                                     <div className="form-group">
                                         <label className="col-lg-2 control-label">User Name</label>
@@ -82,16 +90,17 @@ export const UserScreen = () => {
                                             
                                             <button 
                                                 className="btn btn-primary col-lg-5" 
-                                                onClick={ handleUpdateUser }
                                                 style={{ marginRight:5 }}
                                                 type="submit"
                                                 disabled={ uiDisabled }
                                             ><i className={ uiLoadingSaveButton } ></i>  Actualizar</button>
-                                            <button
+                                            <Link
                                                 className="btn btn-success col-lg-5"  
                                                 style={{ marginRight:5 }} 
                                                 type="button"
-                                            >Cambiar Contraseña</button>
+                                                to="/user/settingp"
+                                            >
+                                            <i className="fa fa-lock" ></i> Actualizar Contraseña</Link>
                                         </div>
                                     </div>
                                 </form>

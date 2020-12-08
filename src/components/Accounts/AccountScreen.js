@@ -24,7 +24,7 @@ export const AccountScreen = () => {
 
 
     return (
-            <div className="col-md-12">
+            <div className="col-md-12 animated fadeIn">
                 <section className="panel">
                     <div className="panel-body">
                         <div className="tab-content tasi-tab">

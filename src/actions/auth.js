@@ -192,7 +192,10 @@ export const startUpdateUser = ( persona_id ,username ) => {
             const { persona } = await respPersona.json();
 
             if ( body.ok ) {
-                dispatch( accountUpdated( persona ) );
+
+                dispatch( login({ 
+                    persona:persona 
+                }));
                 dispatch( uiOpenLoadingSaveButton() );
                 dispatch( uiFalseDisabledButton() );
     

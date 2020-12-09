@@ -1,4 +1,6 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUniversity } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { startLogout } from '../../actions/auth';
@@ -23,16 +25,15 @@ export const Aside = () => {
             >
             <div className="leftside-navigation">
                 <ul className="sidebar-menu" id="nav-accordion">
-                    {/* <li>
-                        <a  href="index.html">
-                            <i className="fa fa-dashboard"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li> */}
                     <li className="sub-menu">
                         <Link to='/user' >
                             <i _ngcontent-tkb-c31="" className="fa fa-user"></i>
                             <span>Perfil</span>
+                        </Link>
+                    </li>
+                    <li className="sub-menu">
+                        <Link to='/user' >
+                            <span> <FontAwesomeIcon icon={ faUniversity } /> Institución</span>
                         </Link>
                     </li>
                     <li onClick={ handleLogout } >

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { AccountScreen } from '../components/Accounts/AccountScreen';
-import { ChangePasswordScreen } from '../components/Accounts/ChangePasswordScreen';
-import { UserScreen } from '../components/Accounts/UserScreen';
-import { Layout } from '../components/main/Layout';
+import { AccountScreen } from '../../components/Accounts/AccountScreen';
+import { ChangePasswordScreen } from '../../components/Accounts/ChangePasswordScreen';
+import { UserScreen } from '../../components/Accounts/UserScreen';
+import { Layout } from '../../components/main/Layout';
 
 
 

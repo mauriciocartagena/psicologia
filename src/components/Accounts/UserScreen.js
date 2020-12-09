@@ -100,7 +100,7 @@ export const UserScreen = () => {
                                                 type="button"
                                                 to="/user/settingp"
                                             >
-                                            <i className="fa fa-lock" ></i> Actualizar Contraseña</Link>
+                                            <i className="fa fa-lock" ></i> Cambiar Contraseña</Link>
                                         </div>
                                     </div>
                                 </form>

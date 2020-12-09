@@ -6,11 +6,12 @@ import {
     Redirect,
 } from "react-router-dom";
 import { startChecking } from '../actions/auth';
-import { AccountRouter } from './AccountRouter';
-import { AuthRouter } from './AuthRouter';
+import { AccountRouter } from './private/AccountRouter';
+import { AuthRouter } from './public/AuthRouter';
 
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRouter';
+import { InstitutionRouter } from './private/InstitutionRouter';
 
 
 export const AppRouter = () => {
@@ -41,10 +42,19 @@ export const AppRouter = () => {
                         component={ AuthRouter } 
                         isAuthenticated={ !!uid }
                     />
-        
+
+                    {/* 
+                        Rutas privadas 
+                    */}
+                    
                     <PrivateRoute 
-                        path="/"      
+                        path="/user"      
                         component={ AccountRouter }
+                        isAuthenticated={ !!uid }
+                    />
+                    <PrivateRoute 
+                        path="/institution"      
+                        component={ InstitutionRouter }
                         isAuthenticated={ !!uid }
                     />
                     <Redirect to="/auth/login" /> 

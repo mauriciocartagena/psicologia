@@ -23,6 +23,9 @@ export const types = {
     uieventLogout:'[ui] Logout',
 
     accountUpdate:'[ui] Account update',
+
+
+    institutionRegister:'[institution] Institution register',
     
     authUserUpdate:'[auth] User update',
     authUserUpdatePassword:"[auth] User update password",

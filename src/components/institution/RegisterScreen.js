@@ -1,14 +1,18 @@
-import React from 'react'
-import { useForm } from '../../hooks/useForm';
+import React, { useEffect } from 'react'
+import InputMask from 'react-input-mask';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/bootstrap.css';
+import { useForm } from '../../hooks/useForm';
 import { useFormPhone } from '../../hooks/useFormPhone';
 import { startRegisterInstitution } from '../../actions/institution';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { uiFalseDisabledButton, uiOpenLoadingButton, uiOpenLoadingSaveButton, uiTrueDisabledButton } from '../../actions/ui';
+ 
 
 export const RegisterScreen = () => {
 
     const dispatch = useDispatch();
+    const { uiDisabled, uiLoadingSaveButton } = useSelector(state => state.ui)
 
     const [ formInstitutionValues, handleInstitutionInputChange ] = useForm({ 
         name:'',
@@ -21,18 +25,28 @@ export const RegisterScreen = () => {
     const [ formInstitutionPhoneValues, handleInstitutionPhoneInputChange ] = useFormPhone({ 
         mobile:'',
     });
-    console.log( formInstitutionValues );
-    console.log( formInstitutionPhoneValues );
 
     const { name, address, phone, emei, nit, contact_name } = formInstitutionValues;
     const { mobile } = formInstitutionPhoneValues;
-    console.log( mobile )
 
     const handleRegister = ( e ) => {
         e.preventDefault();
-        console.log("clock");
         dispatch(startRegisterInstitution( name, address, phone, emei, nit, contact_name, mobile ));
     }
+
+    useEffect(() => {
+        if ( name.trim() === '' || address.trim() === '' || phone.trim() === '' || emei.trim() === '' || nit.trim() === '' || contact_name.trim() === '' || mobile.trim() === '') {
+            return (
+                dispatch( uiOpenLoadingSaveButton() ),
+                dispatch( uiTrueDisabledButton() )
+            )
+
+        }
+        dispatch( uiFalseDisabledButton() );
+       
+        
+    }, [ address ,phone ,emei ,nit ,contact_name ,mobile ,name ])
+
     return (
         <div className="col-lg-12 animated fadeIn">
             <section className="panel">
@@ -79,25 +93,30 @@ export const RegisterScreen = () => {
                                     onChange={ handleInstitutionPhoneInputChange }
                                     country="bo"
                                 />
-
                             </div>
                             <div className="form-group">
                                 <label>Telefono</label>
-                                <input type="text" 
+                               <InputMask 
+                                    placeholder="Ingrese telefono"
                                     className="form-control" 
+                                    mask="999-99-999" 
+                                    style={{ color:"black" }}
+                                    maskChar={null} 
+                                    name="phone"
                                     id="phone" 
-                                    placeholder="Ingrese telefono"  
-                                    name="phone" 
                                     value={ phone } 
                                     onChange={ handleInstitutionInputChange }
                                 />
                             </div>
                             <div className="form-group">
                                 <label>Emei</label>
-                                <input type="text" 
+                                <InputMask 
                                     className="form-control" 
-                                    id="emei" 
+                                    mask="999999999999999" 
+                                    style={{ color:"black" }}
+                                    maskChar={null} 
                                     placeholder="Ingrese emei"  
+                                    id="emei" 
                                     name="emei" 
                                     value={ emei } 
                                     onChange={ handleInstitutionInputChange }
@@ -105,8 +124,11 @@ export const RegisterScreen = () => {
                             </div>
                             <div className="form-group">
                                 <label>Nit</label>
-                                <input type="text" 
+                                <InputMask 
                                     className="form-control" 
+                                    mask="9999999999999" 
+                                    style={{ color:"black" }}
+                                    maskChar={null} 
                                     id="nit" 
                                     placeholder="Ingrese Nit"  
                                     name="nit" 
@@ -125,7 +147,9 @@ export const RegisterScreen = () => {
                                     onChange={ handleInstitutionInputChange }
                                 />
                             </div>
-                            <button type="submit" className="btn btn-info">Registrar</button>
+                            <button type="submit" className="btn btn-info" disabled={ uiDisabled } > 
+                                <i className={ uiLoadingSaveButton } /> Registrar
+                            </button>
                         </form>
                     </div>
                 </div>

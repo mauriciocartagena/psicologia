@@ -6,7 +6,14 @@ const initialState = {
     uiSection:'',
     uiLoadingButton:'fa fa-lock',
     uiLoadingSaveButton:'fa fa-save',
-    uiDisabled:false
+    uiDisabled:false,
+
+    uiSelection:'none',
+    uiRegisterSelectAcordion:'',
+    uiShowSelectInstitution:'',
+
+    uiIconClose:'dcjq-icon'
+
 }
 
 export const uiReducer = ( state = initialState, action) => {
@@ -78,6 +85,70 @@ export const uiReducer = ( state = initialState, action) => {
             return {
                 ...initialState
             }
+        
+        // Events Screen Institution
+
+        case types.institutionAcordionSelect:
+            return{
+                ...state,
+                ...action.payload,
+                uiSelection:'block',
+                checking:false
+            }
+        case types.institutionAcordionDeselect:
+            return{
+                ...state,
+                ...action.payload,
+                uiSelection:'none',
+                checking:false
+            }
+        case types.institutionSelectRegister:
+            return{
+                ...state,
+                ...action.payload,
+                uiRegisterSelectAcordion:'active',
+                checking:false
+            }
+        case types.institutionDeselectRegister:
+            return{
+                ...state,
+                ...action.payload,
+                uiRegisterSelectAcordion:'',
+                checking:false
+            }
+
+        case types.institutionSelectShow:
+            return {
+                ...state,
+                ...action.payload,
+                uiShowSelectInstitution:'active'
+            }
+        case types.institutionDeselectShow:
+            return {
+                ...state,
+                ...action.payload,
+                uiShowSelectInstitution:''
+            }
+        case types.institutionOpenAcordion:
+            return{
+                ...state,
+                ...action.payload,
+                checking:false
+            }
+        case types.institutionCloseAcordion:
+            return{
+                ...state,
+                ...action.payload,
+                checking:false
+            }
+        case types.institutionIconClose:
+            return{
+                ...state,
+                ...action.payload,
+                uiIconClose:'dcjq-icon',
+                cheking:false
+            }
+                
     
         default:
             return state;

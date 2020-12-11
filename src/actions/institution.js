@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import { fetchConToken } from "../helpers/fetch"
-import { uiCloseLoadingButton, uiCloseLoadingSaveButton, uiFalseDisabledButton, uiOpenLoadingButton, uiOpenLoadingSaveButton, uiTrueDisabledButton } from "./ui";
+import { types } from "../types/types";
+import { uiCloseLoadingSaveButton, uiFalseDisabledButton, uiOpenLoadingButton, uiOpenLoadingSaveButton, uiTrueDisabledButton } from "./ui";
 
 export const startRegisterInstitution = ( name, address, phone, emei, nit, contact_name, mobile ) => {
     return async( dispatch ) => {

@@ -20,6 +20,20 @@ export const uiCloseLoadingButton = () => ({ type: types.uiCloseLoadingButton } 
 export const uiOpenLoadingSaveButton = () => ({ type: types.uiOpenLoadingSaveButton } );
 export const uiCloseLoadingSaveButton = () => ({ type: types.uiCloseLoadingSaveButton } );
 
+// Institution
+export const institutionAcordionSelect = () => ({ type:types.institutionAcordionSelect });
+export const institutionAcordionDeselect = () => ({ type:types.institutionAcordionDeselect });
+
+export const institutionSelectRegister = () => ({ type:types.institutionSelectRegister });
+export const institutionDeselectRegister = () => ({ type:types.institutionDeselectRegister });
+
+export const institutionSelectShow = () => ({ type:types.institutionSelectShow });
+export const institutionDeselectShow = () => ({ type:types.institutionDeselectShow });
+
+export const institutionOpenAcordion = () => ({ type:types.institutionOpenAcordion });
+export const institutionCloseAcordion = () => ({ type:types.institutionCloseAcordion });
+export const institutionIconClose = () => ({ type:types.institutionIconClose });
+
 
 export const uieventLogout = () => ({ type: types.uieventLogout } );
 

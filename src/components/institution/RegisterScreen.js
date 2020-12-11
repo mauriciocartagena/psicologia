@@ -6,7 +6,7 @@ import { useForm } from '../../hooks/useForm';
 import { useFormPhone } from '../../hooks/useFormPhone';
 import { startRegisterInstitution } from '../../actions/institution';
 import { useDispatch, useSelector } from 'react-redux';
-import { uiFalseDisabledButton, uiOpenLoadingButton, uiOpenLoadingSaveButton, uiTrueDisabledButton } from '../../actions/ui';
+import { uiFalseDisabledButton, uiOpenLoadingSaveButton, uiTrueDisabledButton } from '../../actions/ui';
  
 
 export const RegisterScreen = () => {
@@ -45,7 +45,7 @@ export const RegisterScreen = () => {
         dispatch( uiFalseDisabledButton() );
        
         
-    }, [ address ,phone ,emei ,nit ,contact_name ,mobile ,name ])
+    }, [ address ,phone ,emei ,nit ,contact_name ,mobile ,name, dispatch ])
 
     return (
         <div className="col-lg-12 animated fadeIn">

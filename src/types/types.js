@@ -26,6 +26,19 @@ export const types = {
 
 
     institutionRegister:'[institution] Institution register',
+
+    institutionAcordionSelect:'[institution] Institution acordion select',
+    institutionAcordionDeselect:'[institution] Institution acordion deselect',
+
+    institutionSelectRegister:'[institution] Select register institution',
+    institutionDeselectRegister:'[institution] Deselect register institution',
+
+    institutionSelectShow:'[institution] Select show institution',
+    institutionDeselectShow:'[institution] Deselect show institution',
+
+    institutionIconClose:'[institution] Close icon institution',
+    institutionOpenAcordion:'[institution] Open acordion institution',
+    institutionCloseAcordion:'[institution] Cloase acordion instituion',
     
     authUserUpdate:'[auth] User update',
     authUserUpdatePassword:"[auth] User update password",

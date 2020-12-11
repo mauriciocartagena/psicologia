@@ -14,7 +14,6 @@ export const institutionReducer = ( state = initialState, action ) => {
                 ...action.payload,
                 checking:false
             }
-            
         default:
             return state
     }

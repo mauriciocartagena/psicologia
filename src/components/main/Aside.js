@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import { startLogout } from '../../actions/auth';
 import '../../styles/styles.css';
-import { institutionAcordionDeselect, institutionAcordionSelect, institutionDeselectRegister, institutionDeselectShow, institutionIconClose, institutionSelectRegister, institutionSelectShow } from '../../actions/ui';
+import { institutionAcordionDeselect, institutionAcordionSelect, institutionDeselectRegister, institutionDeselectShow, institutionSelectRegister, institutionSelectShow } from '../../actions/ui';
 
 
 export const Aside = () => {

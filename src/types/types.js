@@ -30,6 +30,7 @@ export const types = {
     institutionAcordionSelect:'[institution] Institution acordion select',
     institutionAcordionDeselect:'[institution] Institution acordion deselect',
 
+    institutionLoaded:'[institution] Loaded institution',
     institutionSelectRegister:'[institution] Select register institution',
     institutionDeselectRegister:'[institution] Deselect register institution',
 

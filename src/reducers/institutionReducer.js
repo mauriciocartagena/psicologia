@@ -1,7 +1,7 @@
 import { types } from "../types/types";
 
 const initialState = {
-    checking:true
+    institutions:[]
 }
 
 export const institutionReducer = ( state = initialState, action ) => {
@@ -9,10 +9,16 @@ export const institutionReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
 
         case types.institutionRegister:
-            return{
+            return {
                 ...state,
                 ...action.payload,
-                checking:false
+
+            }
+        case types.institutionLoaded:
+            return {
+                ...state,
+                institutions: [ ...action.payload]
+
             }
         default:
             return state

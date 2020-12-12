@@ -43,3 +43,18 @@ export const startRegisterInstitution = ( name, address, phone, emei, nit, conta
 
     }
 }
+
+export const fetchInstitutions = () => {
+    return  async ( dispatch ) => {
+        const resp = await fetchConToken( 'institutos/inst', 'GET');
+
+        const body = await resp.json();
+        const { instituciones } = body;
+        dispatch( institutionLoaded( instituciones ) );
+    }
+}
+
+const institutionLoaded = ( institutions ) => ({
+    type: types.institutionLoaded,
+    payload: institutions 
+});

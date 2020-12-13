@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MDBDataTable } from 'mdbreact';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchInstitutions } from '../../actions/institution';
@@ -7,138 +7,62 @@ export const InstitutionScreen = () => {
 
     const dispatch = useDispatch();
 
-    // dispatch( fetchInstitutions() );
-// 
-    // const { institutions } = useSelector(state => state.institution);
-
+    const { institutions } = useSelector(state => state.institution);
+    
     const data = {
-        columns: [
+      columns: [
           {
-            label: 'Name',
-            field: 'name',
-            sort: 'asc',
-            width: 150
-          },
-          {
-            label: 'Surname',
-            field: 'surname',
-            sort: 'asc',
-            width: 150
-          },
-          {
-            label: 'Position',
-            field: 'position',
-            sort: 'asc',
-            width: 270
-          },
-          {
-            label: 'Office',
-            field: 'office',
+            label: 'Nombre',
+            field: 'nombre',
             sort: 'asc',
             width: 200
           },
           {
-            label: 'Age',
-            field: 'age',
+            label: 'Direccion',
+            field: 'direccion',
             sort: 'asc',
-            width: 100
+            width: 200
           },
           {
-            label: 'Start date',
-            field: 'date',
+            label: 'Nit',
+            field: 'nit',
             sort: 'asc',
-            width: 150
+            width: 200
           },
           {
-            label: 'Salary',
-            field: 'salary',
+            label: 'Telefono',
+            field: 'telefono',
             sort: 'asc',
-            width: 100
+            width: 200
           },
           {
-            label: 'Extn.',
-            field: 'extn',
+            label: 'Celular',
+            field: 'celular',
             sort: 'asc',
-            width: 100
+            width: 200
           },
           {
-            label: "E-mail",
-            field: 'email',
+            label: 'Imei',
+            field: 'imei',
+            sort: 'asc',
+            width: 200
+          },
+          {
+            label: 'Nombre de Contacto',
+            field: 'nombre_contacto',
             sort: 'asc',
             width: 200
           }
         ],
-        rows: [
-          {
-            name: 'Tiger',
-            surname: 'Nixon',
-            position: 'System Architect',
-            office: 'Edinburgh',
-            age: '61',
-            date: '2011/04/25',
-            salary: '$320,800',
-            extn: 5421,
-            email: 't.nixon@datatables.net'
-          },
-          {
-            name: 'Garrett',
-            surname: 'Winters',
-            position: 'Accountant',
-            office: 'Tokyo',
-            age: '63',
-            date: '2011/07/25',
-            salary: '$170,750',
-            extn: 8422,
-            email: 'q.winters@datatables.net'
-          },
-          {
-            name: 'Ashton',
-            surname: 'Cox',
-            position: 'Junior Technical Author',
-            office: 'San Francisco',
-            age: '66',
-            date: '2009/01/12',
-            salary: '$86,000',
-            extn: 1562,
-            email: 'a.cox@datatables.net'
-          },
-          {
-            name: 'Cedric',
-            surname: 'Kelly',
-            position: 'Senior Javascript Developer',
-            office: 'Edinburgh',
-            age: '22',
-            date: '2012/03/29',
-            salary: '$433,060',
-            extn: 6224,
-            email: 'c.kelly@datatables.net'
-          },
-          {
-            name: 'Airi',
-            surname: 'Satou',
-            position: 'Accountant',
-            office: 'Tokyo',
-            age: '33',
-            date: '2008/11/28',
-            salary: '$162,700',
-            extn: 5407,
-            email: 'a.satou@datatables.net'
-          },
-          {
-            name: 'Brielle',
-            surname: 'Williamson',
-            position: 'Integration Specialist',
-            office: 'New York',
-            age: '61',
-            date: '2012/12/02',
-            salary: '$372,000',
-            extn: 4804,
-            email: 'b.williamson@datatables.net'
-          },
-        ]
+        rows: institutions
     };
-    // console.log(institutions );
+    console.log( data );
 
+    useEffect(() => {
+
+      dispatch( fetchInstitutions() );
+      
+    }, [ dispatch ]);
     return (
 
         <div className="col-lg-12 animated fadeIn">
@@ -149,7 +73,9 @@ export const InstitutionScreen = () => {
                 <div className="panel-body">
                     <MDBDataTable
                         scrollX
-                        maxHeight="20vh"
+
+                        autoWidth={true}
+                        maxHeight="30vh"
                         striped
                         bordered
                         small

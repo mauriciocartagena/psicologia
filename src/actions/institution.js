@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { fetchConToken } from "../helpers/fetch"
 import { types } from "../types/types";
-import { uiCloseLoadingSaveButton, uiFalseDisabledButton, uiOpenLoadingButton, uiOpenLoadingSaveButton, uiTrueDisabledButton } from "./ui";
+import { uiCloseLoadingSaveButton, uiFalseDisabledButton, uiOpenLoadingSaveButton, uiTrueDisabledButton } from "./ui";
 
 export const startRegisterInstitution = ( name, address, phone, emei, nit, contact_name, mobile ) => {
     return async( dispatch ) => {
@@ -46,11 +46,25 @@ export const startRegisterInstitution = ( name, address, phone, emei, nit, conta
 
 export const fetchInstitutions = () => {
     return  async ( dispatch ) => {
-        const resp = await fetchConToken( 'institutos/inst', 'GET');
+        
+        try {
+            
+            const resp = await fetchConToken( 'institutos/inst', 'GET');
+    
+            const body = await resp.json();
+            const { instituciones } = body;
+            
+            if ( body.ok ) {
+                
+                dispatch( institutionLoaded( instituciones ) );
+            
+            }else{
+                console.log("error" + body.msg )
+            }
 
-        const body = await resp.json();
-        const { instituciones } = body;
-        dispatch( institutionLoaded( instituciones ) );
+        } catch (error) {
+            console.log("erro", error);
+        }
     }
 }
 

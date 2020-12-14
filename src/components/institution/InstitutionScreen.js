@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { MDBDataTable, MDBBtn } from 'mdbreact';
+import React, { useEffect, useState } from 'react';
+import { MDBBtn, MDBDataTable } from 'mdbreact';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchInstitutions } from '../../actions/institution';
+import { institutionSetActive, institutionLoaded, fetchInstitutions } from '../../actions/institution';
 import { useHistory } from 'react-router-dom';
 
 export const InstitutionScreen = () => {
@@ -10,7 +10,10 @@ export const InstitutionScreen = () => {
 
     const dispatch = useDispatch();
 
-    const { institutions } = useSelector(state => state.institution);
+    const { institution } = useSelector( state => state )
+
+    const [institutions, setInstitutions ] = useState([]);
+
 
     const data = {
       columns: [
@@ -58,40 +61,50 @@ export const InstitutionScreen = () => {
           },
           {
             label: 'Modificar',
-            field: 'buttonUpdate',
+            field: 'modified',
             sort: 'asc',
             width: 200
           },
           {
             label: 'Eliminar',
-            field: 'buttonDelete',
+            field: 'deleted',
             sort: 'asc',
             width: 200
-          }
+          },
       ],
         rows: institutions
     };
 
-    institutions.map( (e) => { 
-      return(
-        e.buttonUpdate = <MDBBtn id={ e.id_institucion } onClick={ ( e ) => ( handleUpdate(e) ) } color="primary">Modificar</MDBBtn>,
-        e.buttonDelete = <MDBBtn id={ e.id_institucion } onClick={ ( e ) => ( handleDelete(e) ) } color="success">Eliminar</MDBBtn>
-      )
-     });
-
     const handleUpdate = (e) => {
       e.preventDefault();
-      console.log( e.target.id  );
-      history.push('/institution/update', { id: e.target.id });
+      console.log(e.target.id);
+      dispatch( institutionSetActive( institution.institutions, e.target.id ) )
+      console.log(institutions);
     }
     const handleDelete = (e) => {
       e.preventDefault();
-      console.log( "handleDelete" );
+      console.log("hello2");
     }
 
     useEffect(() => {
 
-      dispatch( fetchInstitutions() );
+      dispatch( fetchInstitutions() ) ;
+
+      let rows = [];
+      institution.institutions.forEach(item => rows.push({
+        id_institucion:item.id_institucion,
+        nombre: item. nombre,
+        direccion: item. direccion,
+        celular: item. celular,
+        telefono: item.telefono ,
+        imei:item.imei,
+        nit:item.nit,
+        nombre_contacto:item.nombre_contacto,
+        modified: <MDBBtn id={ item.id_institucion } onClick={ ( e ) =>  handleUpdate(e)  } color="primary">Modificar</MDBBtn>,
+        deleted: <MDBBtn id={ item.id_institucion } onClick={ ( e ) =>  handleDelete(e)  } color="success">Eliminar</MDBBtn>
+      }));
+      setInstitutions( rows );
+                
       
     }, [ dispatch ]);
     return (

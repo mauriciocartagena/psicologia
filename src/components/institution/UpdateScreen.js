@@ -1,23 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 import { FormUpdate } from './FormUpdate';
 
 export const UpdateScreen = () => {
 
-    const location = useLocation();
+    // const { institutions } = useSelector(state => state.activeInstitution);
 
-    const { institutions } = useSelector(state => state.institution);
-
-    const [ institution, setInstitution ] = useState([]);
-
-    useEffect(() => {
-        if ( location.state ) {
-            const { id } = location.state;
-            setInstitution( [ institutions.find( e => e.id_institucion.toString() === id ) ] );
-        }
-        
-    }, [ location.state, institutions ]);
+    // console.log( institutions );
 
     return (
         <div className="col-lg-12 animated fadeIn">
@@ -25,7 +14,8 @@ export const UpdateScreen = () => {
                 <header className="panel-heading">
                     MODIFICAR INSTITUCIÓN
                 </header>
-                {
+                <h1>hello</h1>
+                {/* {
                     
                     (location.state)
                     ?
@@ -38,7 +28,7 @@ export const UpdateScreen = () => {
                             <div>No hay datos</div>
                         </div>
                     </div>
-                }
+                } */}
             </section>
         </div>   
     )

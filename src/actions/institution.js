@@ -52,10 +52,11 @@ export const fetchInstitutions = () => {
             const resp = await fetchConToken( 'institutos/inst', 'GET');
     
             const body = await resp.json();
+
             const { instituciones } = body;
             
             if ( body.ok ) {
-                
+
                 dispatch( institutionLoaded( instituciones ) );
             
             }else{
@@ -68,40 +69,36 @@ export const fetchInstitutions = () => {
     }
 }
 
-export const updatedInstitution = ( name, address, phone, emei, newNit, contact_name, mobile, id ) => {
+
+export const institutionSetActive = ( institutions, id ) => ({ 
+    type:types.institutionSetActive,
+    payload: { institutions, id }
+});
+
+export const updatedInstitution = ( institution ) => {
     return async ( dispatch ) => {
         
         dispatch( uiCloseLoadingSaveButton() );
         dispatch( uiTrueDisabledButton() );
 
         try {
-            
     
-            if ( name.trim() === '' || address.trim() === '' || phone.trim() === '' || emei.trim() === '' || newNit.trim() === '' || contact_name.trim() === '' || mobile.trim() === '' ) {
+            // if ( name.trim() === '' || address.trim() === '' || phone.trim() === '' || emei.trim() === '' || newNit.trim() === '' || contact_name.trim() === '' || mobile.trim() === '' ) {
                 
-                return (
-                    Swal.fire(':(', 'Todos los campos son requeridos', 'error'),
-                    dispatch( uiOpenLoadingSaveButton() ),
-                    dispatch( uiFalseDisabledButton() ),
-                    dispatch( fetchInstitutions() )
-                );
+            //     return (
+            //         Swal.fire(':(', 'Todos los campos son requeridos', 'error'),
+            //         dispatch( uiOpenLoadingSaveButton() ),
+            //         dispatch( uiFalseDisabledButton() )
+            //     );
     
-            }
-            const resp = await fetchConToken( 'institutos/update',{ 
-                    nombre:name, 
-                    direccion:address, 
-                    celular:mobile, 
-                    telefono:phone, 
-                    imei:emei, 
-                    nit:newNit, 
-                    nombre_contacto:contact_name,
-                    id_institucion:id
-            } , 'PUT');
+            // }
+            const resp = await fetchConToken( 'institutos/update', institution, 'PUT');
             const body = await resp.json();
     
     
             if ( body.ok ) {
                 Swal.fire(':)','Institución actualizada', 'success');
+                dispatch( institutionUpdated( institution ) )
                 dispatch( uiOpenLoadingSaveButton() );
                 dispatch( uiFalseDisabledButton() );
             }else{
@@ -118,6 +115,12 @@ export const updatedInstitution = ( name, address, phone, emei, newNit, contact_
 
     }
 }
+
+const institutionUpdated = ( institution ) => ({
+
+    type: types.institutionUpdate,
+    payload: institution
+});
 
 const institutionLoaded = ( institutions ) => ({
     type: types.institutionLoaded,

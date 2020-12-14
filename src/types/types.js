@@ -24,8 +24,8 @@ export const types = {
 
     accountUpdate:'[ui] Account update',
 
-
-    institutionRegister:'[institution] Institution register',
+    institutionSetActive:'[institution] Institution active',
+    institutionUpdate: '[institution] Institution updated',
 
     institutionAcordionSelect:'[institution] Institution acordion select',
     institutionAcordionDeselect:'[institution] Institution acordion deselect',

@@ -81,7 +81,7 @@ export const Aside = () => {
                         <ul className="sub" style={{ display: uiSelection }}>
                             <li className={ uiShowSelectInstitution } onClick={ handleChangeStyleShow } >
                                 <NavLink to="/institution/view">
-                                    Instituciónes
+                                    Ver Instituciónes
                                 </NavLink>
                             </li>
                             <li className={ uiRegisterSelectAcordion } onClick={ handleChangeStyleRegister }>

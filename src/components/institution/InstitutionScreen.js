@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import { MDBDataTable, MDBBtn } from 'mdbreact';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchInstitutions } from '../../actions/institution';
+import { useHistory } from 'react-router-dom';
 
 export const InstitutionScreen = () => {
+
+    const history = useHistory();
 
     const dispatch = useDispatch();
 
@@ -78,14 +81,12 @@ export const InstitutionScreen = () => {
 
     const handleUpdate = (e) => {
       e.preventDefault();
-      console.log( "handleUpdate");
+      history.push('/institution/update');
     }
     const handleDelete = (e) => {
       e.preventDefault();
       console.log( "handleDelete" );
     }
-
-    console.log(institutions);
 
     useEffect(() => {
 

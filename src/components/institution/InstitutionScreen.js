@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTable, MDBBtn } from 'mdbreact';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchInstitutions } from '../../actions/institution';
 
@@ -8,14 +8,14 @@ export const InstitutionScreen = () => {
     const dispatch = useDispatch();
 
     const { institutions } = useSelector(state => state.institution);
-    
+
     const data = {
       columns: [
           {
             label: 'Nombre',
             field: 'nombre',
             sort: 'asc',
-            width: 200
+            width: 200,
           },
           {
             label: 'Direccion',
@@ -52,11 +52,40 @@ export const InstitutionScreen = () => {
             field: 'nombre_contacto',
             sort: 'asc',
             width: 200
+          },
+          {
+            label: 'Modificar',
+            field: 'buttonUpdate',
+            sort: 'asc',
+            width: 200
+          },
+          {
+            label: 'Eliminar',
+            field: 'buttonDelete',
+            sort: 'asc',
+            width: 200
           }
-        ],
+      ],
         rows: institutions
     };
-    console.log( data );
+
+    institutions.map( (e) => { 
+      return(
+        e.buttonUpdate = <MDBBtn id={ e.id_institucion } onClick={ ( e ) => ( handleUpdate(e) ) } color="primary">Modificar</MDBBtn>,
+        e.buttonDelete = <MDBBtn id={ e.id_institucion } onClick={ ( e ) => ( handleDelete(e) ) } color="success">Eliminar</MDBBtn>
+      )
+     });
+
+    const handleUpdate = (e) => {
+      e.preventDefault();
+      console.log( "handleUpdate");
+    }
+    const handleDelete = (e) => {
+      e.preventDefault();
+      console.log( "handleDelete" );
+    }
+
+    console.log(institutions);
 
     useEffect(() => {
 
@@ -73,7 +102,6 @@ export const InstitutionScreen = () => {
                 <div className="panel-body">
                     <MDBDataTable
                         scrollX
-
                         autoWidth={true}
                         maxHeight="30vh"
                         striped

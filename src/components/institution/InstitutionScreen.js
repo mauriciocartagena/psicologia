@@ -81,7 +81,8 @@ export const InstitutionScreen = () => {
 
     const handleUpdate = (e) => {
       e.preventDefault();
-      history.push('/institution/update');
+      console.log( e.target.id  );
+      history.push('/institution/update', { id: e.target.id });
     }
     const handleDelete = (e) => {
       e.preventDefault();

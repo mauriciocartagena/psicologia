@@ -109,13 +109,13 @@ export const RegisterScreen = () => {
                                 />
                             </div>
                             <div className="form-group">
-                                <label>Emei</label>
+                                <label>Imei</label>
                                 <InputMask 
                                     className="form-control" 
                                     mask="999999999999999" 
                                     style={{ color:"black" }}
                                     maskChar={null} 
-                                    placeholder="Ingrese emei"  
+                                    placeholder="Ingrese imei"  
                                     id="emei" 
                                     name="emei" 
                                     value={ emei } 

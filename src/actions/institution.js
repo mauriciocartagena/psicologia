@@ -68,6 +68,57 @@ export const fetchInstitutions = () => {
     }
 }
 
+export const updatedInstitution = ( name, address, phone, emei, newNit, contact_name, mobile, id ) => {
+    return async ( dispatch ) => {
+        
+        dispatch( uiCloseLoadingSaveButton() );
+        dispatch( uiTrueDisabledButton() );
+
+        try {
+            
+    
+            if ( name.trim() === '' || address.trim() === '' || phone.trim() === '' || emei.trim() === '' || newNit.trim() === '' || contact_name.trim() === '' || mobile.trim() === '' ) {
+                
+                return (
+                    Swal.fire(':(', 'Todos los campos son requeridos', 'error'),
+                    dispatch( uiOpenLoadingSaveButton() ),
+                    dispatch( uiFalseDisabledButton() ),
+                    dispatch( fetchInstitutions() )
+                );
+    
+            }
+            const resp = await fetchConToken( 'institutos/update',{ 
+                    nombre:name, 
+                    direccion:address, 
+                    celular:mobile, 
+                    telefono:phone, 
+                    imei:emei, 
+                    nit:newNit, 
+                    nombre_contacto:contact_name,
+                    id_institucion:id
+            } , 'PUT');
+            const body = await resp.json();
+    
+    
+            if ( body.ok ) {
+                Swal.fire(':)','Institución actualizada', 'success');
+                dispatch( uiOpenLoadingSaveButton() );
+                dispatch( uiFalseDisabledButton() );
+            }else{
+                Swal.fire('Error', body.msg, 'error');
+                dispatch( uiOpenLoadingSaveButton() );
+                dispatch( uiFalseDisabledButton() );
+            }
+    
+
+        } catch (error) {
+            console.log(error);
+            return Swal.fire('Error', "Hable con el administrador", 'error');
+        }
+
+    }
+}
+
 const institutionLoaded = ( institutions ) => ({
     type: types.institutionLoaded,
     payload: institutions 

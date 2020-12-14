@@ -45,7 +45,7 @@ export const RegisterScreen = () => {
         dispatch( uiFalseDisabledButton() );
        
         
-    }, [ address ,phone ,emei ,nit ,contact_name ,mobile ,name, dispatch ])
+    }, [ address ,phone ,emei ,nit ,contact_name ,mobile ,name, dispatch ]);
 
     return (
         <div className="col-lg-12 animated fadeIn">

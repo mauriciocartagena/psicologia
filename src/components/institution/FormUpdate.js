@@ -1,19 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PhoneInput from 'react-phone-input-2';
 import InputMask from 'react-input-mask';
 import { useForm } from '../../hooks/useForm';
 import { useFormPhone } from '../../hooks/useFormPhone';
+import { useDispatch, useSelector } from 'react-redux';
+import { uiFalseDisabledButton, uiOpenLoadingSaveButton, uiTrueDisabledButton } from '../../actions/ui';
+import { updatedInstitution } from '../../actions/institution';
 
 export const FormUpdate = ( { data = '' } ) => {
 
-    const  { nombre = '', celular = '', direccion = '', telefono = '', imei = '', nit = '', nombre_contacto = '' } = data;
+    const dispatch = useDispatch();
+
+    const  { nombre = '', celular = '', direccion = '', telefono = '', imei = '', nit = '', nombre_contacto = '', id_institucion = '' } = data;
+
+    const { uiDisabled, uiLoadingSaveButton } = useSelector(state => state.ui)
     
     const [ formInstitutionValues, handleInstitutionInputChange ] = useForm({ 
         name: nombre,
         address: direccion,
         phone: telefono,
         emei: imei,
-        nitt: nit,
+        newNit: nit,
         contact_name: nombre_contacto
     });
     
@@ -21,15 +28,26 @@ export const FormUpdate = ( { data = '' } ) => {
         mobile: celular ,
     });
     
-    const { name, address, phone, emei, nitt, contact_name } = formInstitutionValues;
+    const { name, address, phone, emei, newNit, contact_name } = formInstitutionValues;
     const { mobile } = formInstitutionPhoneValues;
-
-    console.log( formInstitutionValues )
 
     const handleUpdated = (e) => {
         e.preventDefault();
-        console.log("hello");
+        dispatch( updatedInstitution( name, address, phone, emei, newNit, contact_name, mobile, id_institucion ) );
     }
+
+    useEffect(() => {
+        if ( name.trim() === '' || address.trim() === '' || phone.trim() === '' || emei.trim() === '' || newNit.trim() === '' || contact_name.trim() === '' || mobile.trim() === '') {
+            return (
+                dispatch( uiOpenLoadingSaveButton() ),
+                dispatch( uiTrueDisabledButton() )
+            )
+
+        }
+        dispatch( uiFalseDisabledButton() );
+       
+        
+    }, [ address ,phone ,emei ,newNit ,contact_name ,mobile ,name, dispatch ]);
 
     return (
         <div className="panel-body">
@@ -108,10 +126,10 @@ export const FormUpdate = ( { data = '' } ) => {
                             mask="9999999999999" 
                             style={{ color:"black" }}
                             maskChar={null} 
-                            id="nitt" 
+                            id="newNit" 
                             placeholder="Ingrese Nit"  
-                            name="nitt" 
-                            value={ nitt } 
+                            name="newNit" 
+                            value={ newNit } 
                             onChange={ handleInstitutionInputChange }
                         />
                     </div>
@@ -127,10 +145,10 @@ export const FormUpdate = ( { data = '' } ) => {
                         />
                     </div>
                     <button type="submit" className="btn btn-info" 
-                    // disabled={ uiDisabled } 
+                    disabled={ uiDisabled } 
                     > 
                         <i 
-                        // className={ uiLoadingSaveButton } 
+                        className={ uiLoadingSaveButton } 
                         /> Modificar
                     </button>
                 </form>

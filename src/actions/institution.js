@@ -1,4 +1,3 @@
-import { MDBBtn } from "mdbreact";
 import Swal from "sweetalert2";
 import { fetchConToken } from "../helpers/fetch"
 import { types } from "../types/types";
@@ -46,52 +45,12 @@ export const startRegisterInstitution = ( name, address, phone, emei, nit, conta
     }
 }
 
-export const fetchInstitutions = ( setInstitutions, handleUpdate, handleDelete ) => {
-    return  async ( dispatch ) => {
-
-        try {
-            
-            const resp = await fetchConToken( 'institutos/inst', 'GET');
-    
-            const body = await resp.json();
-
-            const { instituciones } = body;
-            
-            if ( body.ok ) {
-
-                let rows = [];
-                dispatch( institutionLoaded( instituciones ) );
-                instituciones.forEach(item =>rows.push({
-                    id_institucion:item.id_institucion,
-                    nombre: item.nombre,
-                    direccion: item.direccion,
-                    celular: item.celular,
-                    telefono: item.telefono ,
-                    imei: item.imei,
-                    nit: item.nit,
-                    nombre_contacto:item.nombre_contacto,
-                    modified: <MDBBtn id={ item.id_institucion } onClick={ ( e )=> handleUpdate(e) } color="primary">Modificar</MDBBtn>,
-                    deleted: <MDBBtn id={ item.id_institucion }  onClick={ ( e )=> handleDelete(e) } color="success">Eliminar</MDBBtn>
-                }));
-                setInstitutions( rows )
-            
-            }else{
-                console.log("error" + body.msg )
-            }
-
-        } catch (error) {
-            console.log("erro", error);
-        }
-    }
-}
-
-
 export const institutionSetActive = ( institutions, id ) => ({ 
     type:types.institutionSetActive,
     payload: { institutions, id }
 });
 
-export const updatedInstitution = ( institution ) => {
+export const updatedInstitution = ( name, address, phone, emei, newNit, contact_name, mobile, id_institucion  ) => {
     return async ( dispatch ) => {
         
         dispatch( uiCloseLoadingSaveButton() );
@@ -99,22 +58,30 @@ export const updatedInstitution = ( institution ) => {
 
         try {
     
-            // if ( name.trim() === '' || address.trim() === '' || phone.trim() === '' || emei.trim() === '' || newNit.trim() === '' || contact_name.trim() === '' || mobile.trim() === '' ) {
+            if ( name.trim() === '' || address.trim() === '' || phone.trim() === '' || emei.trim() === '' || newNit.trim() === '' || contact_name.trim() === '' || mobile.trim() === '' ) {
                 
-            //     return (
-            //         Swal.fire(':(', 'Todos los campos son requeridos', 'error'),
-            //         dispatch( uiOpenLoadingSaveButton() ),
-            //         dispatch( uiFalseDisabledButton() )
-            //     );
+                return (
+                    Swal.fire(':(', 'Todos los campos son requeridos', 'error'),
+                    dispatch( uiOpenLoadingSaveButton() ),
+                    dispatch( uiFalseDisabledButton() )
+                );
     
-            // }
-            const resp = await fetchConToken( 'institutos/update', institution, 'PUT');
+            }
+            const resp = await fetchConToken( 'institutos/update', { 
+                nombre:name,
+                direccion:address,
+                celular:mobile,
+                telefono:phone,
+                imei:emei,
+                nit:newNit,
+                nombre_contacto:contact_name,
+                id_institucion:id_institucion
+            }, 'PUT');
+
             const body = await resp.json();
-    
     
             if ( body.ok ) {
                 Swal.fire(':)','Institución actualizada', 'success');
-                dispatch( institutionUpdated( institution ) )
                 dispatch( uiOpenLoadingSaveButton() );
                 dispatch( uiFalseDisabledButton() );
             }else{
@@ -126,17 +93,20 @@ export const updatedInstitution = ( institution ) => {
 
         } catch (error) {
             console.log(error);
-            return Swal.fire('Error', "Hable con el administrador", 'error');
+            return (
+                Swal.fire('Error', "Hable con el administrador", 'error'),
+                dispatch( uiOpenLoadingSaveButton() ),
+                dispatch( uiFalseDisabledButton() )
+            );
         }
 
     }
 }
 
-const institutionUpdated = ( institution ) => ({
-
-    type: types.institutionUpdate,
-    payload: institution
+export const institutionSetActiveClear = () => ({
+    type:types.institutionSetActiveClear
 });
+
 
 export const institutionLoaded = ( institutions ) => ({
     type: types.institutionLoaded,

@@ -21,13 +21,12 @@ export const institutionReducer = ( state = initialState, action ) => {
                 institutions: [ ...action.payload]
 
             }
-        case types.institutionUpdate:
-            return {
+        case types.institutionSetActiveClear:
+            return { 
                 ...state,
-                institutions: state.institutions.map(
-                    e =>( e.id_institucion === action.payload.id_institucion ) ? action.payload : e
-                )
+                activeInstitution:null
             }
+        
         default:
             return state
     }

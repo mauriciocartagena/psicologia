@@ -49,8 +49,12 @@ export  const  useFetchInstituions = (  ) =>{
         })
         .catch(err => console.error(err));
 
+        return () => {
+            setInstitutions({ data_institutions:[] });
+        }
+
     },[ history, dispatch ]);
 
-    return institutions; // { data:[] , loading:true }
+    return institutions; 
 
 }

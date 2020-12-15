@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { FormUpdate } from './FormUpdate';
 
 export const UpdateScreen = () => {
 
-    // const { institutions } = useSelector(state => state.activeInstitution);
-
-    // console.log( institutions );
+    const { activeInstitution } = useSelector(state => state.institution);
+    const history  = useHistory();
 
     return (
         <div className="col-lg-12 animated fadeIn">
@@ -14,21 +14,15 @@ export const UpdateScreen = () => {
                 <header className="panel-heading">
                     MODIFICAR INSTITUCIÓN
                 </header>
-                <h1>hello</h1>
-                {/* {
-                    
-                    (location.state)
+                {
+                    (activeInstitution !== null)
                     ?
-                    institution.map(( e, i ) => (
-                        <FormUpdate key={ i } data={ e }  />
-                    ))
+                        [activeInstitution].map(( e, i ) => (
+                            <FormUpdate key={ i } data={ e }  />
+                        ))
                     :
-                    <div className="panel-body">
-                        <div className="position-center">
-                            <div>No hay datos</div>
-                        </div>
-                    </div>
-                } */}
+                        history.push('/institution/view')
+                }
             </section>
         </div>   
     )

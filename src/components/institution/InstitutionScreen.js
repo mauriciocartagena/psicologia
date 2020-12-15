@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {  MDBDataTable } from 'mdbreact';
 import { useFetchInstituions } from '../../hooks/useFetchInstitutions';
+import { useDispatch } from 'react-redux';
+import { institutionSetActiveClear } from '../../actions/institution';
 
 export const InstitutionScreen = () => {
     
+    const dispatch = useDispatch();
     // Renombrar el nombre
-    const { data_institutions:institutions } = useFetchInstituions();
+    const { data_institutions:institutions } =  useFetchInstituions();
 
     const data = {
       columns: [
@@ -64,8 +67,14 @@ export const InstitutionScreen = () => {
             width: 200
           },
       ],
-        rows: institutions 
+        rows: institutions
     };
+
+    useEffect( () => {
+
+      dispatch( institutionSetActiveClear() );
+
+    },[ dispatch ]);
 
     return (
 
@@ -75,21 +84,24 @@ export const InstitutionScreen = () => {
                     Institutos
                 </header>
                 {
-                  (institutions !== [])
+                  (data.rows !== [])
                   ?
                   <div className="panel-body">
-                  <MDBDataTable
-                      scrollX
-                      autoWidth={true}
-                      maxHeight="30vh"
-                      striped
-                      bordered
-                      small
-                      data={ data }
-                  />
-                </div>
+                    <MDBDataTable
+                        noRecordsFoundLabel="Cargando..."
+                        scrollX
+                        autoWidth={true}
+                        maxHeight="40vh"
+                        striped
+                        bordered
+                        small
+                        data={ data }
+                    />
+                  </div>
                   :
-                  <div>Cargando...</div>
+                  <div className="panel-body">
+                    <div>Cargando...</div>
+                  </div>
                 }
             </section>
         </div>

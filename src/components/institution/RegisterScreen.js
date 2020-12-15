@@ -4,7 +4,7 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/bootstrap.css';
 import { useForm } from '../../hooks/useForm';
 import { useFormPhone } from '../../hooks/useFormPhone';
-import { startRegisterInstitution } from '../../actions/institution';
+import { institutionSetActiveClear, startRegisterInstitution } from '../../actions/institution';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiFalseDisabledButton, uiOpenLoadingSaveButton, uiTrueDisabledButton } from '../../actions/ui';
  
@@ -35,6 +35,9 @@ export const RegisterScreen = () => {
     }
 
     useEffect(() => {
+
+        dispatch( institutionSetActiveClear() );
+        
         if ( name.trim() === '' || address.trim() === '' || phone.trim() === '' || emei.trim() === '' || nit.trim() === '' || contact_name.trim() === '' || mobile.trim() === '') {
             return (
                 dispatch( uiOpenLoadingSaveButton() ),

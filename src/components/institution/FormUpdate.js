@@ -33,7 +33,7 @@ export const FormUpdate = ( { data = '' } ) => {
 
     const handleUpdated = (e) => {
         e.preventDefault();
-        dispatch( updatedInstitution( name, address, phone, emei, newNit, contact_name, mobile, id_institucion ) );
+        dispatch( updatedInstitution( name, address, phone, emei, newNit, contact_name, mobile, id_institucion  ) );
     }
 
     useEffect(() => {

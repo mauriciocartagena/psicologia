@@ -1,25 +1,19 @@
 import { MDBBtn } from 'mdbreact';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { institutionLoaded, institutionSetActive } from '../actions/institution';
 import { fetchConToken } from '../helpers/fetch';
 
 
 export  const  useFetchInstituions = (  ) =>{
 
+    const dispatch = useDispatch();
+    const history  = useHistory();
+
     const [ institutions, setInstitutions ] = useState({
         data_institutions:[]
     });
-
-    const handleUpdate = (e) => {
-        e.preventDefault();
-        console.log("hello1");
-        // dispatch( institutionSetActive( institution.institutions, e.target.id ) );
-        // history.push('/institution/update');
-    }
-    
-    const handleDelete = (e) => {
-        e.preventDefault();
-        console.log("hello2");
-    }
 
     useEffect(()=>{
         fetchConToken( 'institutos/inst', 'GET' )
@@ -37,20 +31,25 @@ export  const  useFetchInstituions = (  ) =>{
                 imei: item.imei,
                 nit: item.nit,
                 nombre_contacto:item.nombre_contacto,
-                modified: <MDBBtn id={ item.id_institucion } onClick={ ( e )=> handleUpdate(e) } color="primary">Modificar</MDBBtn>,
-                deleted: <MDBBtn id={ item.id_institucion }  onClick={ ( e )=> handleDelete(e) } color="success">Eliminar</MDBBtn>
+                modified: <MDBBtn id= { item.id_institucion }  onClick= { ( e ) => { 
+                    return(
+                        dispatch( institutionLoaded(  json.instituciones ) ),
+                        dispatch( institutionSetActive( json.instituciones, e.target.id ) ),
+                        history.push('/institution/update')
+                    )
+                }} color="primary">Modificar</MDBBtn>,
+                deleted: <MDBBtn  id= { item.id_institucion }  onClick= { () => { 
+                    return(
+                        dispatch( institutionLoaded(  json.instituciones ) ),
+                        history.push('/institution/update')
+                    )
+                }} color="success">Eliminar</MDBBtn>
             }));
-            setInstitutions({ data_institutions:rows });
+            setInstitutions( { data_institutions:rows });
         })
         .catch(err => console.error(err));
 
-    },[]);
-
-    // // //Para que no haga peticion cada que se onClick del Button
-    // useEffect( () => {
-    //     getGifs(category).then(setImages  )
-    // },[ category ] );
-
+    },[ history, dispatch ]);
 
     return institutions; // { data:[] , loading:true }
 

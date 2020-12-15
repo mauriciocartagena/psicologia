@@ -1,7 +1,9 @@
+import { MDBBtn } from "mdbreact";
 import Swal from "sweetalert2";
 import { fetchConToken } from "../helpers/fetch"
 import { types } from "../types/types";
 import { uiCloseLoadingSaveButton, uiFalseDisabledButton, uiOpenLoadingSaveButton, uiTrueDisabledButton } from "./ui";
+
 
 export const startRegisterInstitution = ( name, address, phone, emei, nit, contact_name, mobile ) => {
     return async( dispatch ) => {
@@ -44,9 +46,9 @@ export const startRegisterInstitution = ( name, address, phone, emei, nit, conta
     }
 }
 
-export const fetchInstitutions = () => {
+export const fetchInstitutions = ( setInstitutions, handleUpdate, handleDelete ) => {
     return  async ( dispatch ) => {
-        
+
         try {
             
             const resp = await fetchConToken( 'institutos/inst', 'GET');
@@ -57,7 +59,21 @@ export const fetchInstitutions = () => {
             
             if ( body.ok ) {
 
+                let rows = [];
                 dispatch( institutionLoaded( instituciones ) );
+                instituciones.forEach(item =>rows.push({
+                    id_institucion:item.id_institucion,
+                    nombre: item.nombre,
+                    direccion: item.direccion,
+                    celular: item.celular,
+                    telefono: item.telefono ,
+                    imei: item.imei,
+                    nit: item.nit,
+                    nombre_contacto:item.nombre_contacto,
+                    modified: <MDBBtn id={ item.id_institucion } onClick={ ( e )=> handleUpdate(e) } color="primary">Modificar</MDBBtn>,
+                    deleted: <MDBBtn id={ item.id_institucion }  onClick={ ( e )=> handleDelete(e) } color="success">Eliminar</MDBBtn>
+                }));
+                setInstitutions( rows )
             
             }else{
                 console.log("error" + body.msg )
@@ -122,7 +138,7 @@ const institutionUpdated = ( institution ) => ({
     payload: institution
 });
 
-const institutionLoaded = ( institutions ) => ({
+export const institutionLoaded = ( institutions ) => ({
     type: types.institutionLoaded,
     payload: institutions 
 });

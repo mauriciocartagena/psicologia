@@ -1,4 +1,3 @@
-import { act } from "react-dom/cjs/react-dom-test-utils.development";
 import { types } from "../types/types";
 
 const initialState = {

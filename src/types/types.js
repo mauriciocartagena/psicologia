@@ -26,7 +26,7 @@ export const types = {
 
     institutionSetActive:'[institution] Institution active',
     institutionSetActiveClear:'[institution] Institution clear',
-
+    
     institutionAcordionSelect:'[institution] Institution acordion select',
     institutionAcordionDeselect:'[institution] Institution acordion deselect',
 

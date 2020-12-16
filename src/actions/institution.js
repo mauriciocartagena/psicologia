@@ -102,6 +102,53 @@ export const updatedInstitution = ( name, address, phone, emei, newNit, contact_
 
     }
 }
+export const institutionDelete = ( id_institucion ) => { 
+
+    return async ( dispatch ) => {
+
+        dispatch( uiCloseLoadingSaveButton() );
+        dispatch( uiTrueDisabledButton() );
+
+        try {
+    
+            if ( id_institucion === '' || null || undefined ) {
+                
+                return (
+                    Swal.fire(':(', 'La institución es requerido', 'error'),
+                    dispatch( uiOpenLoadingSaveButton() ),
+                    dispatch( uiFalseDisabledButton() )
+                );
+    
+            }
+            const resp = await fetchConToken( 'institutos/delete', { 
+                id_institucion
+            }, 'DELETE');
+
+            const body = await resp.json();
+    
+            if ( body.ok ) {
+                Swal.fire(':)','Institución Eliminada', 'success');
+                dispatch( uiOpenLoadingSaveButton() );
+                dispatch( uiFalseDisabledButton() );
+            }else{
+                Swal.fire('Error', body.msg, 'error');
+                dispatch( uiOpenLoadingSaveButton() );
+                dispatch( uiFalseDisabledButton() );
+            }
+    
+
+        } catch (error) {
+            console.log(error);
+            return (
+                Swal.fire('Error', "Hable con el administrador", 'error'),
+                dispatch( uiOpenLoadingSaveButton() ),
+                dispatch( uiFalseDisabledButton() )
+            );
+        }
+
+    }
+    
+};
 
 export const institutionSetActiveClear = () => ({
     type:types.institutionSetActiveClear

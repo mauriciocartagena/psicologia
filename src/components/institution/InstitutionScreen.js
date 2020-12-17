@@ -7,7 +7,7 @@ import { institutionSetActiveClear } from '../../actions/institution';
 export const InstitutionScreen = () => {
     
     const dispatch = useDispatch();
-    // Renombrar el nombre
+    // Rename the name
     const { data_institutions:institutions } =  useFetchInstituions();
 
     const data = {
@@ -67,7 +67,7 @@ export const InstitutionScreen = () => {
             width: 200
           },
       ],
-        rows: institutions
+      rows: institutions
     };
 
     useEffect( () => {
@@ -77,7 +77,6 @@ export const InstitutionScreen = () => {
     },[ dispatch ]);
 
     return (
-
         <div className="col-lg-12 animated fadeIn">
             <section className="panel">
                 <header className="panel-heading">

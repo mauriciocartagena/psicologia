@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startUpdateAccount } from '../../actions/auth';
+import { uiFalseDisabledButton } from '../../actions/ui';
 import { useForm } from '../../hooks/useForm';
 
 export const AccountScreen = () => {
@@ -21,6 +22,10 @@ export const AccountScreen = () => {
         dispatch( startUpdateAccount( persona_id, nombre, primer_apellido, segundo_apellido, celular, imei, edad, dni, direccion, email ) );
 
     }
+    useEffect(() => {
+        dispatch( uiFalseDisabledButton() );
+        
+    }, [ dispatch ])
 
 
     return (

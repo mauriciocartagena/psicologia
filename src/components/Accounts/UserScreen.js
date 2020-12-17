@@ -27,6 +27,8 @@ export const UserScreen = () => {
         dispatch( startUpdateUser( persona_id, username ) );
     }
     useEffect(() => {
+        dispatch( uiFalseDisabledButton() );
+
         if( username.trim() === '' ){
             return dispatch( uiTrueDisabledButton() );
         }

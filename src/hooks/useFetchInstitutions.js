@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { institutionLoaded, institutionSetActive } from '../actions/institution';
@@ -15,10 +15,11 @@ export  const  useFetchInstituions = () =>{
     const [ institutions, setInstitutions ] = useState({
         data_institutions:[]
     });
-    const handleSwitchChange = () => {
+
+    const handleSwitchChange = useCallback (() => {
         console.log( uiDisabled );
         setUiDisabled( true )
-    };
+    },[ uiDisabled ]);
 
     console.log( uiDisabled );
 
@@ -52,7 +53,6 @@ export  const  useFetchInstituions = () =>{
                     deleted: <button className="btn btn-success"  disabled={ uiDisabled } id= { item.id_institucion } 
                         onClick = { ( e ) => {
                             return (
-                                handleSwitchChange(),
                                 institutionDelete( e.target.id )  
                             )
                         }}
@@ -64,6 +64,8 @@ export  const  useFetchInstituions = () =>{
             
         }
         const institutionDelete = ( id_institucion ) => { 
+
+            handleSwitchChange();
 
             fetchConToken( 'institutos/delete', { 
                 id_institucion
@@ -80,12 +82,13 @@ export  const  useFetchInstituions = () =>{
         };
         fetchInstitution();
         
+        // Clear useEffect
         return () => {
             setInstitutions({ data_institutions:[] });
             setUiDisabled( false );
         }  
         
-    },[ history, dispatch, uiDisabled ]);
+    },[ history, dispatch, uiDisabled, handleSwitchChange ]);
 
     return institutions; 
 

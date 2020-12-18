@@ -17,11 +17,8 @@ export  const  useFetchInstituions = () =>{
     });
 
     const handleSwitchChange = useCallback (() => {
-        console.log( uiDisabled );
         setUiDisabled( true )
-    },[ uiDisabled ]);
-
-    console.log( uiDisabled );
+    },[]);
 
     useEffect(()=>{
 

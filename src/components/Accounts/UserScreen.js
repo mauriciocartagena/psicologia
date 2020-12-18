@@ -23,7 +23,6 @@ export const UserScreen = () => {
 
     const handleUpdateUser = ( e ) => {
         e.preventDefault();
-        console.log( persona_id, username );
         dispatch( startUpdateUser( persona_id, username ) );
     }
     useEffect(() => {

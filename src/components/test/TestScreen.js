@@ -11,7 +11,7 @@ export const TestScreen = () => {
                         <span className="mini-stat-icon tar">
                             <i className="fa fa-tag"></i>
                         </span>
-                        <div class="mini-stat-info">
+                        <div  className="mini-stat-info">
                             <span>31</span>
                              Cantidad de Pruebas simples 
                         </div>
@@ -22,7 +22,7 @@ export const TestScreen = () => {
                         <span className="mini-stat-icon pink">
                             <i className="fa fa-tag"></i>
                         </span>
-                        <div class="mini-stat-info">
+                        <div  className="mini-stat-info">
                             <span>60</span>
                              Cantidad total de pruebas 
                         </div>
@@ -33,7 +33,7 @@ export const TestScreen = () => {
                         <span className="mini-stat-icon orange">
                             <i className="fa fa-tag"></i>
                         </span>
-                        <div class="mini-stat-info">
+                        <div  className="mini-stat-info">
                             <span>29</span>
                              Cantidad de Pruebas de formas 
                         </div>

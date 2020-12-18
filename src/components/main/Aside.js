@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUniversity, faVials } from '@fortawesome/free-solid-svg-icons'
+import { faUniversity, faVials, faVial } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import { startLogout } from '../../actions/auth';
@@ -90,9 +90,19 @@ export const Aside = () => {
                                 </NavLink>
                             </li>
                          </ul>
+                    </li>
+                    <li className="sub-menu" >   
+                        <NavLink to="/test/register" activeClassName="active" >
+                            <i>
+                                <FontAwesomeIcon
+                                    icon={ faVial }
+                                />
+                            </i>
+                            <span>Registro de pruebas</span>
+                        </NavLink>
                     </li> 
                     <li className="sub-menu" >
-                        <NavLink to="/test" >
+                        <NavLink to="/test"  activeClassName="active" exact >
                             <i>
                                 <FontAwesomeIcon icon={ faVials } />
                             </i> 

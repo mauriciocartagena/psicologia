@@ -158,7 +158,7 @@ export const Register = () => {
                                                 >
                                                     Eliminar Todo
                                                 </button>
-                                                <div className="row" style={{marginLeft:15 }} >
+                                                <div className="row" >
                                                     <GetImage data={ images } 
                                                         onImageUpdate={ onImageUpdate } 
                                                         onImageRemove={ onImageRemove } 
@@ -169,13 +169,13 @@ export const Register = () => {
                                     }
                                 </ImageUploading>
                             </div>
-                            <div className="form-group text-center alert alert-info">
+                            <div className="form-group text-center alert">
                                 <label>
                                     <h3>Respuesta Correcta</h3>
                                 </label>
                                 <div className="form-group">
                                     <label className="col-sm-3 control-label"></label>
-                                    <div className="col-sm-7" style={{ paddingBottom:"5%" }} >
+                                    <div className="col-sm-7">
                                         <select 
                                             formcontrolname="curso" 
                                             name="respCorrect" 
@@ -192,15 +192,14 @@ export const Register = () => {
                                         </select>
                                     </div>
                                 </div>
-                               
                             </div>
-                            <div className="form-group text-center">
+                            <div className="form-group text-center alert">
                                 <label>
                                     <h3>Prueba Forma</h3>
                                 </label>
                                 <div className="form-group">
                                     <label className="col-sm-3 control-label"></label>
-                                    <div className="col-sm-7" style={{ paddingBottom:"5%" }} >
+                                    <div className="col-sm-7" >
                                         <select 
                                             formcontrolname="curso" 
                                             name="testShape" 
@@ -219,10 +218,10 @@ export const Register = () => {
                                 </div>
                             </div>
                             <div className="panel-body">
-                            <hr/>
-                                    <button type="submit"  onClick={ handleRegisterTestShape } disabled={ disableButton } className="btn label-info btn-lg btn-block" style={{ color:'white' }} >
-                                        Registrar
-                                    </button>
+                                <hr/>
+                                <button type="submit"  onClick={ handleRegisterTestShape } disabled={ disableButton } className="btn label-info btn-lg btn-block" style={{ color:'white' }} >
+                                    Registrar
+                                </button>
                             </div>
                     </div>
                 </section>

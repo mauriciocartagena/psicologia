@@ -11,7 +11,8 @@ export const GetImageOne = ( { data, onImageUpdate, onImageRemove } ) => {
                         style={{ justifyContent: 'center', alignItems:'center' }} 
                     >
                         <br/>
-                        <img src={image['data_url']} alt="images-shapes" className="img-rounded" width="300px" height="270px"  />
+                        <img src={image['data_url']} alt="images-shapes" className="img-rounded" width="120vh" max-width="100px" height="120vh" max-height="100px"
+                            position="relative"  />
                         <br/>
                         <div className="image-item__btn-wrapper">
                             <br/>

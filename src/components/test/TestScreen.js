@@ -1,46 +1,46 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBong, faCubes } from '@fortawesome/free-solid-svg-icons'
+import { faBong, faCubes, faThermometerQuarter, faThermometerThreeQuarters } from '@fortawesome/free-solid-svg-icons'
 
 export const TestScreen = () => {
     return (
-        <section >
-            <div className="row" >
+        <>
+            <div className="row animated fadeIn" >
                 <div className="col-sm-4">
                     <div className="mini-stat clearfix">
                         <span className="mini-stat-icon tar">
-                            <i className="fa fa-tag"></i>
+                            <FontAwesomeIcon icon={ faThermometerQuarter } />
                         </span>
                         <div  className="mini-stat-info">
                             <span>31</span>
-                             Cantidad de Pruebas simples 
+                                Cantidad de Pruebas simples 
                         </div>
                     </div>
                 </div>
                 <div className="col-sm-4">
                     <div className="mini-stat clearfix">
                         <span className="mini-stat-icon pink">
-                            <i className="fa fa-tag"></i>
+                            <FontAwesomeIcon icon={ faThermometerThreeQuarters } />
                         </span>
                         <div  className="mini-stat-info">
                             <span>60</span>
-                             Cantidad total de pruebas 
+                                Cantidad total de pruebas 
                         </div>
                     </div>
                 </div>
                 <div className="col-sm-4">
                     <div className="mini-stat clearfix">
                         <span className="mini-stat-icon orange">
-                            <i className="fa fa-tag"></i>
+                            <FontAwesomeIcon icon={ faThermometerQuarter } />                            
                         </span>
                         <div  className="mini-stat-info">
                             <span>29</span>
-                             Cantidad de Pruebas de formas 
+                                Cantidad de Pruebas de formas 
                         </div>
                     </div>
                 </div>
             </div>   
-            <div className="row" >
+            <div className="row animated fadeIn" >
                 <div className="col-sm-6" > 
                     <h2>
                         <i>
@@ -66,6 +66,6 @@ export const TestScreen = () => {
                     <button className="btn btn-info btn-lg btn-block" >Elegir</button>
                 </div>
             </div>
-        </section>
+        </>
     )
 }

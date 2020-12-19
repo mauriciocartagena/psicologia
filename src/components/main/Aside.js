@@ -98,7 +98,7 @@ export const Aside = () => {
                                     icon={ faVial }
                                 />
                             </i>
-                            <span>Registro de pruebas</span>
+                            <span>Registrar pruebas</span>
                         </NavLink>
                     </li> 
                     <li className="sub-menu" >

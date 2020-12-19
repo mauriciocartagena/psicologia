@@ -40,6 +40,8 @@ export const types = {
     institutionIconClose:'[institution] Close icon institution',
     institutionOpenAcordion:'[institution] Open acordion institution',
     institutionCloseAcordion:'[institution] Cloase acordion instituion',
+
+    shapeLoaded:'[Shape] Loaded Shape',
     
     authUserUpdate:'[auth] User update',
     authUserUpdatePassword:"[auth] User update password",

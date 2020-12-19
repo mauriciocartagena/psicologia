@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ImageUploading from 'react-images-uploading';
 import { useDispatch, useSelector } from 'react-redux';
-import { shapeStartLoading } from '../../../actions/shape';
+import { shapeRegister, shapeStartLoading } from '../../../actions/shape';
 import { useForm } from '../../../hooks/useForm';
 import { GetImage } from './GetImage';
 import { GetImageOne } from './GetImageOne';
@@ -18,19 +18,16 @@ export const Register = () => {
     
     const [ images, setImages ] = useState([]);
 
-    const [ imagesQuestionCorrect, setImagesQuestionCorrect ] = useState([]);
-
     const [ formShapeInputValues, handleShapeInputValueChange ] = useForm({
         name:'',
-        testShape:''
+        testShape:'',
+        respCorrect:''
     });
 
-    const { name, testShape } = formShapeInputValues;
-    console.log( testShape );
+    const { name, testShape,respCorrect } = formShapeInputValues;
 
     const maxNumberQuestion = 1;
-    const maxNumber = 5;
-    const maxNumberQuestionCorrect = 1;
+    const maxNumber = 6;
 
     const onChangeQuestion = ( imageList ) => {
         setImagesQuestion( imageList );
@@ -39,28 +36,34 @@ export const Register = () => {
     const onChange = ( imageList ) => {
         setImages( imageList );
     };
-
-    const onChangeQuestionCorrect = ( imageList ) => {
-        setImagesQuestionCorrect( imageList );
-    };
     
     const handleRegisterTestShape = ( e ) => {
         e.preventDefault();
-        console.log( "Hello World" );
+        
+        dispatch( shapeRegister( 
+            imagesQuestion[0].data_url,
+            images[0].data_url,
+            images[1].data_url,
+            images[2].data_url,
+            images[3].data_url,
+            images[4].data_url,
+            images[5].data_url,
+            respCorrect,
+            name,
+            testShape )
+        );
     }
     
     useEffect(() => {
 
         dispatch( shapeStartLoading() );
         
-        if ( imagesQuestion.length !== 1 || images.length !== 5 || imagesQuestionCorrect.length !== 1 || name.length === 0 ) {
-            return(
-                setDisableButton( true )
-            )
+        if ( imagesQuestion.length !== 1 || images.length !== 6 || name.length === 0 ) {
+            return setDisableButton( true )
         }
         setDisableButton( false );
         
-    }, [ imagesQuestion, images, imagesQuestionCorrect, name, dispatch ])
+    }, [ imagesQuestion, images, name, dispatch ])
 
 
     return (
@@ -71,7 +74,6 @@ export const Register = () => {
                         REGISTRO DE PRUEBAS FORMAS
                     </header>
                     <div className="panel-body row align-items-end">
-                        <form autoComplete="off" onSubmit={ handleRegisterTestShape } >
                             <div className="form-group alert alert-info" style={{ paddingLeft:"25%", paddingRight:"25%" }}>
                                 <div className="col-xs-14 text-center">
                                     <label>
@@ -80,6 +82,7 @@ export const Register = () => {
                                     <input 
                                         className="text-center form-control round-input input-medium default-date-picker" 
                                         placeholder="Ingrese Nombre" 
+                                        autoComplete="off"
                                         size="16" 
                                         type="text" 
                                         name="name"
@@ -170,40 +173,26 @@ export const Register = () => {
                                 <label>
                                     <h3>Respuesta Correcta</h3>
                                 </label>
-                                <ImageUploading
-                                    multiple
-                                    value={ imagesQuestionCorrect }
-                                    onChange={ onChangeQuestionCorrect }
-                                    maxNumber={ maxNumberQuestionCorrect }
-                                    dataURLKey="data_url"
-                                >
-                                    {
-                                        ({ onImageUpload, onImageRemoveAll, onImageUpdate, onImageRemove }) => (
-                                            <div className="upload__image-wrapper">
-                                                <button
-                                                    className="btn btn-round btn-success"
-                                                    style={{ marginRight:5 }}
-                                                    onClick={ onImageUpload }
-                                                >
-                                                Subir Imagen
-                                                </button> 
-                                                <button 
-                                                    className="btn btn-round btn-warning" 
-                                                    style={{ marginRight:5 }} 
-                                                    onClick={ onImageRemoveAll } 
-                                                >
-                                                    Eliminar Todo
-                                                </button>
-                                                <div className="row" >
-                                                    <GetImageOne data={ imagesQuestionCorrect } 
-                                                        onImageUpdate={ onImageUpdate } 
-                                                        onImageRemove={ onImageRemove } 
-                                                    />
-                                                </div>
-                                            </div>
-                                        )
-                                    }
-                                </ImageUploading>
+                                <div className="form-group">
+                                    <label className="col-sm-3 control-label"></label>
+                                    <div className="col-sm-7" style={{ paddingBottom:"5%" }} >
+                                        <select 
+                                            formcontrolname="curso" 
+                                            name="respCorrect" 
+                                            onChange={ handleShapeInputValueChange } 
+                                            className="form-control ng-valid ng-dirty ng-touched"
+                                            >
+                                            {
+                                                images.map(( e, i )=>(
+                                                    <option  key={ i } 
+                                                        value={ i + 1 } 
+                                                    > { i + 1 }</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                               
                             </div>
                             <div className="form-group text-center">
                                 <label>
@@ -231,11 +220,10 @@ export const Register = () => {
                             </div>
                             <div className="panel-body">
                             <hr/>
-                                    <button type="submit"  disabled={ disableButton } className="btn label-info btn-lg btn-block" style={{ color:'white' }} >
+                                    <button type="submit"  onClick={ handleRegisterTestShape } disabled={ disableButton } className="btn label-info btn-lg btn-block" style={{ color:'white' }} >
                                         Registrar
                                     </button>
                             </div>
-                        </form>
                     </div>
                 </section>
             </div>

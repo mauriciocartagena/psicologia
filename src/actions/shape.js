@@ -1,5 +1,6 @@
 import { types } from '../types/types';
 import { fetchConToken } from '../helpers/fetch';
+import Swal from 'sweetalert2';
 
 export const shapeStartLoading = () => {
     return async ( dispatch ) => { 
@@ -37,10 +38,14 @@ export const shapeRegister = ( pregunta, op1, op2, op3, op4, op5, op6, respuesta
 
             const body = await resp.json();
 
-            console.log( body );
+            if ( body.ok ) {
+                Swal.fire(':)','Pregunta registrada', 'success');
+            }else {
+                Swal.fire(':(', body.msg, 'error');
+            }
             
         } catch (error) {
-            console.log( error)
+            console.log( error);
         }
 
     }

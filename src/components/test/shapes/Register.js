@@ -53,17 +53,18 @@ export const Register = () => {
             testShape )
         );
     }
+    useEffect(() => {
+        dispatch( shapeStartLoading() );
+    }, [ dispatch ])
     
     useEffect(() => {
-
-        dispatch( shapeStartLoading() );
         
         if ( imagesQuestion.length !== 1 || images.length !== 6 || name.length === 0 ) {
             return setDisableButton( true )
         }
         setDisableButton( false );
         
-    }, [ imagesQuestion, images, name, dispatch ])
+    }, [ imagesQuestion, images, name ])
 
 
     return (
@@ -219,7 +220,7 @@ export const Register = () => {
                             </div>
                             <div className="panel-body">
                                 <hr/>
-                                <button type="submit"  onClick={ handleRegisterTestShape } disabled={ disableButton } className="btn label-info btn-lg btn-block" style={{ color:'white' }} >
+                                <button type="submit"  onClick={ handleRegisterTestShape } disabled={ disableButton } className="btn btn-primary btn-lg btn-block" >
                                     Registrar
                                 </button>
                             </div>

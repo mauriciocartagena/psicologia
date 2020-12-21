@@ -1,6 +1,8 @@
 import { types } from '../types/types';
 import { fetchConToken } from '../helpers/fetch';
 import Swal from 'sweetalert2';
+import { uiCloseLoadingSaveButton, uiFalseDisabledButton, uiOpenLoadingSaveButton, uiTrueDisabledButton } from "./ui";
+
 
 export const shapeStartLoading = () => {
     return async ( dispatch ) => { 
@@ -20,7 +22,11 @@ export const shapeStartLoading = () => {
 }
 export const shapeRegister = ( pregunta, op1, op2, op3, op4, op5, op6, respuesta_correcta, name, testShape ) => {
 
-    return async () => {
+    return async ( dispatch ) => {
+
+        dispatch( uiCloseLoadingSaveButton() );
+        dispatch( uiTrueDisabledButton() );
+
         try {
 
             const resp = await fetchConToken('pregunta-formas/new',{
@@ -40,12 +46,19 @@ export const shapeRegister = ( pregunta, op1, op2, op3, op4, op5, op6, respuesta
 
             if ( body.ok ) {
                 Swal.fire(':)','Pregunta registrada', 'success');
-            }else {
+                dispatch( uiOpenLoadingSaveButton() );
+                dispatch( uiFalseDisabledButton () );
+            }else {  
+
                 Swal.fire(':(', body.msg, 'error');
+                dispatch( uiOpenLoadingSaveButton() );
+                dispatch( uiFalseDisabledButton () );
             }
             
         } catch (error) {
             console.log( error);
+            dispatch( uiOpenLoadingSaveButton() );
+            dispatch( uiFalseDisabledButton () );
         }
 
     }

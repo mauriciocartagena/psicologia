@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ImageUploading from 'react-images-uploading';
 import { useDispatch, useSelector } from 'react-redux';
 import { shapeRegister, shapeStartLoading } from '../../../actions/shape';
+import { uiFalseDisabledButton, uiTrueDisabledButton } from '../../../actions/ui';
 import { useForm } from '../../../hooks/useForm';
 import { GetImage } from './GetImage';
 import { GetImageOne } from './GetImageOne';
@@ -10,9 +11,8 @@ export const Register = () => {
 
     const dispatch = useDispatch();
 
-    const [ disableButton, setDisableButton ] = useState(false);
-
     const { shape } = useSelector( state => state.shape );
+    const { uiLoadingSaveButton, uiDisabled } = useSelector( state => state.ui )
 
     const [ imagesQuestion, setImagesQuestion ] = useState([]);
     
@@ -39,7 +39,7 @@ export const Register = () => {
     
     const handleRegisterTestShape = ( e ) => {
         e.preventDefault();
-        
+
         dispatch( shapeRegister( 
             imagesQuestion[0].data_url,
             images[0].data_url,
@@ -60,9 +60,9 @@ export const Register = () => {
     useEffect(() => {
         
         if ( imagesQuestion.length !== 1 || images.length !== 6 || name.length === 0 ) {
-            return setDisableButton( true )
+            return dispatch( uiTrueDisabledButton() );
         }
-        setDisableButton( false );
+        dispatch(uiFalseDisabledButton() );
         
     }, [ imagesQuestion, images, name ])
 
@@ -220,8 +220,11 @@ export const Register = () => {
                             </div>
                             <div className="panel-body">
                                 <hr/>
-                                <button type="submit"  onClick={ handleRegisterTestShape } disabled={ disableButton } className="btn btn-primary btn-lg btn-block" >
-                                    Registrar
+                                <button type="submit"  
+                                    onClick={ handleRegisterTestShape } 
+                                    disabled={ uiDisabled } 
+                                    className="btn btn-primary btn-lg btn-block" >
+                                <i  className={ uiLoadingSaveButton } ></i> Registrar
                                 </button>
                             </div>
                     </div>

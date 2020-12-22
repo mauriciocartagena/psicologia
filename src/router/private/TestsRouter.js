@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { Layout } from '../../components/main/Layout';
 import { RegisterScreen } from '../../components/test/RegisterScreen';
 import { Register } from '../../components/test/shapes/Register';
+import { ShapeScreen } from '../../components/test/shapes/ShapeScreen';
 import { TestScreen } from '../../components/test/TestScreen';
 
 
@@ -28,6 +29,11 @@ export const TestsRouter = () => {
                     exact
                     path="/test/register/shapes"
                     component={ Register }
+                />
+                <Route
+                    exact
+                    path="/test/register/shapes/screen"
+                    component={ ShapeScreen }
                 />
                 <Redirect to="/test" />
             </Switch>

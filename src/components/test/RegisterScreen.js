@@ -74,6 +74,23 @@ export const RegisterScreen = () => {
                     >
                         Seleccionar
                     </NavLink>
+                    
+                    <div className="row" style={{ paddingTop:"10px" }} >
+                        <div className="col-sm-6" style={{ paddingBottom:"10px" }} >
+                            <NavLink className="btn btn-warning btn-lg btn-block" 
+                                to="/test/register/shapes/screen"
+                            >
+                                Administrar pruebas
+                            </NavLink>
+                        </div>
+                        <div className="col-sm-6" >
+                            <NavLink className="btn btn-info btn-lg btn-block" 
+                                to="/test/register/shapes"
+                            >
+                                Categoria pruebas
+                            </NavLink>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

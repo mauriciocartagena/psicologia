@@ -64,7 +64,7 @@ export const Register = () => {
         }
         dispatch(uiFalseDisabledButton() );
         
-    }, [ imagesQuestion, images, name ])
+    }, [ imagesQuestion, images, name, dispatch ])
 
 
     return (

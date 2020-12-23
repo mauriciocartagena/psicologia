@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
-import { fetchConToken } from '../helpers/fetch';
+import { fetchConToken } from '../../helpers/fetch';
 
 export const useFetchQuestionShape = () => {
 

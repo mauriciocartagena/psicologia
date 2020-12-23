@@ -4,6 +4,7 @@ import { Layout } from '../../components/main/Layout';
 import { RegisterScreen } from '../../components/test/RegisterScreen';
 import { Register } from '../../components/test/shapes/Register';
 import { ShapeScreen } from '../../components/test/shapes/ShapeScreen';
+import { UpdatedScreen } from '../../components/test/shapes/UpdatedScreen';
 import { TestScreen } from '../../components/test/TestScreen';
 
 
@@ -34,6 +35,11 @@ export const TestsRouter = () => {
                     exact
                     path="/test/register/shapes/screen"
                     component={ ShapeScreen }
+                />
+                <Route
+                    exact
+                    path="/test/update/shapes/screen"
+                    component={ UpdatedScreen }
                 />
                 <Redirect to="/test" />
             </Switch>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ImageUploading from 'react-images-uploading';
 import { useDispatch, useSelector } from 'react-redux';
-import { shapeRegister, shapeStartLoading } from '../../../actions/shape';
+import { shapeRegister } from '../../../actions/questionShape';
+import { shapeStartLoading } from '../../../actions/shape';
 import { uiFalseDisabledButton, uiTrueDisabledButton } from '../../../actions/ui';
 import { useForm } from '../../../hooks/useForm';
 import { GetImage } from './GetImage';

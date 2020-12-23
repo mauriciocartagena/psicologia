@@ -1,18 +1,33 @@
 import React from 'react';
 import moment from 'moment';
 import 'moment/locale/es';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { questionClearShape, questionSetShape } from '../../../actions/questionShape';
+import { useHistory } from 'react-router-dom';
 
 moment.locale('es');
 
 export const GetImageTest = ({ options = [] } ) => {    
+
+    const dispatch = useDispatch();
+
+    const history = useHistory();
+
+    const handleActiveQuestions = ( id ) => {
+
+        dispatch( questionClearShape() );
+        dispatch( questionSetShape( id ));
+
+        history.push('/test/update/shapes/screen');
+
+    }
 
     return (
         <div>
             {
                 options.map( ( question, key )=> 
                     {
-                        const { pregunta, nombre, op1, op2, op3, op4, op5, op6, respuesta_correcta, createdAt, updatedAt } = question;
+                        const { id_pregunta, pregunta, nombre, op1, op2, op3, op4, op5, op6, respuesta_correcta, createdAt, updatedAt } = question;
 
                         const { nombre: nombreTest } = question.test_formas;
                         
@@ -38,7 +53,7 @@ export const GetImageTest = ({ options = [] } ) => {
                                 <div className="panel-body profile-information">
                                     <div className="col-md-3">
                                         <div className="profile-pic text-center">
-                                            <img src={ questions } alt="" />
+                                            <img src={ questions } alt="question" />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
@@ -56,7 +71,7 @@ export const GetImageTest = ({ options = [] } ) => {
 
                                             </span>
                                             <br/>
-                                            <Link to="/test/register/shapes" className="btn btn-primary">Editar</Link>
+                                            <button onClick={ ()=> { handleActiveQuestions( id_pregunta ) } } className="btn btn-primary">Editar</button>
                                         </div>
                                     </div>
                                     <div className="col-md-3">

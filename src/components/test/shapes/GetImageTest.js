@@ -1,4 +1,9 @@
 import React from 'react';
+import moment from 'moment';
+import 'moment/locale/es';
+import { Link } from 'react-router-dom';
+
+moment.locale('es');
 
 export const GetImageTest = ({ options = [] } ) => {    
 
@@ -7,7 +12,9 @@ export const GetImageTest = ({ options = [] } ) => {
             {
                 options.map( ( question, key )=> 
                     {
-                        const  { pregunta, nombre, op1, op2, op3, op4, op5, op6, respuesta_correcta } = question;
+                        const { pregunta, nombre, op1, op2, op3, op4, op5, op6, respuesta_correcta, createdAt, updatedAt } = question;
+
+                        const { nombre: nombreTest } = question.test_formas;
                         
                         const questions = new Buffer.from( pregunta.data ).toString("ascii");
 
@@ -28,20 +35,38 @@ export const GetImageTest = ({ options = [] } ) => {
                         ];
                         return (
                             <div key={ key } className="animated fadeIn" >
-
-                                <div className="feed-box text-center">
-                                    <div className="panel-body">
-                                        <img 
-                                            style={{ height:"100%", width:200 }} 
-                                            src={ questions } alt="Questions"  
-                                        />
+                                <div className="panel-body profile-information">
+                                    <div className="col-md-3">
+                                        <div className="profile-pic text-center">
+                                            <img src={ questions } alt="" />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
                                         <div className="profile-desk">
                                             <h1>Nombre</h1>
-                                            <span className="text-muted">{ nombre }</span>
-                                            <h1>Respuesta Correcta</h1>
-                                            <span>
-                                                { respuesta_correcta }
+                                            <br/>
+                                                <span className="text-muted">{ nombre }</span>
+                                            <h1>Detalles</h1>
+                                            <br/>
+                                            <span className="text-muted">
+                                                Creado : { moment(createdAt).format('LL, h:mm:ss a') }
+                                                <br/>
+                                                Ultima Actualizacion : { moment(updatedAt).format('LL, h:mm:ss a') }
+                                                <br/>
+
                                             </span>
+                                            <br/>
+                                            <Link to="/test/register/shapes" className="btn btn-primary">Editar</Link>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-3">
+                                        <div className="profile-statistics">
+                                            <h1>Nombre</h1>
+                                            <p>{ nombre } </p>
+                                            <h1>Respuesta Correcta</h1>
+                                            <p>Imagen : { respuesta_correcta }</p>
+                                            <h1>Nombre de Prueba </h1>
+                                            <p>{ nombreTest }</p>
                                         </div>
                                     </div>
                                 </div>
@@ -59,11 +84,6 @@ export const GetImageTest = ({ options = [] } ) => {
                                                 </div>
                                             ))
                                         }
-                                    </div>
-                                </div>
-                                <div className="feed-box text-center" >
-                                    <div className="panel-body">
-                                        <button className="btn btn-success" >Editar</button>
                                     </div>
                                 </div>
                                 <hr/>

@@ -1,13 +1,9 @@
 
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import { fetchConToken } from '../helpers/fetch';
 
 export const useFetchQuestionShape = () => {
-
-    const dispatch = useDispatch();
-    const [ uiDisabled, setUiDisabled] = useState( false )
 
     const [ questionsShape, setQuestionsShape ] = useState({
         data_questions_shape:[]
@@ -37,7 +33,6 @@ export const useFetchQuestionShape = () => {
     
             }
             else{
-    
                 Swal.fire(':(', body.msg, 'error');
     
             }

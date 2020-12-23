@@ -20,32 +20,6 @@ export const shapeStartLoading = () => {
        }
     }
 }
-export const testShapeLoading = () => {
-
-    return async( dispatch ) => {
-
-        const resp = await fetchConToken('pregunta-formas/pformas');
-        const body = await resp.json();
-
-        try {
-
-            if ( body.ok ) {
-                
-                const  { preguntaFormas } = body;
-                dispatch( testShapeLoaded( preguntaFormas ))
-            }
-            else{
-
-                Swal.fire(':(', body.msg, 'error');
-
-            }
-            
-        } catch ( error ) {
-            console.log(error);
-        }
-    }
-
-}
 export const shapeRegister = ( pregunta, op1, op2, op3, op4, op5, op6, respuesta_correcta, name, testShape ) => {
 
     return async ( dispatch ) => {

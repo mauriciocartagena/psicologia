@@ -42,8 +42,6 @@ export const types = {
     institutionCloseAcordion:'[institution] Cloase acordion instituion',
 
     shapeLoaded:'[Shape] Loaded Shape',
-
-    testShapeLoaded:"[Shape] Test Loaded Shape",
     
     authUserUpdate:'[auth] User update',
     authUserUpdatePassword:"[auth] User update password",

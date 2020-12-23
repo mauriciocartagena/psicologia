@@ -1,8 +1,7 @@
 import { types } from "../types/types";
 
 const initialState = {
-    shape:[],
-    testShape:[]
+    shape:[]
 }
 
 export const shapeReducer = ( state = initialState, action ) => {
@@ -14,11 +13,6 @@ export const shapeReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 shape:[ ...action.payload ]
-            }
-        case types.testShapeLoaded:
-            return{ 
-                ...state,
-                testShape:[ ...action.payload ]
             }
         default:
             return state

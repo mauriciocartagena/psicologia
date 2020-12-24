@@ -48,5 +48,4 @@ export const useFetchQuestionShapeOne = ( id_pregunta ) => {
 
     return questionsShape;
 
-
 }

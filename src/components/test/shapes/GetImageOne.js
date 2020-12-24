@@ -2,11 +2,12 @@ import React from 'react';
 
 export const GetImageOne = ( { data, onImageUpdate, onImageRemove } ) => {
 
+    console.log( data )
+
     return (
        <>
             {
                 data.map(( image, index) => (
-
                     <div key={ index } 
                         style={{ justifyContent: 'center', alignItems:'center' }} 
                     >

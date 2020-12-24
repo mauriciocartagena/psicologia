@@ -13,10 +13,10 @@ export const GetImageTest = ({ options = [] } ) => {
 
     const history = useHistory();
 
-    const handleActiveQuestions = ( id ) => {
+    const handleActiveQuestions = ( id_pregunta ) => {
 
         dispatch( questionClearShape() );
-        dispatch( questionSetShape( id ));
+        dispatch( questionSetShape( id_pregunta ));
 
         history.push('/test/update/shapes/screen');
 

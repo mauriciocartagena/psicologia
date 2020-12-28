@@ -1,6 +1,5 @@
 
 import { useEffect, useState } from 'react'
-import Swal from 'sweetalert2';
 import { fetchConToken } from '../../helpers/fetch';
 
 export const useFetchQuestionShapeOne = ( id_pregunta ) => {
@@ -36,7 +35,6 @@ export const useFetchQuestionShapeOne = ( id_pregunta ) => {
             else{
 
                 const  { id_pregunta } = body.errors;
-                Swal.fire(':(',id_pregunta.msg, 'error');
                 console.log(id_pregunta.msg);
     
             }

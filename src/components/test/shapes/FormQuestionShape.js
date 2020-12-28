@@ -7,29 +7,46 @@ import { uiFalseDisabledButton, uiTrueDisabledButton } from '../../../actions/ui
 import { GetImage } from './GetImage';
 import { GetImageOne } from './GetImageOne';
 import { useForm } from '../../../hooks/useForm';
-import { useFetchBase64 } from '../../../hooks/QuestionShape/useFetchBase64';
 import { useFetchQuestionShapeOne } from '../../../hooks/QuestionShape/useFetchQuestionShapeOne';
+import { useFetchDestructureValue } from '../../../hooks/QuestionShape/useFetchDestructureValue';
 
 export const FormQuestionShape = ( { id_pregunta = '' } ) => {
 
     const dispatch = useDispatch();
+
     const { shape } = useSelector( state => state.shape );
     const { uiLoadingSaveButton, uiDisabled } = useSelector( state => state.ui );
 
-    // const { data_questions_shape } = useFetchQuestionShapeOne( id_pregunta );
+    const { data_questions_shape } = useFetchQuestionShapeOne( id_pregunta );
 
-    // console.log( data_questions_shape );
+    const [ question, setQuestion ] = useState([]);
 
+    const { pregunta } = question;
+    
+    const DestructureValue = ( data_questions_shape ) => {
+        
+        setQuestion( data_questions_shape );
+
+    }
+    useEffect(()=>{
+
+        DestructureValue( data_questions_shape );
+
+    },[ data_questions_shape ]);
+
+    
+    const { image } = useFetchDestructureValue( pregunta );
+    
     const [ imagesQuestion, setImagesQuestion ] = useState([]);
-
+    
     const [ images, setImages ] = useState([]);
-
+    
     const [ formShapeInputValues, handleShapeInputValueChange ] = useForm({
         name: '',
         respCorrect: '',
         testShape: ''
     });
-
+    
     const { name, testShape,respCorrect } = formShapeInputValues;
 
     const maxNumberQuestion = 1;
@@ -89,8 +106,17 @@ export const FormQuestionShape = ( { id_pregunta = '' } ) => {
     // }, [ pregunta ])
 
     useEffect(() => {
+
+        if ( image !== '' ) {
+            setImagesQuestion([{ data_url: image }])
+        }
+
+
+    }, [ image ]);
+
+    useEffect(() => {
         dispatch( shapeStartLoading() );
-    }, [ dispatch ])
+    }, [ dispatch ]);
     
     useEffect(() => {
         
@@ -102,7 +128,7 @@ export const FormQuestionShape = ( { id_pregunta = '' } ) => {
     }, [ imagesQuestion, images, name, dispatch ]);
 
     return (
-        <div className="panel-body row align-items-end">
+        <div className="panel-body row align-items-end">            
             <div className="form-group alert alert-info" style={{ paddingLeft:"25%", paddingRight:"25%" }}>
                 <div className="col-xs-14 text-center">
                     <label>

@@ -1,9 +1,6 @@
 import React from 'react';
 
 export const GetImageOne = ( { data, onImageUpdate, onImageRemove } ) => {
-
-    console.log( data )
-
     return (
        <>
             {

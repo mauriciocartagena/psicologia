@@ -9,6 +9,7 @@ import { GetImageOne } from './GetImageOne';
 import { useForm } from '../../../hooks/useForm';
 import { useFetchQuestionShapeOne } from '../../../hooks/QuestionShape/useFetchQuestionShapeOne';
 import { useFetchDestructureValue } from '../../../hooks/QuestionShape/useFetchDestructureValue';
+import { useFetchOptionsDestructure } from '../../../hooks/QuestionShape/useFetchOptionsDestructure';
 
 export const FormQuestionShape = ( { id_pregunta = '' } ) => {
 
@@ -21,7 +22,7 @@ export const FormQuestionShape = ( { id_pregunta = '' } ) => {
 
     const [ question, setQuestion ] = useState([]);
 
-    const { pregunta } = question;
+    const { pregunta, op1, op2, op3, op4, op5, op6 } = question;
     
     const DestructureValue = ( data_questions_shape ) => {
         
@@ -36,6 +37,15 @@ export const FormQuestionShape = ( { id_pregunta = '' } ) => {
 
     
     const { image } = useFetchDestructureValue( pregunta );
+
+    const { 
+        option1,
+        option2,
+        option3,
+        option4,
+        option5,
+        option6 
+    } = useFetchOptionsDestructure( op1, op2, op3, op4, op5, op6 );
     
     const [ imagesQuestion, setImagesQuestion ] = useState([]);
     
@@ -77,42 +87,35 @@ export const FormQuestionShape = ( { id_pregunta = '' } ) => {
         );
     }
 
-    // if ( questionActive !== null ) {
-    //     const  { data } = pregunta;
-    //     const questionMain = new Buffer.from( data ).toString("ascii");
-    //     setImagesQuestion([ { data_url: questionMain } ])
-    // }
-
-    // console.log( pregunta);
-
-    // useEffect(() => {
-    //     if ( questionActive !== null || '' || undefined  ) {
-
-    //         const  { data } = pregunta;
-    //         const questionMain = new Buffer.from( data ).toString("ascii");
-
-    //         // const optionOne   = new Buffer.from( options[0].data ).toString("ascii");
-    //         // const optionTwo   = new Buffer.from( options[1].data ).toString('ascii');
-    //         // const optionThree = new Buffer.from( options[2].data ).toString('ascii');
-    //         // const optionFour  = new Buffer.from( options[3].data ).toString('ascii');
-    //         // const optionFive  = new Buffer.from( options[4].data ).toString('ascii');
-    //         // const optionSix   = new Buffer.from( options[5].data ).toString('ascii');
-        
-    //         // setImagesQuestion([{ data_url: questionMain }])
-    //         console.log( questionMain );
-    //             // console.log( "hello" )
-
-    //     } 
-    // }, [ pregunta ])
-
     useEffect(() => {
 
-        if ( image !== '' ) {
-            setImagesQuestion([{ data_url: image }])
+        if ( image !== '' || option1 !== '' || option2 !== '' || option3 !== '' || option4 !== '' || option5 !== '' || option6 !== '' ) {
+            const options = [
+                {
+                    data_url : option1
+                },
+                {
+                    data_url : option2
+                },
+                {
+                    data_url : option3
+                }, 
+                {
+                    data_url : option4
+                }, 
+                {
+                    data_url : option5
+                }, 
+                {
+                    data_url : option6  
+                }
+            ];
+            setImagesQuestion([{ data_url: image }]);
+            setImages( options )
         }
 
 
-    }, [ image ]);
+    }, [ image, option1, option2, option3, option4, option5, option6 ]);
 
     useEffect(() => {
         dispatch( shapeStartLoading() );

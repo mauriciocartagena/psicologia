@@ -1,7 +1,12 @@
 import { types } from '../types/types';
 
 const initialState = {
-    questionActive: null
+    questionActive: {
+        id: null,
+        name: '',
+        id_test: null,
+        id_resp: null
+    }
 }
 
 export const questionShape = ( state = initialState, action ) => {

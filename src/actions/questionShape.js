@@ -48,7 +48,7 @@ export const shapeRegister = ( pregunta, op1, op2, op3, op4, op5, op6, respuesta
 
 }
 
-export const questionSetShape = ( question ) => ( questionShape( question ) )
+export const questionSetShape = ( question, nombre, id_test, id_resp ) => ( questionShape( { question, nombre, id_test, id_resp }  ) )
 
 const questionShape = ( questionActive ) => ({ 
     type: types.questionSetActive,

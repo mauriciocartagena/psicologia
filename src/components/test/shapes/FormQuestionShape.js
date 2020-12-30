@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { shapeStartLoading } from '../../../actions/shape';
 import { useFetchQuestionShapeOne } from '../../../hooks/QuestionShape/useFetchQuestionShapeOne';
 import { useFetchDestructureValue } from '../../../hooks/QuestionShape/useFetchDestructureValue';
 import { useFetchOptionsDestructure } from '../../../hooks/QuestionShape/useFetchOptionsDestructure';
 import { Form } from './Form';
 
-export const FormQuestionShape = ( { id_pregunta = '' } ) => {
+export const FormQuestionShape = ( { id_pregunta = '', nombre = '', id_test = '', respuesta_correcta = '' } ) => {
 
     const dispatch = useDispatch();
 
@@ -14,7 +14,7 @@ export const FormQuestionShape = ( { id_pregunta = '' } ) => {
 
     const [ question, setQuestion ] = useState([]);
 
-    const { pregunta, op1, op2, op3, op4, op5, op6, nombre, respuesta_correcta, id_test } = question;
+    const { pregunta, op1, op2, op3, op4, op5, op6 } = question;
 
     const [ questionsImage, setQuestionsImage ] = useState([]);
 
@@ -30,7 +30,6 @@ export const FormQuestionShape = ( { id_pregunta = '' } ) => {
         DestructureValue( data_questions_shape );
 
     },[ data_questions_shape ]);
-
     
     const { image } = useFetchDestructureValue( pregunta );
 
@@ -42,7 +41,6 @@ export const FormQuestionShape = ( { id_pregunta = '' } ) => {
         option5,
         option6 
     } = useFetchOptionsDestructure( op1, op2, op3, op4, op5, op6 );
-    
 
     useEffect(() => {
         dispatch( shapeStartLoading() );
@@ -81,7 +79,9 @@ export const FormQuestionShape = ( { id_pregunta = '' } ) => {
            <Form
             questionImage = { questionsImage }
             optionsImage = { imageOptions }
-
+            nombre  = { nombre }
+            id_test = { id_test }
+            respuesta_correcta = { respuesta_correcta }
            />
         </div>
     )

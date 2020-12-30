@@ -7,7 +7,7 @@ import { useForm } from '../../../hooks/useForm';
 import { GetImage } from './GetImage';
 import { GetImageOne } from './GetImageOne';
 
-export const Form = ({ questionImage, optionsImage }) => {
+export const Form = ({ nombre = '', id_test = '', respuesta_correcta = '', questionImage, optionsImage }) => {
 
     const dispatch = useDispatch();
 
@@ -16,15 +16,14 @@ export const Form = ({ questionImage, optionsImage }) => {
     const { uiLoadingSaveButton, uiDisabled } = useSelector( state => state.ui );
 
     const [ formShapeInputValues, handleShapeInputValueChange ] = useForm({
-        name: '',
+        name: nombre,
         respCorrect: '',
         testShape: ''
     });
 
-    const { name, testShape,respCorrect } = formShapeInputValues;
+    const { name, testShape, respCorrect } = formShapeInputValues;
 
     const [ imagesQuestion, setImagesQuestion ] = useState([]);
-
 
     const maxNumberQuestion = 1;
     const maxNumber = 6;
@@ -66,12 +65,11 @@ export const Form = ({ questionImage, optionsImage }) => {
     }, [ imagesQuestion, images, name, dispatch ]);
 
     useEffect(() => {
-        
-        setImagesQuestion(questionImage);
-        setImages(optionsImage)
-        
-    }, [ questionImage, optionsImage ])
 
+        setImagesQuestion( questionImage );
+        setImages( optionsImage );
+        
+    }, [ questionImage, optionsImage ]);
 
     return (
         <>

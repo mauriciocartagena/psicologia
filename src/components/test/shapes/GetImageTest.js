@@ -13,10 +13,10 @@ export const GetImageTest = ({ options = [] } ) => {
 
     const history = useHistory();
 
-    const handleActiveQuestions = ( id_pregunta ) => {
+    const handleActiveQuestions = ( id_pregunta, nombre, id_test, id_resp ) => {
 
         dispatch( questionClearShape() );
-        dispatch( questionSetShape( id_pregunta ));
+        dispatch( questionSetShape( id_pregunta, nombre, id_test, id_resp ));
 
         history.push('/test/update/shapes/screen');
 
@@ -27,11 +27,11 @@ export const GetImageTest = ({ options = [] } ) => {
             {
                 options.map( ( question, key )=> 
                     {
-                        const { id_pregunta, pregunta, nombre, op1, op2, op3, op4, op5, op6, respuesta_correcta, createdAt, updatedAt } = question;
+                        const { id_pregunta, pregunta, nombre, id_test, op1, op2, op3, op4, op5, op6, respuesta_correcta, createdAt, updatedAt } = question;
 
                         const { nombre: nombreTest } = question.test_formas;
                         
-                        const questions = new Buffer.from( pregunta.data ).toString("ascii");
+                        const questions   = new Buffer.from( pregunta.data ).toString("ascii");
 
                         const optionOne   = new Buffer.from( op1.data ).toString("ascii");
                         const optionTwo   = new Buffer.from( op2.data ).toString('ascii');
@@ -71,7 +71,7 @@ export const GetImageTest = ({ options = [] } ) => {
 
                                             </span>
                                             <br/>
-                                            <button onClick={ ()=> { handleActiveQuestions( id_pregunta ) } } className="btn btn-primary">Editar</button>
+                                            <button onClick={ ()=> { handleActiveQuestions( id_pregunta, nombre, id_test, respuesta_correcta ) } } className="btn btn-primary">Editar</button>
                                         </div>
                                     </div>
                                     <div className="col-md-3">

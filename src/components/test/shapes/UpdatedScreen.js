@@ -4,7 +4,7 @@ import { FormQuestionShape } from './FormQuestionShape';
 
 export const UpdatedScreen = () => {
 
-    const { questionActive } = useSelector( state => state.questionShape );
+    const { question, nombre, id_test, id_resp } = useSelector( state => state.questionShape.questionActive );
 
     return (
         <div className="row">
@@ -14,10 +14,14 @@ export const UpdatedScreen = () => {
                         MODIFICAR PRUEBAS FORMAS
                     </header>
                     {
-                        ( questionActive !== null )
+                        ( question !== null )
                         ?
                             <FormQuestionShape  
-                                id_pregunta={ questionActive }
+                                id_pregunta = { question }
+                                nombre = { nombre }
+                                id_test = { id_test }
+                                respuesta_correcta = { id_resp }
+
                             /> 
                         :
                         <div>No hay una pregunta para editar</div>

@@ -22,7 +22,7 @@ export const useFetchOptionsDestructure = ( op1 = '', op2 = '', op3 = '', op4 = 
             option5 : optionFive,
             option6 : optionSix })
        
-    }, [ op1, op2, op3, op4, op5, op6 ]);
+    }, [ optionOne, optionTwo, optionThree, optionFour, optionFive, optionSix ]);
 
     return data;
 

@@ -17,9 +17,11 @@ export const Form = ({ nombre = '', id_test = '', respuesta_correcta = '', quest
 
     const [ formShapeInputValues, handleShapeInputValueChange ] = useForm({
         name: nombre,
-        respCorrect: '',
-        testShape: ''
+        respCorrect: respuesta_correcta,
+        testShape: id_test
     });
+
+    console.log( formShapeInputValues );
 
     const { name, testShape, respCorrect } = formShapeInputValues;
 
@@ -178,16 +180,17 @@ export const Form = ({ nombre = '', id_test = '', respuesta_correcta = '', quest
                     <div className="col-sm-7">
                         <select 
                             formcontrolname="curso" 
-                            name="respCorrect" 
+                            name="respCorrect"
                             onChange={ handleShapeInputValueChange } 
                             className="form-control ng-valid ng-dirty ng-touched"
+                            value={ respCorrect }
                             >
                             {
                                 images.map(( e, i )=>(
                                     <option  
                                         key={ i } 
                                         value={ i + 1 } 
-                                    > { i + 1 }</option>
+                                    > Imagen { i + 1 }</option>
                                 ))
                             }
                         </select>
@@ -206,6 +209,7 @@ export const Form = ({ nombre = '', id_test = '', respuesta_correcta = '', quest
                             name="testShape" 
                             onChange={ handleShapeInputValueChange } 
                             className="form-control ng-valid ng-dirty ng-touched"
+                            value={ testShape }
                             >
                             {
                                 shape.map(( e, i )=>(

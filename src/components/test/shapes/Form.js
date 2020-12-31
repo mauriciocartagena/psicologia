@@ -71,7 +71,7 @@ export const Form = ({ nombre = '', id_test = '', respuesta_correcta = '', quest
             setImages( optionsImage );
         }
         
-    }, [ questionImage, optionsImage ]);
+    }, [ questionImage, optionsImage, nombre ]);
 
     return (
         <>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Img } from './styles/style';
 
 export const GetImage = ( { data, onImageUpdate, onImageRemove } ) => {
 
@@ -11,10 +12,7 @@ export const GetImage = ( { data, onImageUpdate, onImageRemove } ) => {
                         style={{ justifyContent: 'center' }}
                         >
                         <br/>
-                        <img src={image['data_url']} alt="images-shapes" 
-                            style={{ justifyContent:'center',alignItems:'center' }}
-                            className="img-rounded" width="130vh" max-width="100px" height="130vh" max-height="100px"
-                            position="relative"/>
+                            <Img src={image['data_url']} alt="images-shapes"  className="img-rounded" />
                         <br/>
                         <div className="image-item__btn-wrapper">
                             <br/>

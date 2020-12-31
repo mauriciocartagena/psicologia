@@ -32,12 +32,6 @@ export const useFetchQuestionShapeOne = ( id_pregunta ) => {
                 });
     
             }
-            else{
-
-                const  { id_pregunta } = body.errors;
-                console.log(id_pregunta.msg);
-    
-            }
         } catch ( error ) {
             console.log(error);
         }

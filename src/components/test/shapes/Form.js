@@ -21,8 +21,6 @@ export const Form = ({ nombre = '', id_test = '', respuesta_correcta = '', quest
         testShape: id_test
     });
 
-    console.log( formShapeInputValues );
-
     const { name, testShape, respCorrect } = formShapeInputValues;
 
     const [ imagesQuestion, setImagesQuestion ] = useState([]);
@@ -229,7 +227,14 @@ export const Form = ({ nombre = '', id_test = '', respuesta_correcta = '', quest
                     onClick={ handleRegisterTestShape } 
                     disabled={ uiDisabled } 
                     className="btn btn-primary btn-lg btn-block" >
-                <i  className={ uiLoadingSaveButton } ></i> Registrar
+                <i  className={ uiLoadingSaveButton } ></i> 
+                        {
+                            ( id_test === '')
+                            ?
+                                " Registrar"
+                            :
+                                " Modificar"
+                        }
                 </button>
             </div>
     </>

@@ -93,6 +93,31 @@ export const shapeEdit = ( id_pregunta, pregunta, op1, op2, op3, op4, op5, op6, 
     }
 
 }
+export const questionDeleteShape = ( id_pregunta ) => {
+
+    return async () => {
+        try {
+
+            const resp = await fetchConToken('pregunta-formas/delete', {
+                id_pregunta
+            },'DELETE');
+
+            const body = await resp.json();
+
+            if ( body.ok ) {
+                Swal.fire(':)','Pregunta Eliminada', 'success');
+            }else {  
+
+                Swal.fire(':(', body.msg, 'error');
+            }
+            
+        } catch (error) {
+            console.log( error);
+        }
+
+    }
+
+}
 
 export const questionSetShape = ( question, nombre, id_test, id_resp ) => ( questionShape( { question, nombre, id_test, id_resp }  ) )
 

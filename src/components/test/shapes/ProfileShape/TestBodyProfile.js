@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { PanelBody } from './PanelBody';
 
 export const TestBodyProfile = ({ options = [] }) => {
 
+    const [ data, setData ] = useState([]);
+
+    useEffect(() => {
+        
+        setData( options );
+        
+    }, [ options ]);
+
+
     return (
         <>
             {
-                options.map( ( question, key )=> 
+                data.map( ( question, key )=> 
                 {
                      const { id_pregunta, pregunta, nombre, id_test, op1, op2, op3, op4, op5, op6, respuesta_correcta, createdAt, updatedAt } = question;
 
@@ -41,6 +50,8 @@ export const TestBodyProfile = ({ options = [] }) => {
                                     nombreTest = { nombreTest }
                                     id_pregunta = { id_pregunta }
                                     id_test = { id_test }
+                                    filterData = { data }
+                                    setFilterData = { setData }
                                 />
                              </div>
                              <div className="panel-body">

@@ -1,6 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { testShapeLoading } from '../../../actions/shape';
 import { useFetchQuestionShape } from '../../../hooks/QuestionShape/useFetchQuestionShape';
 import { GetImageTest } from './GetImageTest';
 import './styles.css';

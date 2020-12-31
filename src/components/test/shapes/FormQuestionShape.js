@@ -43,7 +43,9 @@ export const FormQuestionShape = ( { id_pregunta = '', nombre = '', id_test = ''
     } = useFetchOptionsDestructure( op1, op2, op3, op4, op5, op6 );
 
     useEffect(() => {
+
         dispatch( shapeStartLoading() );
+
     }, [ dispatch ]);
 
     useEffect(() => {

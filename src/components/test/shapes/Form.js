@@ -66,8 +66,10 @@ export const Form = ({ nombre = '', id_test = '', respuesta_correcta = '', quest
 
     useEffect(() => {
 
-        setImagesQuestion( questionImage );
-        setImages( optionsImage );
+        if ( nombre !== '' || undefined || null ) {     
+            setImagesQuestion( questionImage );
+            setImages( optionsImage );
+        }
         
     }, [ questionImage, optionsImage ]);
 

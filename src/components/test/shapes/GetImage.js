@@ -9,13 +9,13 @@ export const GetImage = ( { data, onImageUpdate, onImageRemove } ) => {
        <>
             {
                 data.map(( image, index) => (
-
                     <div key={ index } className="col-sm-4 form-group text-center"
                         style={{ justifyContent: 'center' }}
                         >
                         <br/>
                             {
-                                (image.data_url !== undefined ) ?
+                                ( image.data_url !== undefined ) 
+                                ?
                                     <Img src={ image['data_url'] } alt="images-shapes"  className="img-rounded" />
                                 :
                                     <ImgDefault src={ DEFAULT_IMAGE } alt="images-shapes"  className="img-rounded" />

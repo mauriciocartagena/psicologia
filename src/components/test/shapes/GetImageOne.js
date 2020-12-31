@@ -1,7 +1,10 @@
 import React from 'react';
-import { Img } from './styles/style';
+import { Img, ImgDefault } from './styles/style';
 
 export const GetImageOne = ( { data, onImageUpdate, onImageRemove } ) => {
+
+    const DEFAULT_IMAGE = 'https://i.pinimg.com/originals/90/80/60/9080607321ab98fa3e70dd24b2513a20.gif';
+
     return (
        <>
             {
@@ -10,7 +13,13 @@ export const GetImageOne = ( { data, onImageUpdate, onImageRemove } ) => {
                         style={{ justifyContent: 'center', alignItems:'center' }} 
                     >
                         <br/>
-                        <Img src={image['data_url']} alt="images-shapes" className="img-rounded" />
+                        {
+                            ( image.data_url !== '' ) 
+                            ?
+                                <Img src={ image['data_url'] } alt="images-shapes"  className="img-rounded" />
+                            :
+                                <ImgDefault src={ DEFAULT_IMAGE } alt="images-shapes"  className="img-rounded" />
+                        }
                         <br/>
                         <div className="image-item__btn-wrapper">
                             <br/>

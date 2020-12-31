@@ -79,11 +79,12 @@ export const FormQuestionShape = ( { id_pregunta = '', nombre = '', id_test = ''
     return (
         <div className="panel-body row align-items-end">            
            <Form
-            questionImage = { questionsImage }
-            optionsImage = { imageOptions }
-            nombre  = { nombre }
-            id_test = { id_test }
-            respuesta_correcta = { respuesta_correcta }
+                id_pregunta={ id_pregunta }
+                questionImage = { questionsImage }
+                optionsImage = { imageOptions }
+                nombre  = { nombre }
+                id_test = { id_test }
+                respuesta_correcta = { respuesta_correcta }
            />
         </div>
     )

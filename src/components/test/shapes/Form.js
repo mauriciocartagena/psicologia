@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import ImageUploading from 'react-images-uploading';
-import { shapeRegister } from '../../../actions/questionShape';
+import { shapeEdit, shapeRegister } from '../../../actions/questionShape';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiFalseDisabledButton, uiTrueDisabledButton } from '../../../actions/ui';
 import { useForm } from '../../../hooks/useForm';
 import { GetImage } from './GetImage';
 import { GetImageOne } from './GetImageOne';
 
-export const Form = ({ nombre = '', id_test = '', respuesta_correcta = '', questionImage, optionsImage }) => {
+export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_correcta = '', questionImage, optionsImage }) => {
 
     const dispatch = useDispatch();
 
@@ -41,18 +41,38 @@ export const Form = ({ nombre = '', id_test = '', respuesta_correcta = '', quest
     const handleRegisterTestShape = ( e ) => {
         e.preventDefault();
 
-        dispatch( shapeRegister( 
-            imagesQuestion[0].data_url,
-            images[0].data_url,
-            images[1].data_url,
-            images[2].data_url,
-            images[3].data_url,
-            images[4].data_url,
-            images[5].data_url,
-            respCorrect,
-            name,
-            testShape )
-        );
+        if ( nombre !== '') {
+          
+            dispatch( shapeEdit(
+                id_pregunta,
+                imagesQuestion[0].data_url,
+                images[0].data_url,
+                images[1].data_url,
+                images[2].data_url,
+                images[3].data_url,
+                images[4].data_url,
+                images[5].data_url,
+                respCorrect,
+                name,
+                testShape )
+            );
+
+        }else{
+
+            dispatch( shapeRegister( 
+                imagesQuestion[0].data_url,
+                images[0].data_url,
+                images[1].data_url,
+                images[2].data_url,
+                images[3].data_url,
+                images[4].data_url,
+                images[5].data_url,
+                respCorrect,
+                name,
+                testShape )
+            );
+
+        }
     }
 
     useEffect(() => {

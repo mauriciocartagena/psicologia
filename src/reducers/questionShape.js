@@ -2,7 +2,7 @@ import { types } from '../types/types';
 
 const initialState = {
     questionActive: {
-        id: null,
+        question: null,
         name: '',
         id_test: null,
         id_resp: null

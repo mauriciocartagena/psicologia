@@ -101,11 +101,9 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
 
     useEffect(() => {
         setDataQuestionShape( shape.filter(( e )=>(
-            e.id_test.toString() === testShape 
-        )));
+            e.id_test.toString() === testShape.toString()
+        ))); 
     }, [ testShape, shape ]);
-
-    console.log( dataQuestionShape );
 
     return (
         <>

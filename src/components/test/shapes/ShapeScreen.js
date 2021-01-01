@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFetchQuestionShape } from '../../../hooks/QuestionShape/useFetchQuestionShape';
-import { GetImageTest } from './GetImageTest';
+import { TestBodyProfile } from './ProfileShape/TestBodyProfile';
 import './styles.css';
 
 export const ShapeScreen = () => {
@@ -11,7 +11,7 @@ export const ShapeScreen = () => {
         <div className="animated fadeIn">
            <div className="profile-nav alt">
                 <section className="panel">
-                    <GetImageTest options={ testShape } />
+                    <TestBodyProfile options={ testShape } />
                 </section>
             </div>
         </div>

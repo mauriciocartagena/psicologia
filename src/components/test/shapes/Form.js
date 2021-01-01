@@ -6,12 +6,15 @@ import { uiFalseDisabledButton, uiTrueDisabledButton } from '../../../actions/ui
 import { useForm } from '../../../hooks/useForm';
 import { GetImage } from './GetImage';
 import { GetImageOne } from './GetImageOne';
+import Swal from 'sweetalert2';
 
 export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_correcta = '', questionImage, optionsImage }) => {
 
     const dispatch = useDispatch();
 
     const { shape } = useSelector( state => state.shape );
+
+    const [ dataQuestionShape, setDataQuestionShape ] = useState([])
 
     const { uiLoadingSaveButton, uiDisabled } = useSelector( state => state.ui );
 
@@ -20,7 +23,7 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
         respCorrect: respuesta_correcta,
         testShape: id_test
     });
-
+    
     const { name, testShape, respCorrect } = formShapeInputValues;
 
     const [ imagesQuestion, setImagesQuestion ] = useState([]);
@@ -41,7 +44,10 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
     const handleRegisterTestShape = ( e ) => {
         e.preventDefault();
 
-        if ( nombre !== '') {
+        if( respCorrect === '' || testShape === '' ) {
+            Swal.fire("Error", "Debe de seleccionar una respuesta y una prueba forma", "error");
+        }
+        else if( nombre !== '') {
           
             dispatch( shapeEdit(
                 id_pregunta,
@@ -92,6 +98,14 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
         }
         
     }, [ questionImage, optionsImage, nombre ]);
+
+    useEffect(() => {
+        setDataQuestionShape( shape.filter(( e )=>(
+            e.id_test.toString() === testShape 
+        )));
+    }, [ testShape, shape ]);
+
+    console.log( dataQuestionShape );
 
     return (
         <>
@@ -198,16 +212,18 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
                 <div className="form-group">
                     <label className="col-sm-3 control-label"></label>
                     <div className="col-sm-7">
+                        <p>Respuesta seleccionada : `{ respCorrect }`</p>
                         <select 
                             formcontrolname="curso" 
                             name="respCorrect"
                             onChange={ handleShapeInputValueChange } 
                             className="form-control ng-valid ng-dirty ng-touched"
-                            value={ respCorrect }
+                            value={ respCorrect  }
                             >
                             {
                                 images.map(( e, i )=>(
-                                    <option  
+                                    <option 
+                                        name="respCorrect"
                                         key={ i } 
                                         value={ i + 1 } 
                                     > Imagen { i + 1 }</option>
@@ -224,6 +240,12 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
                 <div className="form-group">
                     <label className="col-sm-3 control-label"></label>
                     <div className="col-sm-7" >
+                        <p>Forma seleccionada : `{  
+                            dataQuestionShape.map(( e )=>(
+                                e.nombre
+                            ))
+                        }`
+                        </p>
                         <select 
                             formcontrolname="curso" 
                             name="testShape" 

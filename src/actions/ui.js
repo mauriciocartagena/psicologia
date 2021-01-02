@@ -20,6 +20,9 @@ export const uiCloseLoadingButton = () => ({ type: types.uiCloseLoadingButton } 
 export const uiOpenLoadingSaveButton = () => ({ type: types.uiOpenLoadingSaveButton } );
 export const uiCloseLoadingSaveButton = () => ({ type: types.uiCloseLoadingSaveButton } );
 
+export const uiModalTrue = () => ({ type:types.uiModalTrue });
+export const uiModalFalse = () => ({ type:types.uiModalFalse });
+
 // Institution
 export const institutionAcordionSelect = () => ({ type:types.institutionAcordionSelect });
 export const institutionAcordionDeselect = () => ({ type:types.institutionAcordionDeselect });

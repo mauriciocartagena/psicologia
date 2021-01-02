@@ -13,6 +13,7 @@ import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRouter';
 import { InstitutionRouter } from './private/InstitutionRouter';
 import { TestsRouter } from './private/TestsRouter';
+import { TestShapeRouter } from './private/TestShapeRouter';
 
 
 export const AppRouter = () => {
@@ -62,6 +63,11 @@ export const AppRouter = () => {
                      <PrivateRoute 
                         path="/test"      
                         component={ TestsRouter }
+                        isAuthenticated={ !!uid }
+                    />
+                    <PrivateRoute 
+                        path="/test-shape"      
+                        component={ TestShapeRouter }
                         isAuthenticated={ !!uid }
                     />
                     <Redirect to="/auth/login" /> 

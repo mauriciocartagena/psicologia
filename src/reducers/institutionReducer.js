@@ -19,7 +19,6 @@ export const institutionReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 institutions: [ ...action.payload]
-
             }
         case types.institutionSetActiveClear:
             return { 

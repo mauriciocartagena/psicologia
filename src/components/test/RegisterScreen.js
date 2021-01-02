@@ -85,7 +85,7 @@ export const RegisterScreen = () => {
                         </div>
                         <div className="col-sm-6" >
                             <NavLink className="btn btn-info btn-lg btn-block" 
-                                to="/test/register/shapes"
+                                to="/test-shape"
                             >
                                 Categoria pruebas
                             </NavLink>

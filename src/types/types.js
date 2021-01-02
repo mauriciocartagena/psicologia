@@ -16,6 +16,8 @@ export const types = {
 
     uiOpenLoadingSaveButton:'[ui] Open Loading Save Button',
     uiCloseLoadingSaveButton:'[ui] CloseLoading Save Button',
+    uiModalTrue:'[ui] Modal true',
+    uiModalFalse:'[ui] Modal false',
 
 
     uiOpenDrowp:'[ui] Open drowp',
@@ -40,6 +42,10 @@ export const types = {
     institutionIconClose:'[institution] Close icon institution',
     institutionOpenAcordion:'[institution] Open acordion institution',
     institutionCloseAcordion:'[institution] Cloase acordion instituion',
+
+    testShapeActive:'[tShape] Active test shape',
+    testShapeClear:'[tShape] Clear test shape',
+    testShapeLoaded:'[tShape] Loaded test Shape',
 
     shapeLoaded:'[Shape] Loaded Shape',
     questionSetActive:'[QuestionS] Question shape active',

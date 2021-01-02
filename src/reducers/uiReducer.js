@@ -12,7 +12,9 @@ const initialState = {
     uiRegisterSelectAcordion:'',
     uiShowSelectInstitution:'',
 
-    uiIconClose:'dcjq-icon'
+    uiIconClose:'dcjq-icon',
+
+    uiModal: false
 
 }
 
@@ -147,6 +149,16 @@ export const uiReducer = ( state = initialState, action) => {
                 ...action.payload,
                 uiIconClose:'dcjq-icon',
                 cheking:false
+            }
+        case types.uiModalTrue:
+            return {
+                ...state,
+                uiModal: true
+            }
+        case types.uiModalFalse:
+            return {
+                ...state,
+                uiModal: false
             }
                 
     

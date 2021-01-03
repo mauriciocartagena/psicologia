@@ -3,22 +3,19 @@ import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import { fetchConToken } from '../../helpers/fetch';
 
-export const useFetchQuestionShape = () => {
+export const useFetchQuestionShape = (  limit, skip ) => {
 
     const [ questionsShape, setQuestionsShape ] = useState({
-        data_questions_shape:[]
+        shapeData: []
     });
 
     useEffect(() => {
-        testShapeLoading();
-        return (()=>{
-            setQuestionsShape({ data_questions_shape:[] })
-        })
-    }, [])
+        testShapeLoading(  limit, skip );
+    }, [ limit, skip ]);
 
-    const testShapeLoading = async () => {
+    const testShapeLoading = async ( limit, skip ) => {
 
-        const resp = await fetchConToken('pregunta-formas/pformas');
+        const resp = await fetchConToken(`pregunta-formas/pformas?limit=${ limit }&skip=${ skip }`);
         const body = await resp.json();
     
         try {
@@ -27,9 +24,7 @@ export const useFetchQuestionShape = () => {
                 
                 const  { preguntaFormas } = body;
 
-                setQuestionsShape({
-                    data_questions_shape:preguntaFormas
-                });
+                setQuestionsShape({ shapeData: preguntaFormas });
     
             }
             else{

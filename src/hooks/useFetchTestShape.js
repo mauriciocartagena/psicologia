@@ -36,7 +36,7 @@ export  const  useFetcheTestShape = () =>{
                 json.testFormas.forEach( item =>rows.push({
                     id_test:item.id_test,
                     nombre: item.nombre,
-                    modified: <button className="btn btn-primary" id= { item.id_test }  onClick= { ( e ) => { 
+                    modified: <button className="btn btn-primary" id = { item.id_test }  onClick = { ( e ) => { 
 
                         // It's a little more understandable
                         return(

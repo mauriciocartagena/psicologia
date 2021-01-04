@@ -1,23 +1,30 @@
-
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import { fetchConToken } from '../../helpers/fetch';
 
-export const useFetchQuestionShape = (  limit, skip ) => {
+const INITIAL_LIMIT = 0;
 
-    const [ loading, setLoading ] = useState(false)
+export const useFetchQuestionShape = () => {
 
+    const [ loading, setLoading ] = useState(false);
+
+    const [ skip, setSkip ] = useState( INITIAL_LIMIT );
 
     const [ questionsShape, setQuestionsShape ] = useState([]);
 
     useEffect(() => {
-        testShapeLoading(  limit, skip );
-    }, [ limit, skip ]);
+        
+        if ( skip === INITIAL_LIMIT ) {
+            testShapeLoading( INITIAL_LIMIT )
+        }{
+            testShapeLoading( skip );
+        }
+    }, [ skip ])
 
-    const testShapeLoading = async ( limit, skip ) => {
+    const testShapeLoading = async ( skip ) => {
         
         setLoading( true );
-        const resp = await fetchConToken(`pregunta-formas/pformas?limit=${ limit }&skip=${ skip }`);
+        const resp = await fetchConToken(`pregunta-formas/pformas?limit=1&skip=${ skip }`);
         const body = await resp.json();
     
         try {
@@ -26,7 +33,7 @@ export const useFetchQuestionShape = (  limit, skip ) => {
                 
                 const  { preguntaFormas } = body;
 
-                setQuestionsShape( preguntaFormas );
+                setQuestionsShape( questionsShape.concat( preguntaFormas ) );
                 setLoading( false );
     
             }
@@ -42,7 +49,7 @@ export const useFetchQuestionShape = (  limit, skip ) => {
     
     }
 
-    return { loading, questionsShape };
+    return { loading, questionsShape, setSkip };
 
 
 }

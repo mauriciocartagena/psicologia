@@ -7,9 +7,11 @@ export const TestBodyProfile = ({ options }) => {
 
     useEffect(() => {
         
-        setData( options );
+        setData( data.concat( options ) );
         
     }, [ options ]);
+
+    console.log( data )
 
     return (
         <>

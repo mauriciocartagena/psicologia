@@ -5,16 +5,18 @@ import { fetchConToken } from '../../helpers/fetch';
 
 export const useFetchQuestionShape = (  limit, skip ) => {
 
-    const [ questionsShape, setQuestionsShape ] = useState({
-        shapeData: []
-    });
+    const [ loading, setLoading ] = useState(false)
+
+
+    const [ questionsShape, setQuestionsShape ] = useState([]);
 
     useEffect(() => {
         testShapeLoading(  limit, skip );
     }, [ limit, skip ]);
 
     const testShapeLoading = async ( limit, skip ) => {
-
+        
+        setLoading( true );
         const resp = await fetchConToken(`pregunta-formas/pformas?limit=${ limit }&skip=${ skip }`);
         const body = await resp.json();
     
@@ -24,20 +26,23 @@ export const useFetchQuestionShape = (  limit, skip ) => {
                 
                 const  { preguntaFormas } = body;
 
-                setQuestionsShape({ shapeData: preguntaFormas });
+                setQuestionsShape( preguntaFormas );
+                setLoading( false );
     
             }
             else{
                 Swal.fire(':(', body.msg, 'error');
+                setLoading( false );
     
             }
         } catch ( error ) {
             console.log(error);
+            setLoading( false );
         }
     
     }
 
-    return questionsShape;
+    return { loading, questionsShape };
 
 
 }

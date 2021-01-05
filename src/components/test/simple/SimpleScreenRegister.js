@@ -15,6 +15,8 @@ export const SimpleScreenRegister = () => {
 
     const [ state, setState ] = useState([]);
     const [ categoryData, setCategoryData ] = useState([]);
+    const [ testName, setTestName ] = useState([]);
+    const [ nameCategory, setNameCategory ] = useState([]);
 
     const [ formQuestionSimpleInputValues, handleQuestionSimpleInputValueChange ] = useForm({
         question: '',
@@ -35,9 +37,17 @@ export const SimpleScreenRegister = () => {
     useEffect(() => {
         
         setState( questionsSimple );
-        setCategoryData( data  );
+        setCategoryData( data );
         
     }, [ questionsSimple, data ]);
+
+    
+    useEffect(() => {
+        
+        setNameCategory( data.find( e => e.id_categoria.toString() === category ) );
+        setTestName( questionsSimple.find( e => e.id_test.toString() === tSimple ) );
+
+    }, [ category, tSimple, data, questionsSimple ]);
 
     return (
         <div className="row">
@@ -63,6 +73,7 @@ export const SimpleScreenRegister = () => {
                                 </div>
                                 <div className="form-group">
                                     <label>Prueba Simple</label>
+                                    <p>Prueba seleccionada : `{ ( testName !== undefined || '' ? testName.nombre_test : '') }`</p>
                                     <select 
                                         formcontrolname="test-simple" 
                                         name="tSimple"
@@ -82,6 +93,7 @@ export const SimpleScreenRegister = () => {
                                 </div>
                                 <div className="form-group">
                                     <label>Categoria</label>
+                                    <p>Categoria seleccionada : `{ ( nameCategory !== undefined || '' ? nameCategory.nombre_categoria : '') }`</p>
                                     <select 
                                         formcontrolname="curso" 
                                         name="category"

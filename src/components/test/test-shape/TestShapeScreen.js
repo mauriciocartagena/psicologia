@@ -51,6 +51,7 @@ export const TestShapeScreen = () => {
                         <div className="text-right" id="nestable_list_menu">
                             <button type="button" className="btn btn-success" onClick={ handleChangeModal }>Registrar</button>
                         </div>
+                        <br/>
                     </div>
 
                         <MDBDataTable

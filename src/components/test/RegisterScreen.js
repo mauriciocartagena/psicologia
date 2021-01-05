@@ -43,6 +43,7 @@ export const RegisterScreen = () => {
                 </div>
             </div>   
             <div className="row animated fadeIn" >
+
                 <div className="col-sm-6" > 
                     <h2>
                         <i>
@@ -54,11 +55,35 @@ export const RegisterScreen = () => {
                         Pruebas simples sin graficos, solamente preguntas.
                     </p>
                     <NavLink className="btn btn-primary btn-lg btn-block"
-                        to="/test/register/shapes"
+                        to="/test-shape-simple/register"
                     >  
                         Seleccionar
                     </NavLink>
+
+                    <div className="row" style={{ paddingTop:"10px" }} >
+                        <div className="col-sm-6" style={{ paddingBottom:"10px" }} >
+                            <NavLink className="btn btn-success btn-lg btn-block" 
+                                to="/test-shape-simple"
+                            >
+                                Administrar pruebas
+                            </NavLink>
+                        </div>
+                        <div className="col-sm-6" >
+                            <NavLink className="btn btn-danger btn-lg btn-block" 
+                                to="/test-shape-simple/category"
+                            >
+                                Categoria pruebas
+                            </NavLink>
+                        </div>
+                    </div>
+                    <NavLink className="btn btn-info btn-lg btn-block" 
+                        to="/test-shape-simple/tsimple"
+                    >
+                        Prueba Simple
+                    </NavLink>
                 </div>
+
+
                 <div className="col-sm-6">
                     <h2>
                         <i>

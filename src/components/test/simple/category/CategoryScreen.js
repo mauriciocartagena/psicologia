@@ -1,5 +1,5 @@
-import { MDBDataTable } from 'mdbreact';
 import React from 'react'
+import { MDBDataTable } from 'mdbreact';
 import { useDispatch } from 'react-redux';
 import { uiModalTrue } from '../../../../actions/ui';
 import { useFetchCategory } from '../../../../hooks/useFetchCategory';

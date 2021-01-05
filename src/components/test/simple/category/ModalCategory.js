@@ -3,7 +3,6 @@ import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { startRegisterCategory, testSimpleCategoryActive, updatedTestSimpleCategory } from '../../../../actions/category';
-import { startRegisterTestSimple, TestSimpleSetActiveClear, updatedTestSimple } from '../../../../actions/testSimple';
 import { uiModalFalse } from '../../../../actions/ui';
 
 export const ModalCategory = () => {

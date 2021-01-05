@@ -56,11 +56,10 @@ export const types = {
     testSimpleCategoryLoaded:'[tSimpleCategoryLoaded] Loaded category test simple ',
 
 
-
     shapeLoaded:'[Shape] Loaded Shape',
     questionSetActive:'[QuestionS] Question shape active',
     questionClearActive:'[QuestionS] Question shape clear', 
-    
+
     
     authUserUpdate:'[auth] User update',
     authUserUpdatePassword:"[auth] User update password",

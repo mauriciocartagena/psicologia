@@ -55,7 +55,7 @@ export const RegisterScreen = () => {
                         Pruebas simples sin graficos, solamente preguntas.
                     </p>
                     <NavLink className="btn btn-primary btn-lg btn-block"
-                        to="/test-shape-simple/register"
+                        to="/test-simple/register"
                     >  
                         Seleccionar
                     </NavLink>
@@ -63,21 +63,21 @@ export const RegisterScreen = () => {
                     <div className="row" style={{ paddingTop:"10px" }} >
                         <div className="col-sm-6" style={{ paddingBottom:"10px" }} >
                             <NavLink className="btn btn-success btn-lg btn-block" 
-                                to="/test-shape-simple"
+                                to="/test-simple"
                             >
                                 Administrar pruebas
                             </NavLink>
                         </div>
                         <div className="col-sm-6" >
                             <NavLink className="btn btn-danger btn-lg btn-block" 
-                                to="/test-shape-simple/category"
+                                to="/test-simple/category"
                             >
                                 Categoria pruebas
                             </NavLink>
                         </div>
                     </div>
                     <NavLink className="btn btn-info btn-lg btn-block" 
-                        to="/test-shape-simple/tsimple"
+                        to="/test-simple/tsimple"
                     >
                         Prueba Simple
                     </NavLink>

@@ -2,11 +2,11 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom';
 import { Layout } from '../../components/main/Layout';
 import { CategoryScreen } from '../../components/test/simple/category/CategoryScreen';
-import { ShapeScreenRegister } from '../../components/test/simple/ShapeScreenRegister';
-import { ShapeSimpleScreen } from '../../components/test/simple/ShapeSimpleScreen';
+import { SimpleScreen } from '../../components/test/simple/SimpleScreen';
+import { SimpleScreenRegister } from '../../components/test/simple/SimpleScreenRegister';
 import { TestScreenSimple } from '../../components/test/simple/test/TestScreenSimple';
 
-export const TestShapeSimpleRouter = () => {
+export const TestSimpleRouter = () => {
 
     document.body.style.backgroundColor = "";
 
@@ -15,22 +15,22 @@ export const TestShapeSimpleRouter = () => {
             <Switch>
                 <Route
                     exact
-                    path="/test-shape-simple"
-                    component={ ShapeSimpleScreen }
+                    path="/test-simple"
+                    component={ SimpleScreen }
                 />
                 <Route
                     exact
-                    path="/test-shape-simple/register"
-                    component={ ShapeScreenRegister }
+                    path="/test-simple/register"
+                    component={ SimpleScreenRegister }
                 />
                 <Route
                     exact
-                    path="/test-shape-simple/category"
+                    path="/test-simple/category"
                     component={ CategoryScreen }
                 />
                  <Route
                     exact
-                    path="/test-shape-simple/tsimple"
+                    path="/test-simple/tsimple"
                     component={ TestScreenSimple }
                 />
             </Switch>

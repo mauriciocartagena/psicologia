@@ -47,6 +47,11 @@ export const types = {
     testShapeClear:'[tShape] Clear test shape',
     testShapeLoaded:'[tShape] Loaded test Shape',
 
+    testSimpleActive:'[tSimpleActive] Active test simple',
+    testSimpleClear:'[tSimpleClear] Clear test simple',
+    testSimpleLoaded:'[tSimpleLoaded] Loaded test simple',
+
+
     shapeLoaded:'[Shape] Loaded Shape',
     questionSetActive:'[QuestionS] Question shape active',
     questionClearActive:'[QuestionS] Question shape clear', 

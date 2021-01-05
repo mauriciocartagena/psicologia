@@ -14,7 +14,7 @@ import { PublicRoute } from './PublicRouter';
 import { InstitutionRouter } from './private/InstitutionRouter';
 import { TestsRouter } from './private/TestsRouter';
 import { TestShapeRouter } from './private/TestShapeRouter';
-import { TestShapeSimpleRouter } from './private/TestShapeSimpleRouter';
+import { TestSimpleRouter } from './private/TestSimpleRouter';
 
 
 export const AppRouter = () => {
@@ -72,8 +72,8 @@ export const AppRouter = () => {
                         isAuthenticated={ !!uid }
                     />
                     <PrivateRoute
-                        path="/test-shape-simple"
-                        component={ TestShapeSimpleRouter }
+                        path="/test-simple"
+                        component={ TestSimpleRouter }
                         isAuthenticated= { !!uid }
                     />
                     <Redirect to="/auth/login" /> 

@@ -29,6 +29,9 @@ export const ShapeScreen = () => {
             <div className="animated fadeIn">
                <div className="profile-nav alt">
                     <section className="panel">
+                        <header className="panel-heading">
+                            ADMINISTRACION DE PREGUNTAS FORMAS
+                        </header>
                         {
                             ( questionsShape !== [] ) &&
                                 <TestBodyProfile options={ questionsShape } />

@@ -4,9 +4,9 @@ import { fetchConToken } from '../../helpers/fetch';
 
 const INITIAL_LIMIT = 0;
 
-export const useFetchQuestionSImple = () => {
+export const useFetchQuestionSimple = () => {
 
-    const [ loading, setLoading ] = useState(false);
+    const [ loading, setLoading ] = useState( false );
 
     const [ skip, setSkip ] = useState( INITIAL_LIMIT );
 
@@ -14,17 +14,16 @@ export const useFetchQuestionSImple = () => {
 
     useEffect(() => {
         
-        if ( skip === INITIAL_LIMIT ) {
-            testShapeLoading( INITIAL_LIMIT )
-        }{
-            testShapeLoading( skip );
-        }
-    }, [ skip ])
+        if ( skip === INITIAL_LIMIT) 
+            testShapeLoading(INITIAL_LIMIT)
+        else
+        testShapeLoading(skip)
+    }, [ skip ]);
 
     const testShapeLoading = async ( skip ) => {
         
         setLoading( true );
-        const resp = await fetchConToken(`pregunta-simple/psimples?limit=1&skip=${ skip }`);
+        const resp = await fetchConToken(`pregunta-simple/psimples?limit=5&skip=${ skip }`);
         const body = await resp.json();
     
         try {

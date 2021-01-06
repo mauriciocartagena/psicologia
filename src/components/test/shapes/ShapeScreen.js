@@ -17,8 +17,8 @@ export const ShapeScreen = () => {
     });
 
     const debounceHandleNextPage = useCallback(debounce(
-        () => setSkip( preveSkip => preveSkip + 1 ), 1000
-    ), []);
+        () => setSkip( preveSkip => preveSkip + 1 ), 200
+    ), [ setSkip ]);
 
     useEffect(() => {
         if( isNearScreen ) debounceHandleNextPage()

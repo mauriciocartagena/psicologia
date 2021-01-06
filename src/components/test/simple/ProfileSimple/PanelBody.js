@@ -4,11 +4,7 @@ import 'moment/locale/es';
 
 moment.locale('es');
 
-export const PanelBody = ({ options }) => {
-
-
-    //TODO Add id_pregunta for edit and delete
-    const { pregunta, updatedAt, createdAt, categorias, test_simples } = options;
+export const PanelBody = ({ pregunta, updatedAt, createdAt, categorias, test_simples }) => {
 
     const { nombre_categoria } = categorias;
 

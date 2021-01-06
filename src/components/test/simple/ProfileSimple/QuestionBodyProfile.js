@@ -17,8 +17,14 @@ export const QuestionBodyProfile = ({ options }) => {
             { 
                 ( data !== [] )
                 &&
-                    data.map( ( question, key )=> (
-                        <QuestionSimpleCard options={ question } key={ key } />
+                    data.map( ( { pregunta, updatedAt, createdAt, categorias, test_simples }, key )=> (
+                        <QuestionSimpleCard 
+                            pregunta={ pregunta }
+                            updatedAt={ updatedAt }
+                            createdAt ={ createdAt }
+                            categorias={ categorias }
+                            test_simples={ test_simples }
+                            key={ key } />
                     ))
             }
         </>

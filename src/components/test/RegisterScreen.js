@@ -55,7 +55,7 @@ export const RegisterScreen = () => {
                         Pruebas simples sin graficos, solamente preguntas.
                     </p>
                     <NavLink className="btn btn-primary btn-lg btn-block"
-                        to="/test-simple/register"
+                        to="/test-simple/question"
                     >  
                         Seleccionar
                     </NavLink>

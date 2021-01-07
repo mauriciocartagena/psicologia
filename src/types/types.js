@@ -55,10 +55,14 @@ export const types = {
     testSimpleCategoryClear:'[tSimpleCategoryClear] Clear category test simple ',
     testSimpleCategoryLoaded:'[tSimpleCategoryLoaded] Loaded category test simple ',
 
-
+    //Question Shape
     shapeLoaded:'[Shape] Loaded Shape',
     questionSetActive:'[QuestionS] Question shape active',
     questionClearActive:'[QuestionS] Question shape clear', 
+
+    //Question Simple
+    questionSimpleSetActive:'[QSimple] Question simple active',
+    questionSimpleClearActive:'[QSimple] Quesiton simple clear',
 
     
     authUserUpdate:'[auth] User update',

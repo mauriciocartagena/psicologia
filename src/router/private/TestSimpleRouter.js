@@ -5,6 +5,7 @@ import { CategoryScreen } from '../../components/test/simple/category/CategorySc
 import { SimpleScreen } from '../../components/test/simple/SimpleScreen';
 import { SimpleScreenRegister } from '../../components/test/simple/SimpleScreenRegister';
 import { TestScreenSimple } from '../../components/test/simple/test/TestScreenSimple';
+import { UpdatedScreen } from '../../components/test/simple/UpdatedScreen';
 
 export const TestSimpleRouter = () => {
 
@@ -20,8 +21,13 @@ export const TestSimpleRouter = () => {
                 />
                 <Route
                     exact
-                    path="/test-simple/register"
+                    path="/test-simple/question"
                     component={ SimpleScreenRegister }
+                />
+                 <Route
+                    exact
+                    path="/test-simple/question/edit"
+                    component={ UpdatedScreen }
                 />
                 <Route
                     exact

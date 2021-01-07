@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
-import { simpleRegister } from '../../../actions/questionSimple';
+import { simpleEdit } from '../../../actions/questionSimple';
 import { useFetchCategory } from '../../../hooks/QuestionSimple/useFetchCategory';
 import { useFetchTestSimple } from '../../../hooks/QuestionSimple/useFetchTestSimple';
 import { useForm } from '../../../hooks/useForm';
 
-export const SimpleScreenRegister = () => {
+export const FormUpdatedQuestion = ( { id_pregunta = '', pregunta = '', id_categoria = '', id_test = ''  } ) => {
 
     const dispatch = useDispatch();
 
@@ -19,17 +19,17 @@ export const SimpleScreenRegister = () => {
     const [ nameCategory, setNameCategory ] = useState([]);
 
     const [ formQuestionSimpleInputValues, handleQuestionSimpleInputValueChange ] = useForm({
-        question: '',
-        tSimple: '',
-        category: ''
+        question: pregunta,
+        tSimple: id_test,
+        category: id_categoria
     });
 
     const  { question, tSimple, category } = formQuestionSimpleInputValues;
 
-    const handleRegister = ( e ) =>{
+    const handleModified = ( e ) =>{
         e.preventDefault();
-        if ( question !== '' && tSimple !== '' && category !== '' ) {
-            dispatch( simpleRegister( question, tSimple, category ) );
+        if ( question !== '' && tSimple !== '' && category !== '' && question.trim().length !== 0 ) {
+            dispatch( simpleEdit( id_pregunta, question, category, tSimple ) );
         }
         Swal.fire(':(','Todos los campos son necesarios verificar nuevamente', 'error');
     }
@@ -39,6 +39,11 @@ export const SimpleScreenRegister = () => {
         setState( questionsSimple );
         setCategoryData( data );
         
+        return(()=>{
+            setState([]);
+            setCategoryData([]);    
+        })
+        
     }, [ questionsSimple, data ]);
 
     
@@ -47,6 +52,11 @@ export const SimpleScreenRegister = () => {
         setNameCategory( data.find( e => e.id_categoria.toString() === category ) );
         setTestName( questionsSimple.find( e => e.id_test.toString() === tSimple ) );
 
+        return(()=>{
+            setNameCategory([]);
+            setTestName([]);
+        })
+
     }, [ category, tSimple, data, questionsSimple ]);
 
     return (
@@ -54,12 +64,12 @@ export const SimpleScreenRegister = () => {
             <div className="col-sm-12  animated fadeIn">
                 <section className="panel">
                     <header className="panel-heading">
-                        REGISTRO DE PRUEBAS SIMPLES
+                        MODIFICAR PRUEBA SIMPLE
                     </header>
                 
                         <div className="panel-body">
                             <div className="position-center">
-                                <form onSubmit={ handleRegister }>
+                                <form onSubmit={ handleModified }>
                                 <div className="form-group">
                                     <label>Pregunta</label>
                                     <input 
@@ -112,7 +122,7 @@ export const SimpleScreenRegister = () => {
                                     </select>
                                 </div>
                                 <p className="help-block">Todos los campos son requeridos.</p>
-                                <button type="submit" className="btn btn-success">Registrar</button>
+                                <button type="submit" className="btn btn-success">Modificar</button>
                             </form>
                             </div>
 

@@ -1,20 +1,35 @@
 import React from 'react';
 import moment from 'moment';
 import 'moment/locale/es';
+import { questionClearSimple, questionDeleteSimple, questionSetSimple } from '../../../../actions/questionSimple';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 moment.locale('es');
 
-export const PanelBody = ({ pregunta, updatedAt, createdAt, categorias, test_simples }) => {
+export const PanelBody = ({ setDataQuestion, setFilter = [], id_pregunta = '', id_categoria = '', id_test = '', pregunta = '', updatedAt = '', createdAt = '', categorias = '', test_simples = ''  }) => {
+
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const { nombre_categoria } = categorias;
 
     const { nombre_test } = test_simples;
 
-    const handleActiveQuestionsSimple = () => {
-        console.log("Sucess 1")
+    const handleActiveQuestionsSimple = ( id_pregunta, pregunta, id_categoria, id_test ) => {
+
+        dispatch( questionClearSimple() );
+        dispatch( questionSetSimple( id_pregunta, pregunta, id_categoria, id_test ));
+        history.push('/test-simple/question/edit');
     }
-    const handleDeleteQuestionSimple = () => {
-        console.log("Sucess 2")
+
+    const handleDeleteQuestionSimple = ( id_pregunta ) => {
+        
+        dispatch( questionDeleteSimple( id_pregunta ) );
+        setDataQuestion( 
+            setFilter.filter(
+                e =>( e.id_pregunta !== id_pregunta )
+        ));
     }
 
     return (
@@ -34,9 +49,9 @@ export const PanelBody = ({ pregunta, updatedAt, createdAt, categorias, test_sim
                         <br />
                     </span>
                     <br />
-                    <button onClick={() => { handleActiveQuestionsSimple() }} className="btn btn-primary">Editar</button>
+                    <button onClick={() => { handleActiveQuestionsSimple( id_pregunta, pregunta, id_categoria, id_test ) }} className="btn btn-primary">Editar</button>
                     &nbsp; 
-                    <button onClick={() => { handleDeleteQuestionSimple() }} className="btn btn-success">Eliminar</button>
+                    <button onClick={() => { handleDeleteQuestionSimple( id_pregunta ) }} className="btn btn-success">Eliminar</button>
                 </div>
             </div>
             <div className="col-md-3">

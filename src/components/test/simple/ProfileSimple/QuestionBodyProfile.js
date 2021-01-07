@@ -8,22 +8,23 @@ export const QuestionBodyProfile = ({ options }) => {
     useEffect(() => {
         
         setData( options );
+
+        return(()=>{
+            setData([])
+        });
         
     }, [ options ]);
-
 
     return (
         <>
             { 
                 ( data !== [] )
                 &&
-                    data.map( ( { pregunta, updatedAt, createdAt, categorias, test_simples }, key )=> (
+                    data.map( ( option , key )=> (
                         <QuestionSimpleCard 
-                            pregunta={ pregunta }
-                            updatedAt={ updatedAt }
-                            createdAt ={ createdAt }
-                            categorias={ categorias }
-                            test_simples={ test_simples }
+                            option={ option }
+                            setFilter={ options }
+                            setDataQuestion= { setData } 
                             key={ key } />
                     ))
             }

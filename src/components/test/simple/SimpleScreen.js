@@ -24,8 +24,6 @@ export const SimpleScreen = () => {
         if( isNearScreen ) debounceHandleNextPageSimple();
     },[ isNearScreen, debounceHandleNextPageSimple ]);
 
-    console.log( isNearScreen )
-
     return (
         <>
             <div className="animated fadeIn">

@@ -19,7 +19,14 @@ export const useFetchQuestionShape = () => {
         }{
             testShapeLoading( skip );
         }
-    }, [ skip ])
+    }, [ skip ]);
+
+    useEffect(() => {
+        
+        return () => {
+            setQuestionsShape([])
+        }
+    }, []);
 
     const testShapeLoading = async ( skip ) => {
         

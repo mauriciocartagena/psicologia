@@ -5,9 +5,6 @@ import { RegisterScreen } from '../../components/test/RegisterScreen';
 import { Register } from '../../components/test/shapes/Register';
 import { ShapeScreen } from '../../components/test/shapes/ShapeScreen';
 import { UpdatedScreen } from '../../components/test/shapes/UpdatedScreen';
-import { TestScreen } from '../../components/test/TestScreen';
-
-
 
 export const TestsRouter = () => {
 
@@ -16,11 +13,6 @@ export const TestsRouter = () => {
     return (
         <Layout>
             <Switch>
-                <Route
-                    exact
-                    path="/test"
-                    component={ TestScreen }
-                />
                 <Route
                     exact
                     path="/test/register"
@@ -41,7 +33,7 @@ export const TestsRouter = () => {
                     path="/test/update/shapes/screen"
                     component={ UpdatedScreen }
                 />
-                <Redirect to="/test" />
+                <Redirect to="/test/register" />
             </Switch>
         </Layout>
         

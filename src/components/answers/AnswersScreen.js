@@ -1,8 +1,9 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBong, faCubes, faThermometerQuarter, faThermometerThreeQuarters } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 
-export const TestScreen = () => {
+export const AnswersScreen = () => {
     return (
         <>
             <div className="row animated fadeIn" >
@@ -51,7 +52,7 @@ export const TestScreen = () => {
                     <p>
                         Pruebas simples sin graficos, solamente preguntas.
                     </p>
-                    <button className="btn btn-primary btn-lg btn-block" >Elegir</button>
+                    <Link to="/answers/simple" className="btn btn-primary btn-lg btn-block" >Elegir</Link>
                 </div>
                 <div className="col-sm-6">
                     <h2>
@@ -63,7 +64,7 @@ export const TestScreen = () => {
                     <p>
                         Pruebas con graficos, formas entre otras cosas.
                     </p>
-                    <button className="btn btn-info btn-lg btn-block" >Elegir</button>
+                    <Link to="/answers/shape" className="btn btn-info btn-lg btn-block" >Elegir</Link>
                 </div>
             </div>
         </>

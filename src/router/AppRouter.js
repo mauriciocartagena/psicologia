@@ -15,6 +15,7 @@ import { InstitutionRouter } from './private/InstitutionRouter';
 import { TestsRouter } from './private/TestsRouter';
 import { TestShapeRouter } from './private/TestShapeRouter';
 import { TestSimpleRouter } from './private/TestSimpleRouter';
+import { AnswersRouter } from './private/AnswersRouter';
 
 
 export const AppRouter = () => {
@@ -62,7 +63,7 @@ export const AppRouter = () => {
                         isAuthenticated={ !!uid }
                     />
                      <PrivateRoute 
-                        path="/test"      
+                        path="/test/register"      
                         component={ TestsRouter }
                         isAuthenticated={ !!uid }
                     />
@@ -75,6 +76,11 @@ export const AppRouter = () => {
                         path="/test-simple"
                         component={ TestSimpleRouter }
                         isAuthenticated= { !!uid }
+                    />
+                    <PrivateRoute
+                        path="/answers"
+                        component={ AnswersRouter }
+                        isAuthenticated={ !!uid  }
                     />
                     <Redirect to="/auth/login" /> 
                 </Switch>

@@ -102,7 +102,7 @@ export const Aside = () => {
                         </NavLink>
                     </li> 
                     <li className="sub-menu" >
-                        <NavLink to="/test"  activeClassName="active" exact >
+                        <NavLink to="/answers"  activeClassName="active" exact >
                             <i>
                                 <FontAwesomeIcon icon={ faVials } />
                             </i> 

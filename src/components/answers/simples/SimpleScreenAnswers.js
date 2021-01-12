@@ -12,11 +12,15 @@ export const SimpleScreenAnswers = () => {
     ];
 
     return (
-        <div>
-            <h1>Welcome SimpleScreenAnswers</h1>
-            <div className='step-progress'>
-                <StepZilla steps={ steps }/>
-            </div>
+        <div className="col-lg-12 animated fadeIn">
+            <section className="panel">
+                <header className="panel-heading">
+                    PRUEBAS
+                </header>
+                <div className='step-progress'>
+                    <StepZilla steps={ steps }/>
+                </div>
+            </section>
         </div>
     )
 }

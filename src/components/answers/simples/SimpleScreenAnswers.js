@@ -17,6 +17,8 @@ export const SimpleScreenAnswers = () => {
                 <header className="panel-heading">
                     PRUEBAS
                 </header>
+
+                //TODO trabajar con la cantidad de test formas y test simples 
                 <div className='step-progress'>
                     <StepZilla steps={ steps }/>
                 </div>

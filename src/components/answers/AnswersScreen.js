@@ -52,7 +52,7 @@ export const AnswersScreen = () => {
                     <p>
                         Pruebas simples sin graficos, solamente preguntas.
                     </p>
-                    <Link to="/answers/simple" className="btn btn-primary btn-lg btn-block" >Elegir</Link>
+                    <Link to="/answers/selection" className="btn btn-primary btn-lg btn-block" >Elegir</Link>
                 </div>
                 <div className="col-sm-6">
                     <h2>

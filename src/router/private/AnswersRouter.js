@@ -4,6 +4,7 @@ import { ShapeScreeAnswers } from '../../components/answers/shapes/ShapeScreeAns
 import { SimpleScreenAnswers } from '../../components/answers/simples/SimpleScreenAnswers';
 import { AnswersScreen } from '../../components/answers/AnswersScreen';
 import { Layout } from '../../components/main/Layout';
+import { SelectionTestScreen } from '../../components/answers/simples/SelectionTestScreen';
 
 export const AnswersRouter = () => {
     return (
@@ -23,6 +24,11 @@ export const AnswersRouter = () => {
                     exact
                     path="/answers/simple"
                     component={ SimpleScreenAnswers }
+                />
+                <Route 
+                    exact
+                    path="/answers/selection"
+                    component={ SelectionTestScreen }
                 />
                 <Redirect to="/answers" />
             </Switch>

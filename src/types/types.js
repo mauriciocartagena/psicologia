@@ -64,6 +64,10 @@ export const types = {
     questionSimpleSetActive:'[QSimple] Question simple active',
     questionSimpleClearActive:'[QSimple] Quesiton simple clear',
 
+    answersSimpleActive:'[Answers] Answer simple active',
+    answersSimpleClear:'[Answers] Answer simple clear',
+
+
     
     authUserUpdate:'[auth] User update',
     authUserUpdatePassword:"[auth] User update password",

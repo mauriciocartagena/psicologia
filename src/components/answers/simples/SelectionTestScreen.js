@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { answersSimpleActive } from '../../../actions/answersSimple';
 import { useFetchTestSimple } from '../../../hooks/QuestionSimple/useFetchTestSimple';
 import { useForm } from '../../../hooks/useForm';
 
 export const SelectionTestScreen = () => {
+
+    const dispatch = useDispatch();
 
     const [ state, setState ] = useState([]);
 
@@ -19,8 +23,9 @@ export const SelectionTestScreen = () => {
     const handleSubmitForm = ( e ) => {
         e.preventDefault();
         if ( tSimple === '' ) {
-            console.log( selectionDefault );
+            return dispatch( answersSimpleActive( selectionDefault.toString() ) );
         }
+        return dispatch( answersSimpleActive( tSimple ) );
     }
 
     useEffect(() => {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { answersSimpleActive } from '../../../actions/answersSimple';
 import { useFetchTestSimple } from '../../../hooks/QuestionSimple/useFetchTestSimple';
 import { useForm } from '../../../hooks/useForm';
@@ -7,6 +8,7 @@ import { useForm } from '../../../hooks/useForm';
 export const SelectionTestScreen = () => {
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [ state, setState ] = useState([]);
 
@@ -23,9 +25,15 @@ export const SelectionTestScreen = () => {
     const handleSubmitForm = ( e ) => {
         e.preventDefault();
         if ( tSimple === '' ) {
-            return dispatch( answersSimpleActive( selectionDefault.toString() ) );
+            return (
+                dispatch( answersSimpleActive( selectionDefault.toString() ) ),
+                history.push('/answers/simple')
+            )
         }
-        return dispatch( answersSimpleActive( tSimple ) );
+        return (
+            dispatch( answersSimpleActive( tSimple ) ),
+            history.push('/answers/simple')
+        )
     }
 
     useEffect(() => {

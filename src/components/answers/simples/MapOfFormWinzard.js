@@ -1,30 +1,41 @@
-import React, { useState } from 'react';
-import StepWizard from 'react-step-wizard';
-import { FirstPage } from './FirstPage';
+import React from 'react';
+import { Steps, Step } from "react-step-builder"
 import { FormWinzard } from './FormWinzard';
-import { SecondPage } from './SecondPage';
 
 
 export const MapOfFormWinzard = ({ dataAnswers = []}) => {
 
-    // const [ state, setState ] = useState({});
+    const Navigation = ( props ) => {
+        return (
+          <div>
+            <button onClick={ props.prev }>Global Previous</button>
+            <button onClick={ props.next }>Global Next</button>
+          </div>
+        );
+    };
+
+    const config = {
+        navigation: {
+          component: Navigation,
+          location: "before",
+        }
+    };
+      
     
     return (
-        <StepWizard >
-            <FirstPage/>
-            <SecondPage/>
-            {/* {
-                ( dataAnswers !== [] ) &&
-                    dataAnswers.map( ( e ) =>{
-                        return (
-                            <FormWinzard 
-                                pregunta={ e.pregunta } 
-                                changeInitialStep={ setState } 
-                                stateInitialStep={ state } 
-                            />
-                        )
-                    })
-            } */}
-        </StepWizard>
+        <div>
+            <Steps config={ config } >
+                {
+                     dataAnswers.map( ( e ) =>{
+                         return (
+                             <Step 
+                                component={ FormWinzard }
+                                data={ e.pregunta } 
+                             />
+                         )
+                     })
+                }
+            </Steps>
+        </div>
     )
 }

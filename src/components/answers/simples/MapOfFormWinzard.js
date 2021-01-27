@@ -5,18 +5,8 @@ import { FormWinzard } from './FormWinzard';
 
 export const MapOfFormWinzard = ({ dataAnswers = []}) => {
 
-    const Navigation = ( props ) => {
-        return (
-          <div>
-            <button onClick={ props.prev }>Global Previous</button>
-            <button onClick={ props.next }>Global Next</button>
-          </div>
-        );
-    };
-
     const config = {
         navigation: {
-          component: Navigation,
           location: "before",
         }
     };
@@ -26,9 +16,10 @@ export const MapOfFormWinzard = ({ dataAnswers = []}) => {
         <div>
             <Steps config={ config } >
                 {
-                     dataAnswers.map( ( e ) =>{
+                     dataAnswers.map( ( e, key ) =>{
                          return (
                              <Step 
+                                key={ key }
                                 component={ FormWinzard }
                                 data={ e.pregunta } 
                              />

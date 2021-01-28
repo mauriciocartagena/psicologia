@@ -66,7 +66,7 @@ export const FormWinzard = ( props ) => {
                             onClick={ handleClick } 
                             />
                             <label htmlFor="no" >No</label>
-                        <a></a>
+                        <a href="/"> </a> 
                     </div>
                     <br/>
                     <br/>

@@ -10,7 +10,6 @@ export const MapOfFormWinzard = ({ dataAnswers = []}) => {
           location: "before",
         }
     };
-      
     
     return (
         <div>
@@ -19,9 +18,11 @@ export const MapOfFormWinzard = ({ dataAnswers = []}) => {
                      dataAnswers.map( ( e, key ) =>{
                          return (
                              <Step 
+                                length={ dataAnswers.length }
                                 key={ key }
                                 component={ FormWinzard }
                                 data={ e.pregunta } 
+                                id={ e.id_pregunta } 
                              />
                          )
                      })

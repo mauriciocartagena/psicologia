@@ -1,12 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { answersfilter, answersfilterActive } from '../../../actions/answersSimple';
+import { answersfilter, answersfilterActive, answersRegister } from '../../../actions/answersSimple';
 import '../styles/simples/FormWinzard.css'
 
 export const FormWinzard = ( props ) => {  
 
     const dispatch = useDispatch();
     const { answers } = useSelector( state => state.answerSimple );
+    const { uid } = useSelector(state => state.auth);
 
     const array = new Array( props.length );
 
@@ -37,7 +38,11 @@ export const FormWinzard = ( props ) => {
             dispatch( answersfilterActive( { id: props.id, answers: e.target.id }, props.current - 1 ) )
         )
 
+    }
 
+    const handleSendAnswers = () => {
+        
+        dispatch( answersRegister( uid, answers ) );
     }
 
     return (
@@ -80,6 +85,14 @@ export const FormWinzard = ( props ) => {
                             Siguiente
                         </button>
                     </div>
+                    <br/>
+                    {
+                        ( props.length === ( props.current ) )
+                        &&
+                        <button className="btn btn-info btn-lg btn-block" onClick={ handleSendAnswers }>
+                            Enviar
+                        </button> 
+                    }
                 </div>
             </div>
         </div>

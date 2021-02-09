@@ -1,6 +1,7 @@
 import { types } from "../types/types";
 import { fetchConToken } from "../helpers/fetch";
 import * as moment from 'moment';
+import Swal from "sweetalert2";
 
 
 export const answersSimpleActive = ( answerSimple ) => ({ 
@@ -27,18 +28,78 @@ export const answersRegister = ( uid, answers ) => {
         
         const now = moment().format();
 
-        const resp = await fetchConToken( 'respuesta-simple/new',{ 
-            id_pregunta:'6', 
-            persona_id: uid,  
-            fecha_hora: now,
-            si:0,
-            nose:0,
-            no:1
-        }, 'POST'); 
+        try {
 
-        const body = await resp.json();
+            answers.map( async ( e ) => {
 
-        console.log( body )
+                if ( e.answers.toString() === 'yes' ) {
+
+                        const resp = await fetchConToken( 'respuesta-simple/new',{ 
+                            id_pregunta:e.id, 
+                            persona_id: uid,  
+                            fecha_hora: now,
+                            si:1,
+                            nose:0,
+                            no:0
+                        }, 'POST');    
+                        
+                        const body = await resp.json();
+        
+                        if ( body.ok ) {
+                            
+                            return Swal.fire(':)','Respuestas Registradas', 'success');            
+                        }
+                    
+                }
+                if ( e.answers.toString() === 'no-know' ) {
+
+                        const resp = await fetchConToken( 'respuesta-simple/new',{ 
+                            id_pregunta:e.id, 
+                            persona_id: uid,  
+                            fecha_hora: now,
+                            si:0,
+                            nose:1,
+                            no:0
+                        }, 'POST');    
+                        
+                        const body = await resp.json();
+        
+                        if ( body.ok ) {
+                            
+                            return Swal.fire(':)','Respuestas Registradas', 'success');            
+                        }
+                    
+                    
+                }
+                if ( e.answers.toString() === 'no' ) {
+                    
+
+                        const resp = await fetchConToken( 'respuesta-simple/new',{ 
+                            id_pregunta:e.id, 
+                            persona_id: uid,  
+                            fecha_hora: now,
+                            si:0,
+                            nose:0,
+                            no:1
+                        }, 'POST');    
+                        
+                        const body = await resp.json();
+        
+                        if ( body.ok ) {
+                            
+                            return Swal.fire(':)','Respuestas Registradas', 'success');            
+                        }
+                    
+                }
+    
+               
+            });
+
+        } catch (err) {
+          return Swal.fire('Error', "Hable con el administrador", 'error')           
+        }
+
+
 
     }
 

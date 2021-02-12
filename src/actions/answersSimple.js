@@ -49,6 +49,9 @@ export const answersRegister = ( uid, answers ) => {
                             
                             return Swal.fire(':)','Respuestas Registradas', 'success');            
                         }
+                        else{
+                            return Swal.fire(':(','Las respuestas ya fueron registradas', 'error');            
+                        }
                     
                 }
                 if ( e.answers.toString() === 'no-know' ) {
@@ -98,9 +101,6 @@ export const answersRegister = ( uid, answers ) => {
         } catch (err) {
           return Swal.fire('Error', "Hable con el administrador", 'error')           
         }
-
-
-
     }
 
 };

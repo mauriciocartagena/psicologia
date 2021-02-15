@@ -48,8 +48,8 @@ export const answersRegister = ( uid, answers ) => {
                         if ( body.ok ) {
                             
                             return Swal.fire(':)','Respuestas Registradas', 'success');            
-                        }
-                        else{
+                        }{
+                            
                             return Swal.fire(':(','Las respuestas ya fueron registradas', 'error');            
                         }
                     
@@ -70,6 +70,9 @@ export const answersRegister = ( uid, answers ) => {
                         if ( body.ok ) {
                             
                             return Swal.fire(':)','Respuestas Registradas', 'success');            
+                        }{
+                            
+                            return Swal.fire(':(','Las respuestas ya fueron registradas', 'error');            
                         }
                     
                     
@@ -91,6 +94,9 @@ export const answersRegister = ( uid, answers ) => {
                         if ( body.ok ) {
                             
                             return Swal.fire(':)','Respuestas Registradas', 'success');            
+                        }{
+                            
+                            return Swal.fire(':(','Las respuestas ya fueron registradas', 'error');            
                         }
                     
                 }

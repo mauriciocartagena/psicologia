@@ -80,6 +80,8 @@ export const types = {
     authStartRegister:'[auth] Login Register',
     authStartStartTokenRenew:'[auth] start token renew',
 
+    shapeAnswersActive:'[shapeAnswersActive] Loaded shape answers',
+
     authLogout:'[auth] Logout',
 
 }

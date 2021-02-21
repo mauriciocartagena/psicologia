@@ -1,5 +1,6 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { ShapeScreenQuestion } from '../../components/answers/shapes/ShapeScreenQuestion';
 import { Layout } from '../../components/main/Layout';
 import { TestShapeScreen } from '../../components/test/test-shape/TestShapeScreen';
 
@@ -14,7 +15,13 @@ export const TestShapeRouter = () => {
                     exact
                     path="/test-shape"
                     component={ TestShapeScreen }
+                /> 
+                <Route
+                    exact
+                    path="/test-shape/questions"
+                    component={ ShapeScreenQuestion }
                 />
+                <Redirect to="/test-shape" />
             </Switch>
         </Layout>
     );

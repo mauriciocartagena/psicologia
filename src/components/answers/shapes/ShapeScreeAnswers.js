@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { answersShapeActive } from '../../../actions/answersShape';
 import { useFetchTestShape } from '../../../hooks/Answers/Shape/useFetchTestShape';
 import { useForm } from '../../../hooks/useForm';
 
 export const ShapeScreeAnswers = () => {
 
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const [ state, setState ] = useState([]);
 
@@ -25,11 +28,13 @@ export const ShapeScreeAnswers = () => {
         e.preventDefault();
         if ( tShape === '' ) {
             return (
-                console.log(selectionDefault)
+                dispatch( answersShapeActive( selectionDefault.toString() ) ),
+                history.push('/test-shape/questions')
             )
         }
         return (
-            console.log(tShape)
+            dispatch( answersShapeActive( tShape ) ),
+            history.push('/test-shape/questions')
         )
 
     }

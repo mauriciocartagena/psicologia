@@ -11,7 +11,8 @@ export const useFetchQuestionShapeFindAll = ( shape, INITIAL_LIMIT ) => {
         
         testShapeLoading( shape, INITIAL_LIMIT );
 
-    }, []);
+    }, [ shape, INITIAL_LIMIT ]);
+
 
     useEffect(() => {
         

@@ -8,11 +8,20 @@ export const ShapeScreenQuestion = () => {
     
     const { shape } = useSelector( state => state.answerShape );
 
-    const { questionsShape } = useFetchQuestionShapeFindAll( shape, INITIAL_LIMIT );
+    const [ limit, setLimit ] = useState( INITIAL_LIMIT );
+
+    const { questionsShape } = useFetchQuestionShapeFindAll( shape, limit );
 
     const [ question, setQuestion ] = useState([]);
 
     const [ images, setImages ] = useState([]);
+
+    const handleNextQuestion = () => {
+        setLimit( limit + 1 );
+    }
+    const handlePrevQuestion = () => {
+        setLimit( limit - 1 );
+    }
 
     useEffect(() => {
         
@@ -41,69 +50,78 @@ export const ShapeScreenQuestion = () => {
         }
 
         
-    }, [ questionsShape ])
+    }, [ questionsShape ]);
 
 
     return (
         <>
-                <section className="panel">
-                    <header className="panel-heading">
-                        PRUEBAS FORMAS
-                    </header>
-                    <div className="panel-body" style={{ textAlign:'center' }} >
-                        <div className="row">
-                            <div className="col-sm-12" style={{ paddingLeft: '5%' }}>
-                                <div className="row">
-                                    <div className="col-sm-4 form-group text-center" />
-                                        <div className="col-sm-4 form-group text-center">
-                                            <section className="panel">
-                                                <div id="gallery" className="media-gal isotope" style={{textAlign:'center' }} >
-                                                    <div className="images item  isotope-item" >
-                                                        <img 
-                                                        
-                                                            src={ question }
-                                                            alt="Option1" />
-                                                        <h2 >Pregunta</h2>
-                                                    </div>
-                                                </div> 
-                                        </section>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-sm-12" style={{ paddingLeft: '5%' }} >
-                                <div className="row">
-
-                                    {
-                                        ( images !== [] ) ?
-
-                                            images.map(( e, key )=> (
-
-                                                <div className="col-sm-4 form-group text-center" >
-                                                    <section className="panel">
-                                                        <div id="gallery" className="media-gal isotope" style={{ textAlign:'center' }} >
-                                                            <div className="images item  isotope-item" >
-                                                                <img 
-                                                                    src={ e }
-                                                                    alt={ key } />
-                                                                <h2 >Pregunta { key + 1 }</h2>
-                                                            </div>
-                                                        </div> 
-                                                    </section>
+            <section className="panel">
+                <header className="panel-heading">
+                    PRUEBAS FORMAS
+                </header>
+                <div className="panel-body" style={{ textAlign:'center' }} >
+                    <div className="row">
+                        <div className="col-sm-12" style={{ paddingLeft: '5%' }}>
+                            <div className="row">
+                                <div className="col-sm-4 form-group text-center" />
+                                    <div className="col-sm-4 form-group text-center">
+                                        <section className="panel">
+                                            <div id="gallery" className="media-gal isotope" style={{textAlign:'center' }} >
+                                                <div className="images item  isotope-item" >
+                                                    <img 
+                                                    
+                                                        src={ question }
+                                                        alt="Option1" />
+                                                    <h2 >Pregunta</h2>
                                                 </div>
-
-                                            ))
-                                        :
-                                        <div>
-                                            Cargando...
-                                        </div>
-                                    }
+                                            </div> 
+                                    </section>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                    <div className="row">
+                        <div className="col-sm-12" style={{ paddingLeft: '5%' }} >
+                            <div className="row">
+
+                                {
+                                    ( images !== [] ) ?
+
+                                        images.map(( e, key )=> (
+
+                                            <div className="col-sm-4 form-group text-center" >
+                                                <section className="panel">
+                                                    <div id="gallery" className="media-gal isotope" style={{ textAlign:'center' }} >
+                                                        <div className="images item  isotope-item" >
+                                                            <img 
+                                                                src={ e }
+                                                                alt={ key } />
+                                                            <h2 >Pregunta { key + 1 }</h2>
+                                                        </div>
+                                                    </div> 
+                                                </section>
+                                            </div>
+                                            
+
+                                        ))
+                                    :
+                                    <div>
+                                        Cargando...
+                                    </div>
+                                }
+                            </div>
+                            <div className="d-grid gap-2">
+                                <div className="col-sm-6">
+                                    <button className="btn btn-primary" onClick={ handlePrevQuestion }>Anterior</button>
+                                </div>
+                                <div className="col-sm-6">
+                                    <button className="btn btn-success" onClick={ handleNextQuestion } >Siguiente</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </>
     )
 }

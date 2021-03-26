@@ -96,7 +96,7 @@ export const ShapeScreenQuestion = () => {
                                                             <img 
                                                                 src={ e }
                                                                 alt={ key } />
-                                                            <h2 >Pregunta { key + 1 }</h2>
+                                                            <h2 >Opción { key + 1 }</h2>
                                                         </div>
                                                     </div> 
                                                 </section>

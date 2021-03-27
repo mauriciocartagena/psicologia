@@ -10,7 +10,11 @@ export const ShapeScreenQuestion = () => {
 
     const [ limit, setLimit ] = useState( INITIAL_LIMIT );
 
-    const { questionsShape } = useFetchQuestionShapeFindAll( shape, limit );
+    const { questionsShape } = useFetchQuestionShapeFindAll( shape, limit, setLimit );
+
+    const [ disabledFinish, setDisabledFinish ] = useState( false );
+
+    const [ disabledStart, setDisabledStart ] = useState( false );
 
     const [ question, setQuestion ] = useState([]);
 
@@ -22,6 +26,21 @@ export const ShapeScreenQuestion = () => {
     const handlePrevQuestion = () => {
         setLimit( limit - 1 );
     }
+
+    useEffect(()=>{
+
+        if ( limit === 1 ) {
+            return( setDisabledStart( true ) );
+        }
+        else if( questionsShape.length === 0) {
+            return ( setDisabledFinish( true ) );
+        }
+
+        setDisabledFinish( false );
+        setDisabledStart( false );
+
+
+    },[ questionsShape, limit ]);
 
     useEffect(() => {
         
@@ -69,7 +88,6 @@ export const ShapeScreenQuestion = () => {
                                             <div id="gallery" className="media-gal isotope" style={{textAlign:'center' }} >
                                                 <div className="images item  isotope-item" >
                                                     <img 
-                                                    
                                                         src={ question }
                                                         alt="Option1" />
                                                     <h2 >Pregunta</h2>
@@ -89,20 +107,18 @@ export const ShapeScreenQuestion = () => {
 
                                         images.map(( e, key )=> (
 
-                                            <div className="col-sm-4 form-group text-center" >
+                                            <div className="col-sm-4 form-group text-center" key={ key }  >
                                                 <section className="panel">
                                                     <div id="gallery" className="media-gal isotope" style={{ textAlign:'center' }} >
                                                         <div className="images item  isotope-item" >
                                                             <img 
                                                                 src={ e }
-                                                                alt={ key } />
+                                                            />
                                                             <h2 >Opción { key + 1 }</h2>
                                                         </div>
                                                     </div> 
                                                 </section>
                                             </div>
-                                            
-
                                         ))
                                     :
                                     <div>
@@ -112,10 +128,16 @@ export const ShapeScreenQuestion = () => {
                             </div>
                             <div className="d-grid gap-2">
                                 <div className="col-sm-6">
-                                    <button className="btn btn-primary" onClick={ handlePrevQuestion }>Anterior</button>
+                                    <button className="btn btn-primary" 
+                                        onClick={ handlePrevQuestion }
+                                        disabled={ disabledStart }
+                                    >Anterior</button>
                                 </div>
                                 <div className="col-sm-6">
-                                    <button className="btn btn-success" onClick={ handleNextQuestion } >Siguiente</button>
+                                    <button className="btn btn-success" 
+                                        onClick={ handleNextQuestion } 
+                                        disabled={ disabledFinish }
+                                        >Siguiente</button>
                                 </div>
                             </div>
                         </div>

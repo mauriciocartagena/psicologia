@@ -20,11 +20,23 @@ export const ShapeScreenQuestion = () => {
 
     const [ images, setImages ] = useState([]);
 
+    const [ idQuestion, setIdQuestion ] = useState(0);
+    
+    const [ answersShape, setAnswersShape ] = useState({
+        data : [
+        ]
+      });
+
     const handleNextQuestion = () => {
         setLimit( limit + 1 );
+
     }
     const handlePrevQuestion = () => {
         setLimit( limit - 1 );
+    }
+
+    const handleSelect = ( e ) => {
+        console.log(e)
     }
 
     useEffect(()=>{
@@ -33,6 +45,7 @@ export const ShapeScreenQuestion = () => {
             return( setDisabledStart( true ) );
         }
         else if( questionsShape.length === 0) {
+            
             return ( setDisabledFinish( true ) );
         }
 
@@ -66,10 +79,28 @@ export const ShapeScreenQuestion = () => {
             setQuestion( questions );
             setImages( Options );
 
+            const id_pregunta   = questionsShape[0].id_pregunta;
+
+            const { data } = answersShape;
+
+            const newData = [
+            
+                ...data,
+                {
+                    id : id_pregunta,
+                    bien_mal  : 1,
+                }
+            ]
+        
+            setAnswersShape({ data : newData });
+
         }
 
         
     }, [ questionsShape ]);
+
+    console.log( questionsShape );
+    console.log( answersShape )
 
 
     return (
@@ -105,9 +136,10 @@ export const ShapeScreenQuestion = () => {
                                 {
                                     ( images !== [] ) ?
 
-                                        images.map(( e, key )=> (
-
-                                            <div className="col-sm-4 form-group text-center" key={ key }  >
+                                        images.map(( e, key )=> 
+                                        (
+                                            
+                                            <div className="col-sm-4 form-group text-center" key={ key } >
                                                 <section className="panel">
                                                     <div id="gallery" className="media-gal isotope" style={{ textAlign:'center' }} >
                                                         <div className="images item  isotope-item" >
@@ -115,11 +147,17 @@ export const ShapeScreenQuestion = () => {
                                                                 src={ e }
                                                             />
                                                             <h2 >Opción { key + 1 }</h2>
+                                                            <button className="btn btn-info" 
+                                                                onClick={ handleSelect }
+                                                                id={ key + 1 }
+                                                            >Seleccionar</button>
                                                         </div>
                                                     </div> 
                                                 </section>
                                             </div>
-                                        ))
+
+                                        )
+                                     )
                                     :
                                     <div>
                                         Cargando...

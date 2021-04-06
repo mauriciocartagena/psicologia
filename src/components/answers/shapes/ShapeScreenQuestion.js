@@ -42,15 +42,22 @@ export const ShapeScreenQuestion = () => {
     useEffect(()=>{
 
         if ( limit === 1 ) {
-            return( setDisabledStart( true ) );
+            return( 
+                setDisabledStart( true ),
+                setDisabledFinish( false )
+            );
         }
         else if( questionsShape.length === 0) {
             
-            return ( setDisabledFinish( true ) );
+            return ( 
+                setDisabledFinish( true ),
+                setDisabledStart( false )
+            );
         }
-
-        setDisabledFinish( false );
-        setDisabledStart( false );
+        return( 
+            setDisabledFinish( false),
+            setDisabledStart( false )
+         )
 
 
     },[ questionsShape, limit ]);

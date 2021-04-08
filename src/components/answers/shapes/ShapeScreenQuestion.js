@@ -118,6 +118,20 @@ export const ShapeScreenQuestion = () => {
                 ];
                 setAnswersShape({ data : newData });
                 
+            }else {
+
+                const { data } = answersShape;
+                
+                const dataFilter = data.map(function( dato ){
+                  if( dato.id === questionsShape[0].id_pregunta ){
+                    dato.bien_mal = questionsShape[0].id_pregunta;
+                  }
+                  
+                  return dato;
+                });
+
+                setAnswersShape({ data : dataFilter });
+
             } 
         
     }
@@ -127,43 +141,8 @@ export const ShapeScreenQuestion = () => {
         if( questionsShape[0] !== undefined ) changeAnswerData()
 
     },[ questionsShape ]);
-
-
-    // useEffect(() => {
-
-    //     if( answersShape.data !== VALUEDEFAULT ){
-
-    //         const idData = answersShape.data.find(  answers => answers.id.toString() === limitAnswers.toString() );
-
-    //         console.log( idData )
-    //     }else{
-
-    //         const newData = [
-    //             ...answersShape.data,
-    //             {
-    //                 id : 2,
-    //                 bien_mal  : 2,
-    //             }
-    //         ];
-
-    //         setAnswersShape({ data : newData })
-
-    //     }
-
-    // },[ answersShape ]);
-
-    // console.log( limit );
-    // console.log( questionsShape.length );
-
-    // console.log( limitAnswers );
-    // console.log( questionsShape );
-    // console.log( answersShape.data[ limitAnswers ] );
-    // console.log( limitAnswers );
-    // console.log( answersShape )
+    
     console.log( answersShape ) ;
-    // console.log( limitAnswers )
-
-
 
     return (
         <>

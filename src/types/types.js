@@ -69,6 +69,9 @@ export const types = {
     answersfilter:'[Answers] Answer simple filter',
     answersfilterActive:'[Answers] Answer simple filter active',
 
+    answersShapeActive :'[Answers Shape] Answer shape active',
+    answersSimpleClear :'[Answers Shape] Answer shape clear',
+
 
     
     authUserUpdate:'[auth] User update',

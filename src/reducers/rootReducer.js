@@ -10,6 +10,7 @@ import { testSimpleCategoryReducer } from "./testSimpleCategoryReducer";
 import { questionSimpleReducer } from "./questionSimpleReducer";
 import { answersSimpleReducer } from "./answersSimpleReducer";
 import { shapeAnswersReducer } from "./shapeAnswersReducer";
+import { answersShapeReducer } from "./answersShapeReducer";
 
 export const rootReducer = combineReducers({
        ui:uiReducer,
@@ -22,6 +23,7 @@ export const rootReducer = combineReducers({
        category:testSimpleCategoryReducer,
        qSimple:questionSimpleReducer,
        answerSimple:answersSimpleReducer,
-       answerShape:shapeAnswersReducer
+       answerShape:shapeAnswersReducer,
+       shapeAnswer:answersShapeReducer
 
 });

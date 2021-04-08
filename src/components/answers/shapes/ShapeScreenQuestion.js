@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useFetchQuestionShapeFindAll } from '../../../hooks/QuestionShape/useFetchQuestionShapeFindAll';
 
 export const ShapeScreenQuestion = () => {
 
-    const INITIAL_LIMIT = 1;
+    const INITIAL_LIMIT = 0;
+    const VALUEDEFAULT = [];
     
     const { shape } = useSelector( state => state.answerShape );
 
@@ -21,22 +22,35 @@ export const ShapeScreenQuestion = () => {
     const [ images, setImages ] = useState([]);
 
     const [ idQuestion, setIdQuestion ] = useState(0);
+
+    const [ limitAnswers, setLimitAnswers ] = useState(0);
     
     const [ answersShape, setAnswersShape ] = useState({
-        data : [
-        ]
+        data : VALUEDEFAULT
       });
 
     const handleNextQuestion = () => {
-        setLimit( limit + 1 );
+        
+        // if ( limitAnswers === 0 ) {
+        //     return (
+        //         setLimitAnswers( 1 )
+        //     )
+        // }
+        // return (
+            setLimit( limit + 1 );
+            setLimitAnswers( limitAnswers + 1 );
+        // )
+
 
     }
     const handlePrevQuestion = () => {
         setLimit( limit - 1 );
+        setLimitAnswers( limitAnswers - 1 );
+
     }
 
     const handleSelect = ( e ) => {
-        console.log(e)
+        console.log( e.target.id );
     }
 
     useEffect(()=>{
@@ -47,7 +61,7 @@ export const ShapeScreenQuestion = () => {
                 setDisabledFinish( false )
             );
         }
-        else if( questionsShape.length === 0) {
+        else if( questionsShape.length === 0 ) {
             
             return ( 
                 setDisabledFinish( true ),
@@ -62,10 +76,9 @@ export const ShapeScreenQuestion = () => {
 
     },[ questionsShape, limit ]);
 
-    useEffect(() => {
-        
-        if ( questionsShape[0] !== undefined ) {
-            
+    const changeAnswerData = () => {
+
+
             const questions   = new Buffer.from( questionsShape[0].pregunta.data ).toString("ascii");
 
             const optionOne   = new Buffer.from( questionsShape[0].op1.data ).toString("ascii");
@@ -86,28 +99,70 @@ export const ShapeScreenQuestion = () => {
             setQuestion( questions );
             setImages( Options );
 
-            const id_pregunta   = questionsShape[0].id_pregunta;
+            const answersData = answersShape.data;
 
-            const { data } = answersShape;
+            const index = answersData.findIndex( answers  => answers.id === questionsShape[0].id_pregunta );
 
-            const newData = [
-            
-                ...data,
-                {
-                    id : id_pregunta,
-                    bien_mal  : 1,
-                }
-            ]
+            if ( index.toString() === '-1' ) {
+                
+                const { data } = answersShape;
+
+                const newData = [
+
+                    ...data,
+                    {
+                        id: questionsShape[0].id_pregunta,
+                        bien_mal: null,
+                    }
+
+                ];
+                setAnswersShape({ data : newData });
+                
+            } 
         
-            setAnswersShape({ data : newData });
+    }
 
-        }
+    useEffect(() => {
 
-        
-    }, [ questionsShape ]);
+        if( questionsShape[0] !== undefined ) changeAnswerData()
 
-    console.log( questionsShape );
-    console.log( answersShape )
+    },[ questionsShape ]);
+
+
+    // useEffect(() => {
+
+    //     if( answersShape.data !== VALUEDEFAULT ){
+
+    //         const idData = answersShape.data.find(  answers => answers.id.toString() === limitAnswers.toString() );
+
+    //         console.log( idData )
+    //     }else{
+
+    //         const newData = [
+    //             ...answersShape.data,
+    //             {
+    //                 id : 2,
+    //                 bien_mal  : 2,
+    //             }
+    //         ];
+
+    //         setAnswersShape({ data : newData })
+
+    //     }
+
+    // },[ answersShape ]);
+
+    // console.log( limit );
+    // console.log( questionsShape.length );
+
+    // console.log( limitAnswers );
+    // console.log( questionsShape );
+    // console.log( answersShape.data[ limitAnswers ] );
+    // console.log( limitAnswers );
+    // console.log( answersShape )
+    console.log( answersShape ) ;
+    // console.log( limitAnswers )
+
 
 
     return (

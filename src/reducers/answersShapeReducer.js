@@ -2,36 +2,35 @@ import { types } from "../types/types";
 
 
 const initState = {
-    answersShapeActive: null,
-    answers: null
+    answersShape: [],
 }
 
 export const answersShapeReducer = ( state = initState, action ) => {
 
     switch ( action.type ) {
 
-        case types.answersSimpleActive:
+        case types.answersShapeActive:
             return{
                 ...state,
-                answersSimpleActive: action.payload
+                answersShape: action.payload
             }
         case types.answersSimpleClear:
             return{
                 ...state,
-                answersSimpleActive: null
+                answersShape: []
             }
-        case types.answersfilter:
-                return{
-                    ...state,
-                    answers: action.payload
-                }
-        case types.answersfilterActive:
-            let array = state.answers;
-            array[ action.payload.position ] = action.payload.answersActive 
-            return{
-                ...state,
-                answers: array
-            }      
+        // case types.answersfilter:
+        //         return{
+        //             ...state,
+        //             answers: action.payload
+        //         }
+        // case types.answersfilterActive:
+        //     let array = state.answers;
+        //     array[ action.payload.position ] = action.payload.answersActive 
+        //     return{
+        //         ...state,
+        //         answers: array
+        //     }      
         default:
             return  state;
     }

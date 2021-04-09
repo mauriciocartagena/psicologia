@@ -27,7 +27,7 @@ export const ShapeScreenQuestion = () => {
     
     const [ answersShape, setAnswersShape ] = useState({
         data : VALUEDEFAULT
-      });
+    });
 
     const handleNextQuestion = () => {
         
@@ -51,6 +51,7 @@ export const ShapeScreenQuestion = () => {
 
     const handleSelect = ( e ) => {
         console.log( e.target.id );
+        handleOfChangeTheValue( e.target.id );
     }
 
     useEffect(()=>{
@@ -73,8 +74,104 @@ export const ShapeScreenQuestion = () => {
             setDisabledStart( false )
          )
 
-
     },[ questionsShape, limit ]);
+    
+
+    const handleOfChangeTheValue = ( questionCorrect ) => {
+
+        const answersData = answersShape.data;
+
+        const index = answersData.findIndex( answers  => answers.id === questionsShape[0].id_pregunta );
+        
+        const respuesta_correcta = questionsShape[0].respuesta_correcta;
+
+        if ( questionCorrect !== null ) {
+            
+            filterDataAnswers( index, respuesta_correcta, questionCorrect );
+        }
+        else {
+            filterDataAnswers( index, respuesta_correcta, questionCorrect );
+        }
+    }
+
+    const filterDataAnswers = ( index, respuesta_correcta, questionCorrect ) => {
+
+        if ( respuesta_correcta !== null && questionCorrect !== null ) {
+
+            if ( respuesta_correcta.toString() === questionCorrect.toString() ) {
+                
+                correctAnswer( index, 1, respuesta_correcta, questionCorrect );
+
+            }
+            else{
+                correctAnswer( index, 0, respuesta_correcta, questionCorrect );
+            }
+            
+        }else{
+            if ( respuesta_correcta === null || undefined || '' ) {
+                
+                correctAnswer( index, 0, 1, 0 );
+            }
+            else if(  questionCorrect === null || undefined || '' ){
+
+                correctAnswer( index, 0, respuesta_correcta, 0 );
+            }
+        }
+
+    }
+
+    const correctAnswer = ( index, value, respuesta_correcta, questionCorrect) => {
+
+        if ( index.toString() === '-1' ) {
+
+            if ( respuesta_correcta.toString() === questionCorrect.toString() ) {
+            
+                const { data } = answersShape;
+
+                const newData = [
+
+                    ...data,
+                    {
+                        id: questionsShape[0].id_pregunta,
+                        bien_mal: value,
+                    }
+
+                ];
+                setAnswersShape({ data : newData });
+                
+            }
+            else {
+
+                const { data } = answersShape;
+
+                const newData = [
+
+                    ...data,
+                    {
+                        id: questionsShape[0].id_pregunta,
+                        bien_mal: value,
+                    }
+
+                ];
+                setAnswersShape({ data : newData });
+            }
+            
+        }else {
+
+            const { data } = answersShape;
+            
+            const dataFilter = data.map(function( dato ){
+            if( dato.id === questionsShape[0].id_pregunta ){
+                dato.bien_mal = value;
+            }
+            
+            return dato;
+            });
+
+            setAnswersShape({ data : dataFilter });
+
+        } 
+    }
 
     const changeAnswerData = () => {
 
@@ -99,130 +196,119 @@ export const ShapeScreenQuestion = () => {
             setQuestion( questions );
             setImages( Options );
 
-            const answersData = answersShape.data;
-
-            const index = answersData.findIndex( answers  => answers.id === questionsShape[0].id_pregunta );
-
-            if ( index.toString() === '-1' ) {
-                
-                const { data } = answersShape;
-
-                const newData = [
-
-                    ...data,
-                    {
-                        id: questionsShape[0].id_pregunta,
-                        bien_mal: null,
-                    }
-
-                ];
-                setAnswersShape({ data : newData });
-                
-            }else {
-
-                const { data } = answersShape;
-                
-                const dataFilter = data.map(function( dato ){
-                  if( dato.id === questionsShape[0].id_pregunta ){
-                    dato.bien_mal = questionsShape[0].id_pregunta;
-                  }
-                  
-                  return dato;
-                });
-
-                setAnswersShape({ data : dataFilter });
-
-            } 
+            handleOfChangeTheValue( null );
         
     }
 
     useEffect(() => {
 
-        if( questionsShape[0] !== undefined ) changeAnswerData()
+        if( questionsShape[0] !== undefined ) changeAnswerData();
 
     },[ questionsShape ]);
     
-    console.log( answersShape ) ;
+    console.log( questionsShape.length ) ;
+    // console.log( answersData )
 
     return (
         <>
-            <section className="panel">
-                <header className="panel-heading">
-                    PRUEBAS FORMAS
-                </header>
-                <div className="panel-body" style={{ textAlign:'center' }} >
-                    <div className="row">
-                        <div className="col-sm-12" style={{ paddingLeft: '5%' }}>
-                            <div className="row">
-                                <div className="col-sm-4 form-group text-center" />
-                                    <div className="col-sm-4 form-group text-center">
-                                        <section className="panel">
-                                            <div id="gallery" className="media-gal isotope" style={{textAlign:'center' }} >
-                                                <div className="images item  isotope-item" >
-                                                    <img 
-                                                        src={ question }
-                                                        alt="Option1" />
-                                                    <h2 >Pregunta</h2>
-                                                </div>
-                                            </div> 
-                                    </section>
-                                </div>
-                            </div>
+            {
+                ( questionsShape.length !== 1  && disabledFinish === true ) ? 
+                    <div>
+                        <div className="col-sm-6">
+                            <button className="btn btn-primary" 
+                            >Enviar Respuestas</button>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-sm-12" style={{ paddingLeft: '5%' }} >
+                :
+                <section className="panel">
+                    <header className="panel-heading">
+                        PRUEBAS FORMAS
+                    </header>
+
+                    {
+                        ( questionsShape.length !== 1 ) ? 
+                            <div>
+                                <div className="col-sm-6">
+                                    Cargando ...
+                                </div>
+                            </div>
+                        :
+                        <div className="panel-body" style={{ textAlign:'center' }} >
                             <div className="row">
-
-                                {
-                                    ( images !== [] ) ?
-
-                                        images.map(( e, key )=> 
-                                        (
-                                            
-                                            <div className="col-sm-4 form-group text-center" key={ key } >
+                                <div className="col-sm-12" style={{ paddingLeft: '5%' }}>
+                                    <div className="row">
+                                        <div className="col-sm-4 form-group text-center" />
+                                            <div className="col-sm-4 form-group text-center">
                                                 <section className="panel">
-                                                    <div id="gallery" className="media-gal isotope" style={{ textAlign:'center' }} >
+                                                    <div id="gallery" className="media-gal isotope" style={{textAlign:'center' }} >
                                                         <div className="images item  isotope-item" >
                                                             <img 
-                                                                src={ e }
-                                                            />
-                                                            <h2 >Opción { key + 1 }</h2>
-                                                            <button className="btn btn-info" 
-                                                                onClick={ handleSelect }
-                                                                id={ key + 1 }
-                                                            >Seleccionar</button>
+                                                                src={ question }
+                                                                alt="Option1" />
+                                                            <h2 >Pregunta</h2>
                                                         </div>
                                                     </div> 
-                                                </section>
-                                            </div>
-
-                                        )
-                                     )
-                                    :
-                                    <div>
-                                        Cargando...
+                                            </section>
+                                        </div>
                                     </div>
-                                }
-                            </div>
-                            <div className="d-grid gap-2">
-                                <div className="col-sm-6">
-                                    <button className="btn btn-primary" 
-                                        onClick={ handlePrevQuestion }
-                                        disabled={ disabledStart }
-                                    >Anterior</button>
                                 </div>
-                                <div className="col-sm-6">
-                                    <button className="btn btn-success" 
-                                        onClick={ handleNextQuestion } 
-                                        disabled={ disabledFinish }
-                                        >Siguiente</button>
+                            </div>
+                            <div className="row">
+                                <div className="col-sm-12" style={{ paddingLeft: '5%' }} >
+                                    <div className="row">
+
+                                        {
+                                            ( images !== [] ) ?
+
+                                                images.map(( e, key )=> 
+                                                (
+                                                    
+                                                    <div className="col-sm-4 form-group text-center" key={ key } >
+                                                        <section className="panel">
+                                                            <div id="gallery" className="media-gal isotope" style={{ textAlign:'center' }} >
+                                                                <div className="images item  isotope-item" >
+                                                                    <img 
+                                                                        src={ e }
+                                                                    />
+                                                                    <h2 >Opción { key + 1 }</h2>
+                                                                    <button className="btn btn-info" 
+                                                                        onClick={ handleSelect }
+                                                                        id={ key + 1 }
+                                                                    >Seleccionar</button>
+                                                                </div>
+                                                            </div> 
+                                                        </section>
+                                                    </div>
+
+                                                )
+                                                )
+                                            :
+                                            <div>
+                                                Cargando...
+                                            </div>
+                                        }
+                                    </div>
+                                    <div className="d-grid gap-2">
+                                        <div className="col-sm-6">
+                                            <button className="btn btn-primary" 
+                                                onClick={ handlePrevQuestion }
+                                                disabled={ disabledStart }
+                                            >Anterior</button>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <button className="btn btn-success" 
+                                                onClick={ handleNextQuestion } 
+                                                disabled={ disabledFinish }
+                                                >Siguiente</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </section>
+                    }
+                </section>
+            }
+            
         </>
     )
 }

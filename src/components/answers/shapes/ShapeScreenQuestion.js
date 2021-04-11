@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { answersShapeRegister } from '../../../actions/answersShape';
 import { useFetchQuestionShapeFindAll } from '../../../hooks/QuestionShape/useFetchQuestionShapeFindAll';
 
 export const ShapeScreenQuestion = () => {
@@ -8,6 +9,10 @@ export const ShapeScreenQuestion = () => {
     const VALUEDEFAULT = [];
     
     const { shape } = useSelector( state => state.answerShape );
+
+    const dispatch = useDispatch();
+
+    const { uid } = useSelector( state => state.auth );
 
     const [ limit, setLimit ] = useState( INITIAL_LIMIT );
 
@@ -31,16 +36,8 @@ export const ShapeScreenQuestion = () => {
 
     const handleNextQuestion = () => {
         
-        // if ( limitAnswers === 0 ) {
-        //     return (
-        //         setLimitAnswers( 1 )
-        //     )
-        // }
-        // return (
-            setLimit( limit + 1 );
-            setLimitAnswers( limitAnswers + 1 );
-        // )
-
+        setLimit( limit + 1 );
+        setLimitAnswers( limitAnswers + 1 );
 
     }
     const handlePrevQuestion = () => {
@@ -50,7 +47,6 @@ export const ShapeScreenQuestion = () => {
     }
 
     const handleSelect = ( e ) => {
-        console.log( e.target.id );
         handleOfChangeTheValue( e.target.id );
     }
 
@@ -75,7 +71,6 @@ export const ShapeScreenQuestion = () => {
          )
 
     },[ questionsShape, limit ]);
-    
 
     const handleOfChangeTheValue = ( questionCorrect ) => {
 
@@ -200,14 +195,17 @@ export const ShapeScreenQuestion = () => {
         
     }
 
+    const handleAnswersShapeRegister = () => {
+        
+        dispatch( answersShapeRegister(  uid, answersShape.data ) );
+    }
+
     useEffect(() => {
 
         if( questionsShape[0] !== undefined ) changeAnswerData();
 
     },[ questionsShape ]);
-    
-    console.log( questionsShape.length ) ;
-    // console.log( answersData )
+
 
     return (
         <>
@@ -215,7 +213,8 @@ export const ShapeScreenQuestion = () => {
                 ( questionsShape.length !== 1  && disabledFinish === true ) ? 
                     <div>
                         <div className="col-sm-6">
-                            <button className="btn btn-primary" 
+                            <button className="btn btn-primary"
+                                onClick={ handleAnswersShapeRegister } 
                             >Enviar Respuestas</button>
                         </div>
                     </div>

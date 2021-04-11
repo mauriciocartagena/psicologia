@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { answersShapeRegister } from '../../../actions/answersShape';
 import { useFetchQuestionShapeFindAll } from '../../../hooks/QuestionShape/useFetchQuestionShapeFindAll';
@@ -25,8 +25,6 @@ export const ShapeScreenQuestion = () => {
     const [ question, setQuestion ] = useState([]);
 
     const [ images, setImages ] = useState([]);
-
-    const [ idQuestion, setIdQuestion ] = useState(0);
 
     const [ limitAnswers, setLimitAnswers ] = useState(0);
     
@@ -206,18 +204,28 @@ export const ShapeScreenQuestion = () => {
 
     },[ questionsShape ]);
 
-
     return (
         <>
             {
                 ( questionsShape.length !== 1  && disabledFinish === true ) ? 
-                    <div>
-                        <div className="col-sm-6">
-                            <button className="btn btn-primary"
-                                onClick={ handleAnswersShapeRegister } 
-                            >Enviar Respuestas</button>
-                        </div>
+                <div className="row animated fadeIn" >
+                    <br/>
+                    <div className="col-sm-6" > 
+                        <button className="btn btn-success btn-lg btn-block"
+                            onClick={ handlePrevQuestion }
+                        >
+                            Atrás
+                        </button>
                     </div>
+
+                    <div className="col-sm-6">
+                        <button className="btn btn-primary btn-lg btn-block"
+                            onClick={ handleAnswersShapeRegister }
+                        >  
+                            Enviar respuestas
+                        </button>
+                    </div>
+                </div>      
                 :
                 <section className="panel">
                     <header className="panel-heading">

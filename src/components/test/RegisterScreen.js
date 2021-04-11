@@ -43,7 +43,6 @@ export const RegisterScreen = () => {
                 </div>
             </div>   
             <div className="row animated fadeIn" >
-
                 <div className="col-sm-6" > 
                     <h2>
                         <i>

@@ -1,10 +1,12 @@
 // localhost:4000/api/test-formas//tformas/answers
 import { useEffect, useState } from 'react'
+import { useHistory } from 'react-router';
 import Swal from 'sweetalert2';
 import { fetchConToken } from '../../helpers/fetch';
 
 export const useFetchQuestionShapeFindAll = ( shape, INITIAL_LIMIT, setLimit ) => {
 
+    const history = useHistory();
     const [ questionsShape, setQuestionsShape ] = useState([]);
 
     useEffect(() => {
@@ -47,6 +49,7 @@ export const useFetchQuestionShapeFindAll = ( shape, INITIAL_LIMIT, setLimit ) =
                 }
                 else{
                     Swal.fire(':(', body.msg, 'error');
+                    history.push("/answers/shape");
         
                 }
             } catch ( error ) {

@@ -26,7 +26,6 @@ export const Aside = () => {
 
     const handleChangeStyle = (e) => {
         e.preventDefault();
-        console.log(uiSelection);
         if (uiSelection === 'block') {
             return (
                 dispatch(institutionAcordionDeselect()),

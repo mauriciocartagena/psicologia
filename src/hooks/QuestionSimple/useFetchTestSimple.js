@@ -4,13 +4,14 @@ import { fetchConToken } from '../../helpers/fetch';
 
 export const useFetchTestSimple = () => {
 
+
     const [questionsSimple, setQuestionsSimple] = useState([]);
 
     useEffect(() => {
 
-        testSimpleLoading()
+        testSimpleLoading();
 
-    }, [])
+    }, []);
 
     const testSimpleLoading = async () => {
 

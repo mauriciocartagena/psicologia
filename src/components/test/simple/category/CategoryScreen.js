@@ -7,35 +7,36 @@ import { ModalCategory } from './ModalCategory';
 
 export const CategoryScreen = () => {
 
-    const { data_category: category } =  useFetchCategory();
-    
     const dispatch = useDispatch();
+
+    const { data_category: category } = useFetchCategory();
+
 
     const data = {
         columns: [
             {
-              label: 'Nombre Categoria',
-              field: 'nombre_categoria',
-              sort: 'asc',
-              width: 200,
+                label: 'Nombre Categoria',
+                field: 'nombre_categoria',
+                sort: 'asc',
+                width: 200,
             },
             {
-              label: 'Modificar',
-              field: 'modified',
-              sort: 'asc',
-              width: 200
+                label: 'Modificar',
+                field: 'modified',
+                sort: 'asc',
+                width: 200
             },
             {
-              label: 'Eliminar',
-              field: 'deleted',
-              sort: 'asc',
-              width: 200
+                label: 'Eliminar',
+                field: 'deleted',
+                sort: 'asc',
+                width: 200
             },
         ],
         rows: category
-      };
-    const handleChangeModal = () =>{
-        dispatch( uiModalTrue() );
+    };
+    const handleChangeModal = () => {
+        dispatch(uiModalTrue());
     }
 
     return (
@@ -46,30 +47,30 @@ export const CategoryScreen = () => {
                 </header>
                 {
                     (data.rows !== [])
-                    ?
-                    <div className="panel-body">
-                    <div className="col-lg-12">
-                        <div className="text-right" id="nestable_list_menu">
-                            <button type="button" className="btn btn-success" onClick={ handleChangeModal }>Registrar</button>
-                        </div>
-                        <br/>
-                    </div>
+                        ?
+                        <div className="panel-body">
+                            <div className="col-lg-12">
+                                <div className="text-right" id="nestable_list_menu">
+                                    <button type="button" className="btn btn-success" onClick={handleChangeModal}>Registrar</button>
+                                </div>
+                                <br />
+                            </div>
 
-                        <MDBDataTable
-                            noRecordsFoundLabel="Cargando..."
-                            scrollX
-                            autoWidth={true}
-                            maxHeight="40vh"
-                            striped
-                            bordered
-                            small
-                            data={ data }
-                        />
-                    </div>
-                    :
-                    <div className="panel-body">
-                        <div>Cargando...</div>
-                    </div>
+                            <MDBDataTable
+                                noRecordsFoundLabel={category !== undefined || data.rows !== undefined ? "Cargando..." : "Aún no se registro ningun dato"}
+                                scrollX
+                                autoWidth={true}
+                                maxHeight="40vh"
+                                striped
+                                bordered
+                                small
+                                data={data}
+                            />
+                        </div>
+                        :
+                        <div className="panel-body">
+                            <div>Cargando</div>
+                        </div>
                 }
             </section>
             <ModalCategory />

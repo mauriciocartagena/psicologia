@@ -43,12 +43,13 @@ export const Header = () => {
         <header className="header fixed-top clearfix">
             <div className="brand">
 
-                <href href="index.html" className="logo">
+                <Link
+                    className="logo" to="index.html">
                     <img
                         src="https://mauriciocartagena.github.io/my-perfil/static/media/Logo.2921d167.png"
                         style={{ width: 168, height: 40 }} alt="logo"
                     />
-                </href>
+                </Link>
                 <div
                     className="sidebar-toggle-box"
                     onClick={handleSidebar}
@@ -66,8 +67,9 @@ export const Header = () => {
                             className="dropdown-toggle"
                             onClick={dropDownOpen}
                             style={{ cursor: "pointer" }}
+                            to="/"
                         >
-                            <img alt="" src="https://mauriciocartagena.github.io/my-perfil/static/media/photo.517c8325.png" />
+                            <img alt="photo" src="https://mauriciocartagena.github.io/my-perfil/static/media/photo.517c8325.png" />
                             <span className="username" > &nbsp; Mauricio Cartagena </span>
                             <b className="caret"></b>
                         </Link>
@@ -85,7 +87,9 @@ export const Header = () => {
                                 </Link>
                             </li>
                             <li className="hyper" onClick={handleLogout} >
-                                <Link>
+                                <Link
+                                    to="/"
+                                >
                                     <i className="fa fa-key"></i>Cerrar Sesión
                                 </Link>
                             </li>

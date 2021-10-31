@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { uiModalTrue } from '../../../../actions/ui';
-import { useFetchTestSimple } from '../../../../hooks/QuestionSimple/useFetchTestSimple';
+
 import { MDBDataTable } from 'mdbreact';
 import { ModalRegisterSimple } from './ModalRegisterSimple';
+import { useFetchTestSimple } from '../../../../hooks/useFetchTestSimple';
 
 export const TestScreenSimple = () => {
 
@@ -38,6 +39,7 @@ export const TestScreenSimple = () => {
         dispatch(uiModalTrue());
     }
 
+
     return (
         <React.Fragment>
             <div className="col-lg-12 animated fadeIn">
@@ -57,7 +59,7 @@ export const TestScreenSimple = () => {
                                 </div>
 
                                 <MDBDataTable
-                                    noRecordsFoundLabel="Cargando..."
+                                    noRecordsFoundLabel={(TestSimple !== undefined || data.rows !== undefined) ? "Cargando..." : "Aún no se registro ningun dato"}
                                     scrollX
                                     autoWidth={true}
                                     maxHeight="40vh"
@@ -69,7 +71,7 @@ export const TestScreenSimple = () => {
                             </div>
                             :
                             <div className="panel-body">
-                                <div>Cargando...</div>
+                                <div>Cargando ...</div>
                             </div>
 
                     }

@@ -22,7 +22,7 @@ export const ShapeScreen = () => {
 
     useEffect(() => {
         if (isNearScreen) debounceHandleNextPage()
-    }, [isNearScreen, debounceHandleNextPage])
+    }, [isNearScreen, debounceHandleNextPage]);
 
     return (
         <React.Fragment>
@@ -33,8 +33,14 @@ export const ShapeScreen = () => {
                             ADMINISTRACION DE PREGUNTAS FORMAS
                         </header>
                         {
-                            (questionsShape !== []) &&
-                            <TestBodyProfile options={questionsShape} />
+                            (questionsShape !== []) ?
+                                <TestBodyProfile options={questionsShape}
+                                />
+                                :
+
+                                <div className='panel-body'>
+                                    Espere ...
+                                </div>
                         }
                     </section>
                 </div>

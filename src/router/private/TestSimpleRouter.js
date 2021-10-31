@@ -17,27 +17,27 @@ export const TestSimpleRouter = () => {
                 <Route
                     exact
                     path="/test-simple"
-                    component={ SimpleScreen }
+                    component={SimpleScreen}
                 />
                 <Route
                     exact
                     path="/test-simple/question"
-                    component={ SimpleScreenRegister }
+                    component={SimpleScreenRegister}
                 />
-                 <Route
+                <Route
                     exact
                     path="/test-simple/question/edit"
-                    component={ UpdatedScreen }
+                    component={UpdatedScreen}
                 />
                 <Route
                     exact
                     path="/test-simple/category"
-                    component={ CategoryScreen }
+                    component={CategoryScreen}
                 />
-                 <Route
+                <Route
                     exact
                     path="/test-simple/tsimple"
-                    component={ TestScreenSimple }
+                    component={TestScreenSimple}
                 />
             </Switch>
         </Layout>

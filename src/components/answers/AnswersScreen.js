@@ -5,47 +5,47 @@ import { Link } from 'react-router-dom';
 
 export const AnswersScreen = () => {
     return (
-        <>
+        <React.Fragment>
             <div className="row animated fadeIn" >
                 <div className="col-sm-4">
                     <div className="mini-stat clearfix">
                         <span className="mini-stat-icon tar">
-                            <FontAwesomeIcon icon={ faThermometerQuarter } />
+                            <FontAwesomeIcon icon={faThermometerQuarter} />
                         </span>
-                        <div  className="mini-stat-info">
+                        <div className="mini-stat-info">
                             <span>31</span>
-                                Cantidad de Pruebas simples 
+                            Cantidad de Pruebas simples
                         </div>
                     </div>
                 </div>
                 <div className="col-sm-4">
                     <div className="mini-stat clearfix">
                         <span className="mini-stat-icon pink">
-                            <FontAwesomeIcon icon={ faThermometerThreeQuarters } />
+                            <FontAwesomeIcon icon={faThermometerThreeQuarters} />
                         </span>
-                        <div  className="mini-stat-info">
+                        <div className="mini-stat-info">
                             <span>60</span>
-                                Cantidad total de pruebas 
+                            Cantidad total de pruebas
                         </div>
                     </div>
                 </div>
                 <div className="col-sm-4">
                     <div className="mini-stat clearfix">
                         <span className="mini-stat-icon orange">
-                            <FontAwesomeIcon icon={ faThermometerQuarter } />                            
+                            <FontAwesomeIcon icon={faThermometerQuarter} />
                         </span>
-                        <div  className="mini-stat-info">
+                        <div className="mini-stat-info">
                             <span>29</span>
-                                Cantidad de Pruebas de formas 
+                            Cantidad de Pruebas de formas
                         </div>
                     </div>
                 </div>
-            </div>   
+            </div>
             <div className="row animated fadeIn" >
-                <div className="col-sm-6" > 
+                <div className="col-sm-6" >
                     <h2>
                         <i>
-                            <FontAwesomeIcon icon={ faBong } />
+                            <FontAwesomeIcon icon={faBong} />
                             <span> Pruebas Simples</span>
                         </i>
                     </h2>
@@ -57,7 +57,7 @@ export const AnswersScreen = () => {
                 <div className="col-sm-6">
                     <h2>
                         <i>
-                            <FontAwesomeIcon icon={ faCubes } />
+                            <FontAwesomeIcon icon={faCubes} />
                             <span> Pruebas de Formas</span>
                         </i>
                     </h2>
@@ -67,6 +67,6 @@ export const AnswersScreen = () => {
                     <Link to="/answers/shape" className="btn btn-info btn-lg btn-block" >Elegir</Link>
                 </div>
             </div>
-        </>
+        </React.Fragment>
     )
 }

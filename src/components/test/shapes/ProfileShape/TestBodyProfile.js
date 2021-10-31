@@ -3,27 +3,27 @@ import { TestShapeCard } from './TestShapeCard';
 
 export const TestBodyProfile = ({ options }) => {
 
-    const [ data, setData ] = useState([]);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
-        
-        setData( options );
-        
-    }, [ options ]);
+
+        setData(options);
+
+    }, [options]);
 
     return (
-        <>
-            { 
-                ( data !== [] )
+        <React.Fragment>
+            {
+                (data !== [])
                 &&
-                    data.map( ( question, key )=> (
-                        <TestShapeCard 
-                            key={ key }
-                            questionData={ question }
-                            option={ data }
-                        />
-                    ))
+                data.map((question, key) => (
+                    <TestShapeCard
+                        key={key}
+                        questionData={question}
+                        option={data}
+                    />
+                ))
             }
-        </>
+        </React.Fragment>
     )
 }

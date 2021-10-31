@@ -5,37 +5,37 @@ import { useFetchAnswerSimple } from '../../../hooks/Answers/Simple/useFetchAnsw
 import { MapOfFormWinzard } from './MapOfFormWinzard';
 
 export const SimpleScreenAnswers = () => {
- 
+
     const history = useHistory();
 
-    const { answersSimpleActive } = useSelector( state => state.answerSimple );
+    const { answersSimpleActive } = useSelector(state => state.answerSimple);
 
-    const { data_answer } = useFetchAnswerSimple( answersSimpleActive );
+    const { data_answer } = useFetchAnswerSimple(answersSimpleActive);
 
-    useEffect( () =>{
+    useEffect(() => {
 
-        if ( answersSimpleActive === null ) {
+        if (answersSimpleActive === null) {
             history.push('/answers/selection');
         }
 
-    },[ answersSimpleActive, history ]);
+    }, [answersSimpleActive, history]);
 
     return (
-        <>
+        <React.Fragment>
             {
-                ( data_answer !== [])
+                (data_answer !== [])
                 &&
-                ( 
+                (
                     <div className="col-lg-12 animated fadeIn">
                         <section className="panel">
                             <header className="panel-heading">
-                              PRUEBAS
+                                PRUEBAS
                             </header>
-                             <MapOfFormWinzard dataAnswers={ data_answer } />
+                            <MapOfFormWinzard dataAnswers={data_answer} />
                         </section>
                     </div>
                 )
             }
-        </>
+        </React.Fragment>
     )
 }

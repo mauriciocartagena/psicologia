@@ -175,6 +175,7 @@ export const startChecking = () => {
     const { persona } = await respPersona.json();
 
     if (body.ok) {
+
       localStorage.setItem("token", body.token);
       localStorage.setItem("token-init-date", new Date().getTime());
 
@@ -183,7 +184,7 @@ export const startChecking = () => {
           uid: body.uid,
           username: body.username,
           persona: persona,
-        })
+        }),
       );
     } else {
       dispatch(checkingFinish());

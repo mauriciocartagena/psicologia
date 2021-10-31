@@ -12,44 +12,44 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
 
     const dispatch = useDispatch();
 
-    const { shape } = useSelector( state => state.shape );
+    const { shape } = useSelector(state => state.shape);
 
-    const [ dataQuestionShape, setDataQuestionShape ] = useState([])
+    const [dataQuestionShape, setDataQuestionShape] = useState([])
 
-    const { uiLoadingSaveButton, uiDisabled } = useSelector( state => state.ui );
+    const { uiLoadingSaveButton, uiDisabled } = useSelector(state => state.ui);
 
-    const [ formShapeInputValues, handleShapeInputValueChange ] = useForm({
+    const [formShapeInputValues, handleShapeInputValueChange] = useForm({
         name: nombre,
         respCorrect: respuesta_correcta,
         testShape: id_test
     });
-    
+
     const { name, testShape, respCorrect } = formShapeInputValues;
 
-    const [ imagesQuestion, setImagesQuestion ] = useState([]);
+    const [imagesQuestion, setImagesQuestion] = useState([]);
 
     const maxNumberQuestion = 1;
     const maxNumber = 6;
 
-    const onChangeQuestion = ( imageList ) => {
-        setImagesQuestion( imageList );
+    const onChangeQuestion = (imageList) => {
+        setImagesQuestion(imageList);
     };
 
-    const [ images, setImages ] = useState([]);
+    const [images, setImages] = useState([]);
 
-    const onChange = ( imageList ) => {
-        setImages( imageList );
+    const onChange = (imageList) => {
+        setImages(imageList);
     };
-    
-    const handleRegisterTestShape = ( e ) => {
+
+    const handleRegisterTestShape = (e) => {
         e.preventDefault();
 
-        if( respCorrect === '' || testShape === '' ) {
+        if (respCorrect === '' || testShape === '') {
             Swal.fire("Error", "Debe de seleccionar una respuesta y una prueba forma", "error");
         }
-        else if( nombre !== '') {
-          
-            dispatch( shapeEdit(
+        else if (nombre !== '') {
+
+            dispatch(shapeEdit(
                 id_pregunta,
                 imagesQuestion[0].data_url,
                 images[0].data_url,
@@ -60,12 +60,12 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
                 images[5].data_url,
                 respCorrect,
                 name,
-                testShape )
+                testShape)
             );
 
-        }else{
+        } else {
 
-            dispatch( shapeRegister( 
+            dispatch(shapeRegister(
                 imagesQuestion[0].data_url,
                 images[0].data_url,
                 images[1].data_url,
@@ -75,52 +75,52 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
                 images[5].data_url,
                 respCorrect,
                 name,
-                testShape )
+                testShape)
             );
 
         }
     }
 
     useEffect(() => {
-        
-        if ( imagesQuestion.length !== 1 || images.length !== 6 || name === undefined || '' || 0 ) {
-            return dispatch( uiTrueDisabledButton() );
+
+        if (imagesQuestion.length !== 1 || images.length !== 6 || name === undefined || '' || 0) {
+            return dispatch(uiTrueDisabledButton());
         }
-        dispatch(uiFalseDisabledButton() );
-        
-    }, [ imagesQuestion, images, name, dispatch ]);
+        dispatch(uiFalseDisabledButton());
+
+    }, [imagesQuestion, images, name, dispatch]);
 
     useEffect(() => {
 
-        if ( nombre !== '' || undefined || null ) {     
-            setImagesQuestion( questionImage );
-            setImages( optionsImage );
+        if (nombre !== '' || undefined || null) {
+            setImagesQuestion(questionImage);
+            setImages(optionsImage);
         }
-        
-    }, [ questionImage, optionsImage, nombre ]);
+
+    }, [questionImage, optionsImage, nombre]);
 
     useEffect(() => {
-        setDataQuestionShape( shape.filter(( e )=>(
+        setDataQuestionShape(shape.filter((e) => (
             e.id_test.toString() === testShape.toString()
-        ))); 
-    }, [ testShape, shape ]);
+        )));
+    }, [testShape, shape]);
 
     return (
-        <>
-            <div className="form-group alert alert-info" style={{ paddingLeft:"25%", paddingRight:"25%" }}>
+        <React.Fragment>
+            <div className="form-group alert alert-info" style={{ paddingLeft: "25%", paddingRight: "25%" }}>
                 <div className="col-xs-14 text-center">
                     <label>
                         <h3>Nombre</h3>
                     </label>
-                    <input 
-                        className="text-center form-control round-input input-medium default-date-picker" 
-                        placeholder="Ingrese Nombre" 
+                    <input
+                        className="text-center form-control round-input input-medium default-date-picker"
+                        placeholder="Ingrese Nombre"
                         autoComplete="off"
-                        size="16" 
-                        type="text" 
+                        size="16"
+                        type="text"
                         name="name"
-                        value={ name }
-                        onChange={ handleShapeInputValueChange }
+                        value={name}
+                        onChange={handleShapeInputValueChange}
                     />
                 </div>
             </div>
@@ -130,9 +130,9 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
                 </label>
                 <ImageUploading
                     multiple
-                    value={ imagesQuestion }
-                    onChange={ onChangeQuestion }
-                    maxNumber={ maxNumberQuestion }
+                    value={imagesQuestion}
+                    onChange={onChangeQuestion}
+                    maxNumber={maxNumberQuestion}
                     dataURLKey="data_url"
                 >
                     {
@@ -140,23 +140,23 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
                             <div className="upload__image-wrapper">
                                 <button
                                     className="btn btn-round btn-success"
-                                    style={{ marginRight:5 }}
-                                    onClick={ onImageUpload }
+                                    style={{ marginRight: 5 }}
+                                    onClick={onImageUpload}
                                 >
-                                Subir Imagen
-                                </button> 
-                                <button 
-                                    className="btn btn-round btn-warning" 
-                                    style={{ marginRight:5 }} 
-                                    onClick={ onImageRemoveAll } 
+                                    Subir Imagen
+                                </button>
+                                <button
+                                    className="btn btn-round btn-warning"
+                                    style={{ marginRight: 5 }}
+                                    onClick={onImageRemoveAll}
                                 >
                                     Eliminar Todo
                                 </button>
                                 <div className="row" >
-                                    <GetImageOne 
-                                        data={ imagesQuestion } 
-                                        onImageUpdate={ onImageUpdate } 
-                                        onImageRemove={ onImageRemove } 
+                                    <GetImageOne
+                                        data={imagesQuestion}
+                                        onImageUpdate={onImageUpdate}
+                                        onImageRemove={onImageRemove}
                                     />
                                 </div>
                             </div>
@@ -170,9 +170,9 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
                 </label>
                 <ImageUploading
                     multiple
-                    value={ images }
-                    onChange={ onChange }
-                    maxNumber={ maxNumber }
+                    value={images}
+                    onChange={onChange}
+                    maxNumber={maxNumber}
                     dataURLKey="data_url"
                 >
                     {
@@ -180,22 +180,22 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
                             <div className="upload__image-wrapper">
                                 <button
                                     className="btn btn-round btn-success"
-                                    style={{ marginRight:5 }}
-                                    onClick={ onImageUpload }
+                                    style={{ marginRight: 5 }}
+                                    onClick={onImageUpload}
                                 >
-                                Subir Imagen
-                                </button> 
-                                <button 
-                                    className="btn btn-round btn-warning" 
-                                    style={{ marginRight:5 }} 
-                                    onClick={ onImageRemoveAll } 
+                                    Subir Imagen
+                                </button>
+                                <button
+                                    className="btn btn-round btn-warning"
+                                    style={{ marginRight: 5 }}
+                                    onClick={onImageRemoveAll}
                                 >
                                     Eliminar Todo
                                 </button>
                                 <div className="row" >
-                                    <GetImage data={ images } 
-                                        onImageUpdate={ onImageUpdate } 
-                                        onImageRemove={ onImageRemove } 
+                                    <GetImage data={images}
+                                        onImageUpdate={onImageUpdate}
+                                        onImageRemove={onImageRemove}
                                     />
                                 </div>
                             </div>
@@ -210,21 +210,21 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
                 <div className="form-group">
                     <label className="col-sm-3 control-label"></label>
                     <div className="col-sm-7">
-                        <p>Respuesta seleccionada : `{ respCorrect }`</p>
-                        <select 
-                            formcontrolname="curso" 
+                        <p>Respuesta seleccionada : `{respCorrect}`</p>
+                        <select
+                            formcontrolname="curso"
                             name="respCorrect"
-                            onChange={ handleShapeInputValueChange } 
+                            onChange={handleShapeInputValueChange}
                             className="form-control ng-valid ng-dirty ng-touched"
-                            value={ respCorrect  }
-                            >
+                            value={respCorrect}
+                        >
                             {
-                                images.map(( e, i )=>(
-                                    <option 
+                                images.map((e, i) => (
+                                    <option
                                         name="respCorrect"
-                                        key={ i } 
-                                        value={ i + 1 } 
-                                    > Imagen { i + 1 }</option>
+                                        key={i}
+                                        value={i + 1}
+                                    > Imagen {i + 1}</option>
                                 ))
                             }
                         </select>
@@ -238,25 +238,25 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
                 <div className="form-group">
                     <label className="col-sm-3 control-label"></label>
                     <div className="col-sm-7" >
-                        <p>Forma seleccionada : `{  
-                            dataQuestionShape.map(( e )=>(
+                        <p>Forma seleccionada : `{
+                            dataQuestionShape.map((e) => (
                                 e.nombre
                             ))
                         }`
                         </p>
-                        <select 
-                            formcontrolname="curso" 
-                            name="testShape" 
-                            onChange={ handleShapeInputValueChange } 
+                        <select
+                            formcontrolname="curso"
+                            name="testShape"
+                            onChange={handleShapeInputValueChange}
                             className="form-control ng-valid ng-dirty ng-touched"
-                            value={ testShape }
-                            >
+                            value={testShape}
+                        >
                             {
-                                shape.map(( e, i )=>(
-                                    <option  
-                                        key={ i } 
-                                        value={ e.id_test } 
-                                    > { e.nombre }</option>
+                                shape.map((e, i) => (
+                                    <option
+                                        key={i}
+                                        value={e.id_test}
+                                    > {e.nombre}</option>
                                 ))
                             }
                         </select>
@@ -264,21 +264,21 @@ export const Form = ({ id_pregunta = '', nombre = '', id_test = '', respuesta_co
                 </div>
             </div>
             <div className="panel-body">
-                <hr/>
-                <button type="submit"  
-                    onClick={ handleRegisterTestShape } 
-                    disabled={ uiDisabled } 
+                <hr />
+                <button type="submit"
+                    onClick={handleRegisterTestShape}
+                    disabled={uiDisabled}
                     className="btn btn-primary btn-lg btn-block" >
-                <i  className={ uiLoadingSaveButton } ></i> 
-                        {
-                            ( id_test === '')
+                    <i className={uiLoadingSaveButton} ></i>
+                    {
+                        (id_test === '')
                             ?
-                                " Registrar"
+                            " Registrar"
                             :
-                                " Modificar"
-                        }
+                            " Modificar"
+                    }
                 </button>
             </div>
-    </>
+        </React.Fragment>
     )
 }

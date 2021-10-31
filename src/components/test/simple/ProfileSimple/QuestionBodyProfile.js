@@ -3,31 +3,31 @@ import { QuestionSimpleCard } from './QuestionSimpleCard';
 
 export const QuestionBodyProfile = ({ options }) => {
 
-    const [ data, setData ] = useState([]);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
-        
-        setData( options );
 
-        return(()=>{
+        setData(options);
+
+        return (() => {
             setData([])
         });
-        
-    }, [ options ]);
+
+    }, [options]);
 
     return (
-        <>
-            { 
-                ( data !== [] )
+        <React.Fragment>
+            {
+                (data !== [])
                 &&
-                    data.map( ( option , key )=> (
-                        <QuestionSimpleCard 
-                            option={ option }
-                            setFilter={ options }
-                            setDataQuestion= { setData } 
-                            key={ key } />
-                    ))
+                data.map((option, key) => (
+                    <QuestionSimpleCard
+                        option={option}
+                        setFilter={options}
+                        setDataQuestion={setData}
+                        key={key} />
+                ))
             }
-        </>
+        </React.Fragment>
     )
 }

@@ -6,54 +6,54 @@ const INITIAL_LIMIT = 0;
 
 export const useFetchQuestionShape = () => {
 
-    const [ loading, setLoading ] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const [ skip, setSkip ] = useState( INITIAL_LIMIT );
+    const [skip, setSkip] = useState(INITIAL_LIMIT);
 
-    const [ questionsShape, setQuestionsShape ] = useState([]);
+    const [questionsShape, setQuestionsShape] = useState([]);
 
     useEffect(() => {
-        
-        if ( skip === INITIAL_LIMIT ) {
-            testShapeLoading( INITIAL_LIMIT )
-        }{
-            testShapeLoading( skip );
+
+        if (skip === INITIAL_LIMIT) {
+            testShapeLoading(INITIAL_LIMIT)
+        } else {
+            testShapeLoading(skip);
         }
-    }, [ skip ]);
+    }, [skip]);
 
     useEffect(() => {
-        
+
         return () => {
             setQuestionsShape([])
         }
     }, []);
 
-    const testShapeLoading = async ( skip ) => {
-        
-        setLoading( true );
-        const resp = await fetchConToken(`pregunta-formas/pformas?limit=1&skip=${ skip }`);
+    const testShapeLoading = async (skip) => {
+
+        setLoading(true);
+        const resp = await fetchConToken(`pregunta-formas/pformas?limit=1&skip=${skip}`);
         const body = await resp.json();
-    
+
         try {
 
-            if ( body.ok ) {   
-                
-                const  { preguntaFormas } = body;
+            if (body.ok) {
 
-                setQuestionsShape( questionsShape.concat( preguntaFormas ) );
-                setLoading( false );
-    
+                const { preguntaFormas } = body;
+
+                setQuestionsShape(questionsShape.concat(preguntaFormas));
+                setLoading(false);
+
             }
-            else{
+            else {
                 Swal.fire(':(', body.msg, 'error');
-                setLoading( false );
-    
+                setLoading(false);
+
             }
-        } catch ( error ) {
+        } catch (error) {
             console.log(error);
-            setLoading( false );
+            setLoading(false);
         }
-    
+
     }
 
     return { loading, questionsShape, setSkip };

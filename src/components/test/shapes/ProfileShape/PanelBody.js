@@ -7,30 +7,30 @@ import { questionClearShape, questionDeleteShape, questionSetShape } from '../..
 
 moment.locale('es');
 
-export const PanelBody = ({ id_pregunta = '', id_test = '', questions = [], nombre = [],  createdAt = '', updatedAt = '', respuesta_correcta = '', nombreTest = '', filterData, setFilterData }) => {
+export const PanelBody = ({ id_pregunta = '', id_test = '', questions = [], nombre = [], createdAt = '', updatedAt = '', respuesta_correcta = '', nombreTest = '', filterData, setFilterData }) => {
 
     const dispatch = useDispatch();
 
     const history = useHistory();
 
-    const handleActiveQuestions = ( id_pregunta, nombre, id_test, id_resp ) => {
+    const handleActiveQuestions = (id_pregunta, nombre, id_test, id_resp) => {
 
-        dispatch( questionClearShape() );
-        dispatch( questionSetShape( id_pregunta, nombre, id_test, id_resp ));
+        dispatch(questionClearShape());
+        dispatch(questionSetShape(id_pregunta, nombre, id_test, id_resp));
         history.push('/test/update/shapes/screen');
 
     }
-    const handleDeleteQuestion = ( id_pregunta ) => {
-        dispatch( questionDeleteShape( id_pregunta ) );
-        setFilterData( 
+    const handleDeleteQuestion = (id_pregunta) => {
+        dispatch(questionDeleteShape(id_pregunta));
+        setFilterData(
             filterData.filter(
-            e =>( e.id_pregunta !== id_pregunta )
-        ));
-        
+                e => (e.id_pregunta !== id_pregunta)
+            ));
+
     }
-    
+
     return (
-        <>
+        <React.Fragment>
             <div className="col-md-3">
                 <div className="profile-pic text-center">
                     <img src={questions} alt="question" />
@@ -51,9 +51,9 @@ export const PanelBody = ({ id_pregunta = '', id_test = '', questions = [], nomb
 
                     </span>
                     <br />
-                    <button onClick={() => { handleActiveQuestions( id_pregunta, nombre, id_test, respuesta_correcta ) }} className="btn btn-primary">Editar</button>
-                    &nbsp; 
-                    <button onClick={() => { handleDeleteQuestion( id_pregunta ) }} className="btn btn-success">Eliminar</button>
+                    <button onClick={() => { handleActiveQuestions(id_pregunta, nombre, id_test, respuesta_correcta) }} className="btn btn-primary">Editar</button>
+                    &nbsp;
+                    <button onClick={() => { handleDeleteQuestion(id_pregunta) }} className="btn btn-success">Eliminar</button>
                 </div>
             </div>
             <div className="col-md-3">
@@ -66,6 +66,6 @@ export const PanelBody = ({ id_pregunta = '', id_test = '', questions = [], nomb
                     <p>{nombreTest}</p>
                 </div>
             </div>
-        </>
+        </React.Fragment>
     )
 }

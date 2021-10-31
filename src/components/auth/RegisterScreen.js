@@ -19,78 +19,78 @@ export const RegisterScreen = () => {
         nombre: "tu nombre",
         primer_apellido: "tu primer apellido",
         segundo_apellido: "tu segundo apellido",
-        celular: `${ cryptoRandomString({ length:8, type:'numeric' }) }`,
-        imei: `${ cryptoRandomString({ length:12, type:'numeric' }) }`,
+        celular: `${cryptoRandomString({ length: 8, type: 'numeric' })}`,
+        imei: `${cryptoRandomString({ length: 12, type: 'numeric' })}`,
         genero: "Masculino",
         edad: "15",
         direccion: "Cochabamba",
         padres_responsables: "padres",
-        dni: `${ cryptoRandomString({ length: 8, type: 'url-safe' })}`,
-        email: `${ cryptoRandomString({ length:8, type:'distinguishable' }) }@gmail.com`,
+        dni: `${cryptoRandomString({ length: 8, type: 'url-safe' })}`,
+        email: `${cryptoRandomString({ length: 8, type: 'distinguishable' })}@gmail.com`,
         username: "",
         password: "",
-        password2:"",
+        password2: "",
         id_institucion: "1"
 
     });
 
     const { nombre, primer_apellido, segundo_apellido, celular, imei, genero, edad, direccion, padres_responsables, dni, email, username, password, id_institucion, password2 } = formRegisterValues;
 
-    const handleRegisterUser = ( e ) => {
+    const handleRegisterUser = (e) => {
         e.preventDefault();
 
-        dispatch( startRegister( nombre, primer_apellido, segundo_apellido, celular, imei, genero, edad, direccion, padres_responsables, dni, email, username, password, password2, id_institucion ) );
+        dispatch(startRegister(nombre, primer_apellido, segundo_apellido, celular, imei, genero, edad, direccion, padres_responsables, dni, email, username, password, password2, id_institucion));
     }
 
     useEffect(() => {
 
-        if ( password.trim() === '' ||  password2.trim() === ''|| username.trim() === '' ) {
-          return dispatch( uiTrueDisabledButton() );
+        if (password.trim() === '' || password2.trim() === '' || username.trim() === '') {
+            return dispatch(uiTrueDisabledButton());
         }
-        else if( password.trim().length <= 5 || password2.trim().length <= 5 ) {
-            return dispatch( uiTrueDisabledButton() );
+        else if (password.trim().length <= 5 || password2.trim().length <= 5) {
+            return dispatch(uiTrueDisabledButton());
         }
-        dispatch( uiFalseDisabledButton() );
-  
-    }, [ password, password2, username, dispatch ]);
-  
+        dispatch(uiFalseDisabledButton());
+
+    }, [password, password2, username, dispatch]);
+
 
 
     return (
         <div className="container">
-            <form className="form-signin" onSubmit={ handleRegisterUser }>
+            <form className="form-signin" onSubmit={handleRegisterUser}>
                 <h2 className="form-signin-heading">Crear Cuenta</h2>
 
                 <div className="login-wrap">
 
-                    <input 
-                        type="text"     
-                        name="username" 
+                    <input
+                        type="text"
+                        name="username"
                         className="form-control"
-                        placeholder="User Name" 
-                        value={ username }
-                        onChange={ handleRegisterInputChange }
-                         
+                        placeholder="User Name"
+                        value={username}
+                        onChange={handleRegisterInputChange}
+
                     />
-                    <input 
-                        type="password" 
-                        name="password" 
-                        className="form-control" 
-                        placeholder="Contraseña" 
-                        value={ password }
-                        onChange={ handleRegisterInputChange }
+                    <input
+                        type="password"
+                        name="password"
+                        className="form-control"
+                        placeholder="Contraseña"
+                        value={password}
+                        onChange={handleRegisterInputChange}
                     />
-                    <input 
-                        type="password" 
+                    <input
+                        type="password"
                         className="form-control"
                         placeholder="Confirmar Contraseña"
                         name="password2"
-                        value={ password2 }
-                        onChange={ handleRegisterInputChange }
+                        value={password2}
+                        onChange={handleRegisterInputChange}
                     />
 
-                    <button className="btn btn-lg btn-login btn-block" type="submit" disabled={ uiDisabled } >
-                        <i _ngcontent-kod-c28="" className={ uiLoadingButton }></i> Crear Cuenta
+                    <button className="btn btn-lg btn-login btn-block" type="submit" disabled={uiDisabled} >
+                        <i _ngcontent-kod-c28="" className={uiLoadingButton}></i> Crear Cuenta
                     </button>
 
                     <div className="registration">

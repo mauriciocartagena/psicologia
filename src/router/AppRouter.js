@@ -24,65 +24,65 @@ export const AppRouter = () => {
     const { checking, uid } = useSelector(state => state.auth)
 
     useEffect(() => {
-       
-        dispatch( startChecking() );
-       
+
+        dispatch(startChecking());
+
     }, [dispatch]);
 
-    if ( checking ) {
-        return ( 
-            <div className="loader-wrapper" style={{ display:"block" }} >
-                <div  className="loader"/>
+    if (checking) {
+        return (
+            <div className="loader-wrapper" style={{ display: "block" }} >
+                <div className="loader" />
             </div>
         );
     }
-    
+
 
     return (
         <Router>
             <div>
                 <Switch>
-                    <PublicRoute  
-                        path="/auth" 
-                        component={ AuthRouter } 
-                        isAuthenticated={ !!uid }
+                    <PublicRoute
+                        path="/auth"
+                        component={AuthRouter}
+                        isAuthenticated={!!uid}
                     />
 
                     {/* 
                         Rutas privadas 
                     */}
-                    
-                    <PrivateRoute 
-                        path="/user"      
-                        component={ AccountRouter }
-                        isAuthenticated={ !!uid }
+
+                    <PrivateRoute
+                        path="/user"
+                        component={AccountRouter}
+                        isAuthenticated={!!uid}
                     />
-                    <PrivateRoute 
-                        path="/institution"      
-                        component={ InstitutionRouter }
-                        isAuthenticated={ !!uid }
+                    <PrivateRoute
+                        path="/institution"
+                        component={InstitutionRouter}
+                        isAuthenticated={!!uid}
                     />
-                     <PrivateRoute 
-                        path="/test/register"      
-                        component={ TestsRouter }
-                        isAuthenticated={ !!uid }
+                    <PrivateRoute
+                        path="/test/register"
+                        component={TestsRouter}
+                        isAuthenticated={!!uid}
                     />
-                    <PrivateRoute 
-                        path="/test-shape"      
-                        component={ TestShapeRouter }
-                        isAuthenticated={ !!uid }
+                    <PrivateRoute
+                        path="/test-shape"
+                        component={TestShapeRouter}
+                        isAuthenticated={!!uid}
                     />
                     <PrivateRoute
                         path="/test-simple"
-                        component={ TestSimpleRouter }
-                        isAuthenticated= { !!uid }
+                        component={TestSimpleRouter}
+                        isAuthenticated={!!uid}
                     />
                     <PrivateRoute
                         path="/answers"
-                        component={ AnswersRouter }
-                        isAuthenticated={ !!uid  }
+                        component={AnswersRouter}
+                        isAuthenticated={!!uid}
                     />
-                    <Redirect to="/auth/login" /> 
+                    <Redirect to="/auth/login" />
                 </Switch>
             </div>
         </Router>

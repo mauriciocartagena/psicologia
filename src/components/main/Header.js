@@ -6,36 +6,36 @@ import { uiCloseDrowp, uiCloseSection, uiCloseSidebar, uiOpenDrowp, uiOpenSectio
 import '../../styles/styles.css';
 
 export const Header = () => {
-    const { uiDrowp, uiSidebar  } = useSelector(state => state.ui);
-   
+    const { uiDrowp, uiSidebar } = useSelector(state => state.ui);
+
     const dispatch = useDispatch();
 
-    const handleSidebar = ( e ) => {
+    const handleSidebar = (e) => {
         e.preventDefault();
 
-        if( uiSidebar === 'nav-collapse' ){
+        if (uiSidebar === 'nav-collapse') {
             return (
-                dispatch( uiCloseSidebar()),
-                dispatch( uiCloseSection())     
+                dispatch(uiCloseSidebar()),
+                dispatch(uiCloseSection())
             );
         }
-        dispatch( uiOpenSidebar());
-        dispatch( uiOpenSection());
+        dispatch(uiOpenSidebar());
+        dispatch(uiOpenSection());
     }
 
-    const dropDownOpen = ( e ) => {
+    const dropDownOpen = (e) => {
         e.preventDefault();
-        
-        if ( uiDrowp === 'dropdown' ) {
-            
-           return dispatch( uiOpenDrowp() );
-            
+
+        if (uiDrowp === 'dropdown') {
+
+            return dispatch(uiOpenDrowp());
+
         }
 
-        dispatch( uiCloseDrowp() );
+        dispatch(uiCloseDrowp());
     }
     const handleLogout = () => {
-        dispatch( startLogout() );
+        dispatch(startLogout());
     }
 
 
@@ -43,51 +43,51 @@ export const Header = () => {
         <header className="header fixed-top clearfix">
             <div className="brand">
 
-                <a href="index.html" className="logo">
-                    <img 
-                        src="https://mauriciocartagena.github.io/my-perfil/static/media/Logo.2921d167.png" 
-                        style={{ width:168,height:40 }}  alt="logo" 
+                <href href="index.html" className="logo">
+                    <img
+                        src="https://mauriciocartagena.github.io/my-perfil/static/media/Logo.2921d167.png"
+                        style={{ width: 168, height: 40 }} alt="logo"
                     />
-                </a>
-                <div 
-                    className="sidebar-toggle-box"  
-                    onClick = { handleSidebar }
+                </href>
+                <div
+                    className="sidebar-toggle-box"
+                    onClick={handleSidebar}
                 >
                     <div className="fa fa-bars"></div>
                 </div>
             </div>
-        
+
             <div className="top-nav clearfix">
                 <ul className="nav pull-right top-menu">
-                    <li 
-                        className={ uiDrowp }
+                    <li
+                        className={uiDrowp}
+                    >
+                        <Link data-toggle="dropdown"
+                            className="dropdown-toggle"
+                            onClick={dropDownOpen}
+                            style={{ cursor: "pointer" }}
                         >
-                        <a data-toggle="dropdown"
-                            className="dropdown-toggle" 
-                            onClick={ dropDownOpen } 
-                            style={{cursor:"pointer" }}
-                            >
-                            <img alt="" src="https://mauriciocartagena.github.io/my-perfil/static/media/photo.517c8325.png" />  
+                            <img alt="" src="https://mauriciocartagena.github.io/my-perfil/static/media/photo.517c8325.png" />
                             <span className="username" > &nbsp; Mauricio Cartagena </span>
                             <b className="caret"></b>
-                        </a>
+                        </Link>
                         <ul className="dropdown-menu extended logout">
                             <li>
                                 <Link to='/user' >
                                     <i className=" fa fa-suitcase"></i>
                                     Perfil
-                                </Link>                                        
+                                </Link>
                             </li>
                             <li>
-                               <Link to='/user/setting' >
+                                <Link to='/user/setting' >
                                     <i className="fa fa-cog"></i>
                                     Configuración
-                                </Link>    
+                                </Link>
                             </li>
-                            <li className='hyper' onClick = { handleLogout } >
-                                <a>
+                            <li className="hyper" onClick={handleLogout} >
+                                <Link>
                                     <i className="fa fa-key"></i>Cerrar Sesión
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </li>

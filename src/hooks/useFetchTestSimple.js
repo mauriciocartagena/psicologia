@@ -1,3 +1,4 @@
+import React from 'react';
 import Swal from 'sweetalert2';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -7,86 +8,86 @@ import { uiModalTrue } from '../actions/ui';
 import { testSimpleActive, testSimpleLoaded } from '../actions/testSimple';
 
 
-export  const  useFetchTestSimple = () =>{
+export const useFetchTestSimple = () => {
 
     const dispatch = useDispatch();
 
-    const [ uiDisabled, setUiDisabled] = useState( false );
-        
-    const history  = useHistory();
+    const [uiDisabled, setUiDisabled] = useState(false);
 
-    const [ data, setData ] = useState({
-        data_simple:[]
+    const history = useHistory();
+
+    const [data, setData] = useState({
+        data_simple: []
     });
 
-    const handleSwitchChange = useCallback (() => {
-        setUiDisabled( true )
-    },[]);
+    const handleSwitchChange = useCallback(() => {
+        setUiDisabled(true)
+    }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        const fetchTSimple = () =>{
+        const fetchTSimple = () => {
 
-            fetchConToken( 'test-simple/testsimples', 'GET' )
-            .then(res => res.json())
-            .then(json => {
-        
-                let rows = [];
-        
-                json.testSimple.forEach( item => rows.push({
-                    id_test:item.id_test,
-                    nombre: item.nombre_test,
-                    modified: <button className="btn btn-primary" id = { item.id_test }  onClick = { ( e ) => { 
+            fetchConToken('test-simple/testsimples', 'GET')
+                .then(res => res.json())
+                .then(json => {
 
-                        // It's a little more understandable
-                        return(
-                            dispatch( testSimpleLoaded( json.testSimple ) ),
-                            dispatch( testSimpleActive( json.testSimple, e.target.id  ) ),
-                            dispatch(  uiModalTrue() )
-                        )
-                    }}>Modificar</button>,
-                    deleted: <button className="btn btn-success"  disabled={ uiDisabled } id= { item.id_test } 
-                        onClick = { ( e ) => {
+                    let rows = [];
+
+                    json.testSimple.forEach(item => rows.push({
+                        id_test: item.id_test,
+                        nombre: item.nombre_test,
+                        modified: <button className="btn btn-primary" id={item.id_test} onClick={(e) => {
+
+                            // It's a little more understandable
                             return (
-                                testSimpleDelete( e.target.id )
+                                dispatch(testSimpleLoaded(json.testSimple)),
+                                dispatch(testSimpleActive(json.testSimple, e.target.id)),
+                                dispatch(uiModalTrue())
                             )
-                        }}
-                    >Eliminar</button>
-                }));
+                        }}>Modificar</button>,
+                        deleted: <button className="btn btn-success" disabled={uiDisabled} id={item.id_test}
+                            onClick={(e) => {
+                                return (
+                                    testSimpleDelete(e.target.id)
+                                )
+                            }}
+                        >Eliminar</button>
+                    }));
 
-                setData( { data_simple: rows });
-            })
-            .catch(err => console.error(err));
-            
+                    setData({ data_simple: rows });
+                })
+                .catch(err => console.error(err));
+
         }
-        const testSimpleDelete = ( id_test ) => { 
+        const testSimpleDelete = (id_test) => {
 
             handleSwitchChange();
 
-            fetchConToken( 'test-simple/delete', { 
+            fetchConToken('test-simple/delete', {
                 id_test
             }, 'DELETE')
-            .then(res => {
-                if (res.ok) { 
-                    Swal.fire(':)','Prueba simple Eliminada', 'success');
-                    fetchTSimple();
-                }
-            })
-            .catch(err => (
-                console.error(err)),
-            );
+                .then(res => {
+                    if (res.ok) {
+                        Swal.fire(':)', 'Prueba simple Eliminada', 'success');
+                        fetchTSimple();
+                    }
+                })
+                .catch(err => (
+                    console.error(err)),
+                );
         };
 
         fetchTSimple();
-        
+
         // Clear useEffect
         return () => {
-            setData({ data_simple:[] });
-            setUiDisabled( false );
-        }  
-        
-    },[ history, dispatch, uiDisabled, handleSwitchChange ]);
+            setData({ data_simple: [] });
+            setUiDisabled(false);
+        }
 
-    return data; 
+    }, [history, dispatch, uiDisabled, handleSwitchChange]);
+
+    return data;
 
 }

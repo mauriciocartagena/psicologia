@@ -34,7 +34,6 @@ export const ShapeScreen = () => {
                         </header>
                         {
                             (questionsShape !== []) ?
-
                                 <TestBodyProfile options={questionsShape} />
                                 :
                                 <div className='panel-body'>

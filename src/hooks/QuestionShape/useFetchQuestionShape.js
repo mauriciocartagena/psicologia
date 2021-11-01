@@ -40,7 +40,7 @@ export const useFetchQuestionShape = () => {
 
                 const { preguntaFormas } = body;
 
-                setQuestionsShape(questionsShape.concat(preguntaFormas));
+                setQuestionsShape((questionsShape) => questionsShape.concat(preguntaFormas));
                 setLoading(false);
 
             }
@@ -55,8 +55,6 @@ export const useFetchQuestionShape = () => {
         }
 
     }
-
     return { loading, questionsShape, setSkip };
-
 
 }

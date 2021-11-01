@@ -204,6 +204,7 @@ export const ShapeScreenQuestion = () => {
 
     }, [questionsShape]);
 
+
     return (
         <React.Fragment>
             {
@@ -274,7 +275,7 @@ export const ShapeScreenQuestion = () => {
                                                                 <section className="panel">
                                                                     <div id="gallery" className="media-gal isotope" style={{ textAlign: 'center' }} >
                                                                         <div className="images item  isotope-item" >
-                                                                            <image
+                                                                            <img
                                                                                 src={e}
                                                                             />
                                                                             <h2 >Opción {key + 1}</h2>

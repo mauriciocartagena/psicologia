@@ -16,26 +16,26 @@ export const TestsRouter = () => {
                 <Route
                     exact
                     path="/test/register"
-                    component={ RegisterScreen }
+                    component={RegisterScreen}
                 />
                 <Route
                     exact
                     path="/test/register/shapes"
-                    component={ Register }
+                    component={Register}
                 />
                 <Route
                     exact
                     path="/test/register/shapes/screen"
-                    component={ ShapeScreen }
+                    component={ShapeScreen}
                 />
                 <Route
                     exact
-                    path="/test/update/shapes/screen"
-                    component={ UpdatedScreen }
+                    path="/test/register/updated/shapes"
+                    component={UpdatedScreen}
                 />
                 <Redirect to="/test/register" />
             </Switch>
         </Layout>
-        
+
     )
 }

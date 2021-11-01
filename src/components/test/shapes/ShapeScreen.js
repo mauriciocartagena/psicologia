@@ -34,12 +34,11 @@ export const ShapeScreen = () => {
                         </header>
                         {
                             (questionsShape !== []) ?
-                                <TestBodyProfile options={questionsShape}
-                                />
-                                :
 
+                                <TestBodyProfile options={questionsShape} />
+                                :
                                 <div className='panel-body'>
-                                    Espere ...
+                                    Cargando ...
                                 </div>
                         }
                     </section>

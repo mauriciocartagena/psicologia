@@ -17,7 +17,7 @@ export const PanelBody = ({ id_pregunta = '', id_test = '', questions = [], nomb
 
         dispatch(questionClearShape());
         dispatch(questionSetShape(id_pregunta, nombre, id_test, id_resp));
-        history.push('/test/update/shapes/screen');
+        history.push('/test/register/updated/shapes');
 
     }
     const handleDeleteQuestion = (id_pregunta) => {

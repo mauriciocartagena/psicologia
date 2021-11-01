@@ -5,11 +5,11 @@ import { FormQuestionShape } from './FormQuestionShape';
 
 export const UpdatedScreen = () => {
 
-    const { question, nombre, id_test, id_resp } = useSelector( state => state.questionShape.questionActive );
+    const { question, nombre, id_test, id_resp } = useSelector(state => state.questionShape.questionActive);
 
     const history = useHistory();
 
-    const ChangeLocation = ( e ) => {
+    const ChangeLocation = (e) => {
         e.preventDefault();
         history.push('/test/register/shapes/screen');
     }
@@ -22,24 +22,24 @@ export const UpdatedScreen = () => {
                         MODIFICAR PRUEBAS FORMAS
                     </header>
                     {
-                        ( question !== null )
-                        ?
-                            <FormQuestionShape  
-                                id_pregunta = { question }
-                                nombre = { nombre }
-                                id_test = { id_test }
-                                respuesta_correcta = { id_resp }
+                        (question !== null)
+                            ?
+                            <FormQuestionShape
+                                id_pregunta={question}
+                                nombre={nombre}
+                                id_test={id_test}
+                                respuesta_correcta={id_resp}
 
-                            /> 
-                        :
-                        <div className="panel-body row align-items-end">
-                            <div className="col-sm-12"> 
-                                <div className="text-center">
-                                    <br/>
-                                    <button onClick={ ChangeLocation } className="btn btn-primary">Debe de seleccionar una pregunta para editar</button>
+                            />
+                            :
+                            <div className="panel-body row align-items-end">
+                                <div className="col-sm-12">
+                                    <div className="text-center">
+                                        <br />
+                                        <button onClick={ChangeLocation} className="btn btn-primary">Debe de seleccionar una pregunta para editar</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     }
                 </section>
             </div>

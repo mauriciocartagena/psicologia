@@ -14,16 +14,16 @@ export const TestShapeRouter = () => {
                 <Route
                     exact
                     path="/test-shape"
-                    component={ TestShapeScreen }
-                /> 
+                    component={TestShapeScreen}
+                />
                 <Route
                     exact
                     path="/test-shape/questions"
-                    component={ ShapeScreenQuestion }
+                    component={ShapeScreenQuestion}
                 />
                 <Redirect to="/test-shape" />
             </Switch>
-        </Layout>
+        </Layout >
     );
 
 }

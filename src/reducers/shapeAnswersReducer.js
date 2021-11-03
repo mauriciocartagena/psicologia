@@ -1,20 +1,26 @@
 import { types } from "../types/types";
 
 const initialState = {
-    shape:[]
+    shape: []
 }
 
-export const shapeAnswersReducer = ( state = initialState, action ) => {
+export const shapeAnswersReducer = (state = initialState, action) => {
 
-    switch ( action.type ) {
+
+    switch (action.type) {
 
         case types.shapeAnswersActive:
             return {
                 ...state,
-                shape:[ ...action.payload ]
+                shape: action.payload
+            }
+        case types.shapeAnswersClear:
+            return {
+                ...state,
+                shape: []
             }
         default:
             return state
     }
-    
+
 }

@@ -8,9 +8,9 @@ export const ShapeScreenQuestion = () => {
     const INITIAL_LIMIT = 0;
     const VALUEDEFAULT = [];
 
-    const { shape } = useSelector(state => state.answerShape);
-
     const dispatch = useDispatch();
+
+    const { shape } = useSelector(state => state.answerShape);
 
     const { uid } = useSelector(state => state.auth);
 
@@ -33,15 +33,12 @@ export const ShapeScreenQuestion = () => {
     });
 
     const handleNextQuestion = () => {
-
         setLimit(limit + 1);
         setLimitAnswers(limitAnswers + 1);
-
     }
     const handlePrevQuestion = () => {
         setLimit(limit - 1);
         setLimitAnswers(limitAnswers - 1);
-
     }
 
     const handleSelect = (e) => {
@@ -50,7 +47,7 @@ export const ShapeScreenQuestion = () => {
 
     useEffect(() => {
 
-        if (limit === 1) {
+        if (limit === 0) {
             return (
                 setDisabledStart(true),
                 setDisabledFinish(false)
@@ -203,7 +200,6 @@ export const ShapeScreenQuestion = () => {
         if (questionsShape[0] !== undefined) { changeAnswerData() };
 
     }, [questionsShape]);
-
 
     return (
         <React.Fragment>

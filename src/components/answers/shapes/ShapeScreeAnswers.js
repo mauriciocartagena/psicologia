@@ -10,14 +10,14 @@ export const ShapeScreeAnswers = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const [ state, setState ] = useState([]);
+    const [state, setState] = useState([]);
 
 
     const { dataShape } = useFetchTestShape();
 
-    const [ selectionDefault, setSelectionDefault ] = useState('');
+    const [selectionDefault, setSelectionDefault] = useState('');
 
-    const [ formSelectionInputValues, handleSelectionInputValueChange ] = useForm({
+    const [formSelectionInputValues, handleSelectionInputValueChange] = useForm({
         tShape: selectionDefault
     });
 
@@ -26,32 +26,38 @@ export const ShapeScreeAnswers = () => {
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
-        if ( tShape === '' ) {
+
+        if (tShape !== '') {
+
             return (
-                dispatch( answersShapeActive( selectionDefault.toString() ) ),
+                dispatch(answersShapeActive(tShape)),
                 history.push('/test-shape/questions')
             )
+
+        } else {
+            return (
+                dispatch(answersShapeActive(selectionDefault)),
+                history.push('/test-shape/questions')
+            )
+
         }
-        return (
-            dispatch( answersShapeActive( tShape ) ),
-            history.push('/test-shape/questions')
-        )
 
     }
 
-   useEffect(() => {
-    
-        if ( dataShape !== [] ) {
-            if ( dataShape[0] !== undefined ) {   
-                
+    useEffect(() => {
+
+        if (dataShape !== []) {
+            if (dataShape[0] !== undefined) {
+
                 const DEFAULTVALUE = dataShape[0].id_test;
-                setSelectionDefault( DEFAULTVALUE );
+
+                setSelectionDefault(DEFAULTVALUE.toString());
 
             }
         }
-        setState( dataShape );
+        setState(dataShape);
 
-   }, [ dataShape ]);
+    }, [dataShape]);
 
 
     return (
@@ -63,24 +69,24 @@ export const ShapeScreeAnswers = () => {
                     </header>
                     <div className="panel-body">
                         <div className="position-center">
-                            <form 
-                                onSubmit={ handleSubmitForm } 
+                            <form
+                                onSubmit={handleSubmitForm}
                             >
                                 <div className="form-group">
                                     <label>Prueba forma</label>
-                                    <select 
-                                        formcontrolname="test-simple" 
+                                    <select
+                                        formcontrolname="test-simple"
                                         name="tShape"
-                                        value={ tShape }
-                                        onChange={ handleSelectionInputValueChange }   
+                                        value={tShape}
+                                        onChange={handleSelectionInputValueChange}
                                         className="form-control ng-valid ng-dirty ng-touched"
-                                        >
+                                    >
                                         {
-                                            state.map(( e )=>(
-                                                <option 
-                                                    key={ e.id_test } 
-                                                    value={ e.id_test } 
-                                                >{ e.nombre }</option>
+                                            state.map((e) => (
+                                                <option
+                                                    key={e.id_test}
+                                                    value={e.id_test}
+                                                >{e.nombre}</option>
                                             ))
                                         }
                                     </select>

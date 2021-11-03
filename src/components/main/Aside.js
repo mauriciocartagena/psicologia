@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { startLogout } from '../../actions/auth';
 import '../../styles/styles.css';
 import { institutionAcordionDeselect, institutionAcordionSelect, institutionDeselectRegister, institutionDeselectShow, institutionSelectRegister, institutionSelectShow } from '../../actions/ui';
+import { answerShapeClear } from '../../actions/answersShape';
 
 
 export const Aside = () => {
@@ -22,6 +23,8 @@ export const Aside = () => {
         dispatch(institutionAcordionDeselect());
         dispatch(institutionDeselectRegister());
         dispatch(institutionDeselectShow());
+        dispatch(answerShapeClear())
+
     }
 
     const handleChangeStyle = (e) => {
@@ -34,6 +37,8 @@ export const Aside = () => {
             )
         }
         dispatch(institutionAcordionSelect());
+        dispatch(answerShapeClear())
+
 
     }
 
@@ -41,14 +46,46 @@ export const Aside = () => {
         e.preventDefault();
         dispatch(institutionSelectShow());
         dispatch(institutionDeselectRegister());
+        dispatch(answerShapeClear())
+
     }
     const handleChangeStyleRegister = (e) => {
         e.preventDefault();
         dispatch(institutionSelectRegister());
         dispatch(institutionDeselectShow());
+        dispatch(answerShapeClear())
+    }
+
+    const handleChangeStyleTestRegister = (e) => {
+
+        e.preventDefault();
+        if (uiSelection === 'block') {
+            return (
+                dispatch(institutionDeselectShow()),
+                dispatch(institutionAcordionDeselect()),
+                dispatch(institutionDeselectRegister())
+            )
+        }
+        dispatch(answerShapeClear())
+
+    }
+
+    const handleChangeStyleTest = (e) => {
+
+        e.preventDefault();
+        if (uiSelection === 'block') {
+            return (
+                dispatch(institutionDeselectShow()),
+                dispatch(institutionAcordionDeselect()),
+                dispatch(institutionDeselectRegister())
+            )
+        }
+        dispatch(answerShapeClear());
+
     }
 
     const handleLogout = () => {
+        dispatch(answerShapeClear())
         dispatch(startLogout());
     }
 
@@ -90,23 +127,28 @@ export const Aside = () => {
                                 </li>
                             </ul>
                         </li>
-                        <li className="sub-menu" >
-                            <NavLink to="/test/register" activeClassName="active" >
-                                <i>
-                                    <FontAwesomeIcon
-                                        icon={faVial}
-                                    />
-                                </i>
-                                <span>Registrar pruebas</span>
-                            </NavLink>
+                        <li className="sub-menu" style={{ cursor: "pointer" }}>
+                            <div onClick={handleChangeStyleTestRegister}>
+
+                                <NavLink to="/test/register" activeClassName="active" >
+                                    <i>
+                                        <FontAwesomeIcon
+                                            icon={faVial}
+                                        />
+                                    </i>
+                                    <span>Registrar pruebas</span>
+                                </NavLink>
+                            </div>
                         </li>
-                        <li className="sub-menu" >
-                            <NavLink to="/answers" activeClassName="active" exact >
-                                <i>
-                                    <FontAwesomeIcon icon={faVials} />
-                                </i>
-                                <span>Pruebas</span>
-                            </NavLink>
+                        <li className="sub-menu" style={{ cursor: "pointer" }}>
+                            <div onClick={handleChangeStyleTest} >
+                                <NavLink to="/answers" activeClassName="active" exact >
+                                    <i>
+                                        <FontAwesomeIcon icon={faVials} />
+                                    </i>
+                                    <span>Pruebas</span>
+                                </NavLink>
+                            </div>
                         </li>
                         <li onClick={handleLogout}  >
                             <NavLink to="/auth/login" className='hyper'>

@@ -84,6 +84,7 @@ export const types = {
     authStartStartTokenRenew: '[auth] start token renew',
 
     shapeAnswersActive: '[shapeAnswersActive] Loaded shape answers',
+    shapeAnswersClear: '[shapeAnswersClear] clear shape answers',
 
     authLogout: '[auth] Logout',
 

@@ -36,7 +36,7 @@ export const CategoryScreen = () => {
         rows: category
     };
     const handleChangeModal = () => {
-        dispatch(uiModalTrue());
+        return dispatch(uiModalTrue());
     }
 
     return (

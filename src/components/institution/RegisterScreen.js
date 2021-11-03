@@ -7,48 +7,48 @@ import { useFormPhone } from '../../hooks/useFormPhone';
 import { institutionSetActiveClear, startRegisterInstitution } from '../../actions/institution';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiFalseDisabledButton, uiOpenLoadingSaveButton, uiTrueDisabledButton } from '../../actions/ui';
- 
+
 
 export const RegisterScreen = () => {
 
     const dispatch = useDispatch();
     const { uiDisabled, uiLoadingSaveButton } = useSelector(state => state.ui)
 
-    const [ formInstitutionValues, handleInstitutionInputChange ] = useForm({ 
-        name:'',
-        address:'',
-        phone:'',
-        emei:'',
-        nit:'',
-        contact_name:''
+    const [formInstitutionValues, handleInstitutionInputChange] = useForm({
+        name: '',
+        address: '',
+        phone: '',
+        emei: '',
+        nit: '',
+        contact_name: ''
     });
-    const [ formInstitutionPhoneValues, handleInstitutionPhoneInputChange ] = useFormPhone({ 
-        mobile:'',
+    const [formInstitutionPhoneValues, handleInstitutionPhoneInputChange] = useFormPhone({
+        mobile: '',
     });
 
     const { name, address, phone, emei, nit, contact_name } = formInstitutionValues;
     const { mobile } = formInstitutionPhoneValues;
 
-    const handleRegister = ( e ) => {
+    const handleRegister = (e) => {
         e.preventDefault();
-        dispatch(startRegisterInstitution( name, address, phone, emei, nit, contact_name, mobile ));
+        dispatch(startRegisterInstitution(name, address, phone, emei, nit, contact_name, mobile));
     }
 
     useEffect(() => {
 
-        dispatch( institutionSetActiveClear() );
-        
-        if ( name.trim() === '' || address.trim() === '' || phone.trim() === '' || emei.trim() === '' || nit.trim() === '' || contact_name.trim() === '' || mobile.trim() === '') {
+        dispatch(institutionSetActiveClear());
+
+        if (name.trim() === '' || address.trim() === '' || phone.trim() === '' || emei.trim() === '' || nit.trim() === '' || contact_name.trim() === '' || mobile.trim() === '') {
             return (
-                dispatch( uiOpenLoadingSaveButton() ),
-                dispatch( uiTrueDisabledButton() )
+                dispatch(uiOpenLoadingSaveButton()),
+                dispatch(uiTrueDisabledButton())
             )
 
         }
-        dispatch( uiFalseDisabledButton() );
-       
-        
-    }, [ address ,phone ,emei ,nit ,contact_name ,mobile ,name, dispatch ]);
+        return dispatch(uiFalseDisabledButton());
+
+
+    }, [address, phone, emei, nit, contact_name, mobile, name, dispatch]);
 
     return (
         <div className="col-lg-12 animated fadeIn">
@@ -58,27 +58,27 @@ export const RegisterScreen = () => {
                 </header>
                 <div className="panel-body">
                     <div className="position-center">
-                        <form autoComplete="off" onSubmit={ handleRegister } >
+                        <form autoComplete="off" onSubmit={handleRegister} >
                             <div className="form-group">
                                 <label>Nombre</label>
-                                <input type="text" 
-                                    className="form-control" 
-                                    id="name" 
-                                    placeholder="Ingrese nombre"  
-                                    name="name" 
-                                    value={ name } 
-                                    onChange={ handleInstitutionInputChange }
+                                <input type="text"
+                                    className="form-control"
+                                    id="name"
+                                    placeholder="Ingrese nombre"
+                                    name="name"
+                                    value={name}
+                                    onChange={handleInstitutionInputChange}
                                 />
                             </div>
                             <div className="form-group">
                                 <label>Dirección</label>
-                                <input type="text" 
-                                    className="form-control" 
-                                    id="address" 
-                                    placeholder="Ingrese dirección"  
-                                    name="address" 
-                                    value={ address } 
-                                    onChange={ handleInstitutionInputChange }
+                                <input type="text"
+                                    className="form-control"
+                                    id="address"
+                                    placeholder="Ingrese dirección"
+                                    name="address"
+                                    value={address}
+                                    onChange={handleInstitutionInputChange}
                                 />
                             </div>
                             <div className="form-group">
@@ -90,73 +90,73 @@ export const RegisterScreen = () => {
                                         autoFocus: true
                                     }}
                                     dropdownClass="col-lg-3"
-                                    inputStyle={{ width:"100%" }}
+                                    inputStyle={{ width: "100%" }}
                                     placeholder="Enter phone number"
-                                    value={ mobile }
-                                    onChange={ handleInstitutionPhoneInputChange }
+                                    value={mobile}
+                                    onChange={handleInstitutionPhoneInputChange}
                                     country="bo"
                                 />
                             </div>
                             <div className="form-group">
                                 <label>Telefono</label>
-                               <InputMask 
+                                <InputMask
                                     placeholder="Ingrese telefono"
-                                    className="form-control" 
-                                    mask="999-99-999" 
-                                    style={{ color:"black" }}
-                                    maskChar={null} 
+                                    className="form-control"
+                                    mask="999-99-999"
+                                    style={{ color: "black" }}
+                                    maskChar={null}
                                     name="phone"
-                                    id="phone" 
-                                    value={ phone } 
-                                    onChange={ handleInstitutionInputChange }
+                                    id="phone"
+                                    value={phone}
+                                    onChange={handleInstitutionInputChange}
                                 />
                             </div>
                             <div className="form-group">
                                 <label>Imei</label>
-                                <InputMask 
-                                    className="form-control" 
-                                    mask="999999999999999" 
-                                    style={{ color:"black" }}
-                                    maskChar={null} 
-                                    placeholder="Ingrese imei"  
-                                    id="emei" 
-                                    name="emei" 
-                                    value={ emei } 
-                                    onChange={ handleInstitutionInputChange }
+                                <InputMask
+                                    className="form-control"
+                                    mask="999999999999999"
+                                    style={{ color: "black" }}
+                                    maskChar={null}
+                                    placeholder="Ingrese imei"
+                                    id="emei"
+                                    name="emei"
+                                    value={emei}
+                                    onChange={handleInstitutionInputChange}
                                 />
                             </div>
                             <div className="form-group">
                                 <label>Nit</label>
-                                <InputMask 
-                                    className="form-control" 
-                                    mask="9999999999999" 
-                                    style={{ color:"black" }}
-                                    maskChar={null} 
-                                    id="nit" 
-                                    placeholder="Ingrese Nit"  
-                                    name="nit" 
-                                    value={ nit } 
-                                    onChange={ handleInstitutionInputChange }
+                                <InputMask
+                                    className="form-control"
+                                    mask="9999999999999"
+                                    style={{ color: "black" }}
+                                    maskChar={null}
+                                    id="nit"
+                                    placeholder="Ingrese Nit"
+                                    name="nit"
+                                    value={nit}
+                                    onChange={handleInstitutionInputChange}
                                 />
                             </div>
                             <div className="form-group">
                                 <label>Nombre de Contacto</label>
-                                <input type="text" 
-                                    className="form-control" 
-                                    id="contact_name" 
-                                    placeholder="Ingrese nombre de contacto"  
-                                    name="contact_name" 
-                                    value={ contact_name } 
-                                    onChange={ handleInstitutionInputChange }
+                                <input type="text"
+                                    className="form-control"
+                                    id="contact_name"
+                                    placeholder="Ingrese nombre de contacto"
+                                    name="contact_name"
+                                    value={contact_name}
+                                    onChange={handleInstitutionInputChange}
                                 />
                             </div>
-                            <button type="submit" className="btn btn-info" disabled={ uiDisabled } > 
-                                <i className={ uiLoadingSaveButton } /> Registrar
+                            <button type="submit" className="btn btn-info" disabled={uiDisabled} >
+                                <i className={uiLoadingSaveButton} /> Registrar
                             </button>
                         </form>
                     </div>
                 </div>
             </section>
-        </div>   
+        </div>
     )
 }

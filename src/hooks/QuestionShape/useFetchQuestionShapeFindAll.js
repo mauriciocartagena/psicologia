@@ -11,9 +11,9 @@ export const useFetchQuestionShapeFindAll = (shape, INITIAL_LIMIT, setLimit) => 
 
     useEffect(() => {
 
-        testShapeLoading(shape, INITIAL_LIMIT);
+        return testShapeLoading(shape, INITIAL_LIMIT);
 
-    }, [shape, INITIAL_LIMIT]);
+    }, [shape, INITIAL_LIMIT, setLimit]);
 
 
     useEffect(() => {
@@ -23,37 +23,45 @@ export const useFetchQuestionShapeFindAll = (shape, INITIAL_LIMIT, setLimit) => 
         }
     }, []);
 
+
+
     const testShapeLoading = async (id_test, skip) => {
 
+        if (skip === -1) {
+            setLimit(0);
+        }
+        else {
 
-        const resp = await fetchConToken(`test-formas/tformas/answers`, {
-            limit: 1,
-            skip: skip,
-            id_test,
-        }, 'POST');
+            const resp = await fetchConToken(`test-formas/tformas/answers`, {
+                limit: 1,
+                skip: skip,
+                id_test,
+            }, 'POST');
 
-        const body = await resp.json();
+            const body = await resp.json();
 
-        try {
+            try {
 
-            if (body.ok) {
+                if (body.ok) {
 
-                const { preguntaFormas } = body;
+                    const { preguntaFormas } = body;
 
-                setQuestionsShape(preguntaFormas);
+                    return setQuestionsShape(preguntaFormas);
 
+                }
+                else {
+                    Swal.fire(':(', body.msg, 'error');
+                    history.push("/answers/shape");
+
+                }
+            } catch (error) {
+                console.log(error);
             }
-            else {
-                Swal.fire(':(', body.msg, 'error');
-                history.push("/answers/shape");
-
-            }
-        } catch (error) {
-            console.log(error);
         }
 
     }
 
     return { questionsShape };
+
 
 }

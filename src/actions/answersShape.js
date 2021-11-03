@@ -15,6 +15,9 @@ export const answersShapeFindAll = (answerShape) => ({
     type: types.answersShapeActive,
     payload: answerShape
 });
+export const answerShapeClear = () => ({
+    type: types.shapeAnswersClear,
+});
 
 export const answersShapeRegister = (uid, answers) => {
 

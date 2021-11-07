@@ -6,8 +6,12 @@ import { useFetchDestructureValue } from "../../../hooks/QuestionShape/useFetchD
 import { useFetchOptionsDestructure } from "../../../hooks/QuestionShape/useFetchOptionsDestructure";
 import { Form } from "./Form";
 
-export const FormQuestionShape = ({ id_pregunta = "",nombre = "",id_test = "", respuesta_correcta = "" }) => {
-  
+export const FormQuestionShape = ({
+  id_pregunta = "",
+  nombre = "",
+  id_test = "",
+  respuesta_correcta = "",
+}) => {
   const dispatch = useDispatch();
 
   const { data_questions_shape } = useFetchQuestionShapeOne(id_pregunta);
@@ -29,14 +33,8 @@ export const FormQuestionShape = ({ id_pregunta = "",nombre = "",id_test = "", r
 
   const { image } = useFetchDestructureValue(pregunta);
 
-  const {
-    option1,
-    option2,
-    option3,
-    option4,
-    option5,
-    option6,
-  } = useFetchOptionsDestructure(op1, op2, op3, op4, op5, op6);
+  const { option1, option2, option3, option4, option5, option6 } =
+    useFetchOptionsDestructure(op1, op2, op3, op4, op5, op6);
 
   useEffect(() => {
     dispatch(shapeStartLoading());

@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
 
+export const useFetchDestructureValue = (pregunta = "") => {
+  const [data, setData] = useState({ image: "" });
 
-export const useFetchDestructureValue = (pregunta = '') => {
+  const question = new Buffer.from(pregunta).toString("ascii");
 
-    const [data, setData] = useState({ image: '' });
+  useEffect(() => {
+    setData({
+      image: question,
+    });
+  }, [pregunta, question]);
 
-    const question = new Buffer.from(pregunta).toString("ascii");
-
-    useEffect(() => {
-
-        setData({
-            image: question
-        })
-
-    }, [pregunta])
-
-    return data;
-
-}
+  return data;
+};

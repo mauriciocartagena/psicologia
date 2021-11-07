@@ -1,91 +1,85 @@
 export const types = {
+  uiOpenSidebar: "[ui] Open Sidebar",
+  uiCloseSidebar: "[ui] Close Sidebar",
 
-    uiOpenSidebar: '[ui] Open Sidebar',
-    uiCloseSidebar: '[ui] Close Sidebar',
+  uiTrueDisabledButton: "[ui] Disabled true",
+  uiFalseDisabledButton: "[ui] Disabled false",
 
+  uiOpenSection: "[ui] Open Section",
+  uiCloseSection: "[ui] Close Section",
 
+  uiOpenLoadingButton: "[ui] Open Loading Button",
+  uiCloseLoadingButton: "[ui] CloseLoading Button",
 
-    uiTrueDisabledButton: '[ui] Disabled true',
-    uiFalseDisabledButton: '[ui] Disabled false',
+  uiOpenLoadingSaveButton: "[ui] Open Loading Save Button",
+  uiCloseLoadingSaveButton: "[ui] CloseLoading Save Button",
+  uiModalTrue: "[ui] Modal true",
+  uiModalFalse: "[ui] Modal false",
 
-    uiOpenSection: '[ui] Open Section',
-    uiCloseSection: '[ui] Close Section',
+  uiOpenDrowp: "[ui] Open drowp",
+  uiCloseDrowp: "[ui] Close drowp",
+  uieventLogout: "[ui] Logout",
 
-    uiOpenLoadingButton: '[ui] Open Loading Button',
-    uiCloseLoadingButton: '[ui] CloseLoading Button',
+  accountUpdate: "[ui] Account update",
 
-    uiOpenLoadingSaveButton: '[ui] Open Loading Save Button',
-    uiCloseLoadingSaveButton: '[ui] CloseLoading Save Button',
-    uiModalTrue: '[ui] Modal true',
-    uiModalFalse: '[ui] Modal false',
+  institutionSetActive: "[institution] Institution active",
+  institutionSetActiveClear: "[institution] Institution clear",
 
+  institutionAcordionSelect: "[institution] Institution acordion select",
+  institutionAcordionDeselect: "[institution] Institution acordion deselect",
 
-    uiOpenDrowp: '[ui] Open drowp',
-    uiCloseDrowp: '[ui] Close drowp',
-    uieventLogout: '[ui] Logout',
+  institutionLoaded: "[institution] Loaded institution",
+  institutionSelectRegister: "[institution] Select register institution",
+  institutionDeselectRegister: "[institution] Deselect register institution",
 
-    accountUpdate: '[ui] Account update',
+  institutionSelectShow: "[institution] Select show institution",
+  institutionDeselectShow: "[institution] Deselect show institution",
 
-    institutionSetActive: '[institution] Institution active',
-    institutionSetActiveClear: '[institution] Institution clear',
+  institutionIconClose: "[institution] Close icon institution",
+  institutionOpenAcordion: "[institution] Open acordion institution",
+  institutionCloseAcordion: "[institution] Cloase acordion instituion",
 
-    institutionAcordionSelect: '[institution] Institution acordion select',
-    institutionAcordionDeselect: '[institution] Institution acordion deselect',
+  testShapeActive: "[tShape] Active test shape",
+  testShapeClear: "[tShape] Clear test shape",
+  testShapeLoaded: "[tShape] Loaded test Shape",
 
-    institutionLoaded: '[institution] Loaded institution',
-    institutionSelectRegister: '[institution] Select register institution',
-    institutionDeselectRegister: '[institution] Deselect register institution',
+  testSimpleActive: "[tSimpleActive] Active test simple",
+  testSimpleClear: "[tSimpleClear] Clear test simple",
+  testSimpleLoaded: "[tSimpleLoaded] Loaded test simple",
 
-    institutionSelectShow: '[institution] Select show institution',
-    institutionDeselectShow: '[institution] Deselect show institution',
+  testSimpleCategoryActive:
+    "[tSimpleCategoryActive] Active category test simple ",
+  testSimpleCategoryClear: "[tSimpleCategoryClear] Clear category test simple ",
+  testSimpleCategoryLoaded:
+    "[tSimpleCategoryLoaded] Loaded category test simple ",
 
-    institutionIconClose: '[institution] Close icon institution',
-    institutionOpenAcordion: '[institution] Open acordion institution',
-    institutionCloseAcordion: '[institution] Cloase acordion instituion',
+  //Question Shape
+  shapeLoaded: "[Shape] Loaded Shape",
+  questionSetActive: "[QuestionS] Question shape active",
+  questionClearActive: "[QuestionS] Question shape clear",
 
-    testShapeActive: '[tShape] Active test shape',
-    testShapeClear: '[tShape] Clear test shape',
-    testShapeLoaded: '[tShape] Loaded test Shape',
+  //Question Simple
+  questionSimpleSetActive: "[QSimple] Question simple active",
+  questionSimpleClearActive: "[QSimple] Quesiton simple clear",
 
-    testSimpleActive: '[tSimpleActive] Active test simple',
-    testSimpleClear: '[tSimpleClear] Clear test simple',
-    testSimpleLoaded: '[tSimpleLoaded] Loaded test simple',
+  answersSimpleActive: "[Answers] Answer simple active",
+  answersSimpleClear: "[Answers] Answer simple clear",
+  answersfilter: "[Answers] Answer simple filter",
+  answersfilterActive: "[Answers] Answer simple filter active",
 
-    testSimpleCategoryActive: '[tSimpleCategoryActive] Active category test simple ',
-    testSimpleCategoryClear: '[tSimpleCategoryClear] Clear category test simple ',
-    testSimpleCategoryLoaded: '[tSimpleCategoryLoaded] Loaded category test simple ',
+  answersShapeActive: "[Answers Shape] Answer shape active",
 
-    //Question Shape
-    shapeLoaded: '[Shape] Loaded Shape',
-    questionSetActive: '[QuestionS] Question shape active',
-    questionClearActive: '[QuestionS] Question shape clear',
+  authUserUpdate: "[auth] User update",
+  authUserUpdatePassword: "[auth] User update password",
+  authChecking: "[auth] Checking login state ",
+  authCheckingFinish: "[auth] Finish cheking login state ",
+  authStartLogin: "[auth] Start Login",
+  authLogin: "[auth] Login",
+  authStartRegister: "[auth] Login Register",
+  authStartStartTokenRenew: "[auth] start token renew",
 
-    //Question Simple
-    questionSimpleSetActive: '[QSimple] Question simple active',
-    questionSimpleClearActive: '[QSimple] Quesiton simple clear',
+  shapeAnswersActive: "[shapeAnswersActive] Loaded shape answers",
+  shapeAnswersClear: "[shapeAnswersClear] clear shape answers",
 
-    answersSimpleActive: '[Answers] Answer simple active',
-    answersSimpleClear: '[Answers] Answer simple clear',
-    answersfilter: '[Answers] Answer simple filter',
-    answersfilterActive: '[Answers] Answer simple filter active',
-
-    answersShapeActive: '[Answers Shape] Answer shape active',
-    answersSimpleClear: '[Answers Shape] Answer shape clear',
-
-
-
-    authUserUpdate: '[auth] User update',
-    authUserUpdatePassword: "[auth] User update password",
-    authChecking: '[auth] Checking login state ',
-    authCheckingFinish: '[auth] Finish cheking login state ',
-    authStartLogin: '[auth] Start Login',
-    authLogin: '[auth] Login',
-    authStartRegister: '[auth] Login Register',
-    authStartStartTokenRenew: '[auth] start token renew',
-
-    shapeAnswersActive: '[shapeAnswersActive] Loaded shape answers',
-    shapeAnswersClear: '[shapeAnswersClear] clear shape answers',
-
-    authLogout: '[auth] Logout',
-
-}
+  authLogout: "[auth] Logout",
+};
